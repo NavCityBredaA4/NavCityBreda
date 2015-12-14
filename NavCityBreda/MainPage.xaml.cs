@@ -101,5 +101,21 @@ namespace NavCityBreda
                 Frame.Navigate(typeof(SettingsView));
             }
         }
+
+        private void Grid_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            if (e.Cumulative.Translation.X > 50)
+            {
+                NavView.IsPaneOpen = true;
+            }
+        }
+
+        private void MySplitviewPane_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            if (e.Cumulative.Translation.X < -50)
+            {
+                NavView.IsPaneOpen = false;
+            }
+        }
     }
 }
