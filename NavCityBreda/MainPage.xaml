@@ -7,7 +7,59 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style x:Key="NavStackPanel" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
 
+        <Style x:Key="NavIcon" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="Margin" Value="-2,5,0,0" />
+        </Style>
+
+        <Style x:Key="NavText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="Margin" Value="20,0,0,0" />
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <RelativePanel Grid.Row="0">
+            <Button RelativePanel.AlignLeftWithPanel="True" Name="NavButton" Click="NavButton_Click" VerticalAlignment="Stretch" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" FontSize="28" />
+
+            <TextBlock RelativePanel.RightOf="NavButton" FontSize="28" Margin="10,0,0,0" Name="PageTitle" x:Uid="PageTitleDefault"/>
+        </RelativePanel>
+
+        <!-- http://stackoverflow.com/questions/32108362/uwp-swipe-to-open-splitview-pane-->
+        <SplitView Grid.Row="1" Name="NavView" DisplayMode="Overlay" OpenPaneLength="300">
+            <SplitView.Pane>
+                <StackPanel>
+                    <ListBox SelectionMode="Single" Name="NavList" SelectionChanged="NavList_SelectionChanged">
+                        <ListBoxItem Name="NavListHelp">
+                            <StackPanel Style="{StaticResource NavStackPanel}">
+                                <TextBlock Style="{StaticResource NavIcon}" Text="&#xE897;"/>
+                                <TextBlock Style="{StaticResource NavText}" x:Uid="MenuItemHelp"/>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="NavListSettings">
+                            <StackPanel Style="{StaticResource NavStackPanel}">
+                                <TextBlock Style="{StaticResource NavIcon}" Text="&#xE713;"/>
+                                <TextBlock Style="{StaticResource NavText}" x:Uid="MenuItemSettings"/>
+                            </StackPanel>
+                        </ListBoxItem>
+                    </ListBox>
+                </StackPanel>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Frame Name="Frame"/>
+            </SplitView.Content>
+        </SplitView>
     </Grid>
 </Page>

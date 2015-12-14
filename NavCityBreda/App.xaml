@@ -5,4 +5,13 @@
     xmlns:local="using:NavCityBreda"
     RequestedTheme="Light">
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Dark" Source="Themes/DarkTheme.xaml"/>
+                <ResourceDictionary x:Key="Light" Source="Themes/LightTheme.xaml"/>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
 </Application>
