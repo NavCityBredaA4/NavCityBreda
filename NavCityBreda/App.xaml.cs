@@ -1,4 +1,5 @@
 ﻿using NavCityBreda.Helpers;
+using NavCityBreda.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -25,6 +27,20 @@ namespace NavCityBreda
     /// </summary>
     sealed partial class App : Application
     {
+
+        public static Frame rootFrame;
+
+        private static GeoTracker geo = new GeoTracker();
+
+        public static GeoTracker Geo
+        {
+            get
+            {
+                return geo;
+            }
+        }
+
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -50,7 +66,7 @@ namespace NavCityBreda
             }
 #endif
 
-            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active

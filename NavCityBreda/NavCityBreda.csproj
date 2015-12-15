@@ -90,10 +90,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <PRIResource Include="Languages\de-DE\Resources.resw" />
-    <PRIResource Include="Languages\nl-NL\Resources.resw" />
+    <PRIResource Include="Strings\de-DE\Resources.resw" />
+    <PRIResource Include="Strings\nl-NL\Resources.resw" />
     <None Include="project.json" />
-    <PRIResource Include="Languages\en-US\Resources.resw" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -105,7 +105,10 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\GeoTracker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\MapVM.cs" />
+    <Compile Include="ViewModel\MenuVM.cs" />
     <Compile Include="Views\HelpView.xaml.cs">
       <DependentUpon>HelpView.xaml</DependentUpon>
     </Compile>

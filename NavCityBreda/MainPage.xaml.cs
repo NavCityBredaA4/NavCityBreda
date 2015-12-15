@@ -1,4 +1,5 @@
 ﻿using NavCityBreda.Helpers;
+using NavCityBreda.ViewModel;
 using NavCityBreda.Views;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,8 @@ namespace NavCityBreda
             Frame.Navigated += Frame_Navigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
             Frame.Navigate(typeof(MapView));
+
+            this.DataContext = new MenuVM();
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
@@ -53,7 +56,6 @@ namespace NavCityBreda
         {
             //Dirty Hack
             string pagename = e.SourcePageType.ToString().Split('.').Last();
-            Debug.WriteLine(pagename);
 
             NavList.SelectedIndex = -1;
 
@@ -76,6 +78,7 @@ namespace NavCityBreda
                     break;
                 case "routeview":
                     PageTitle.Text = Util.Loader.GetString("PageTitleRoute");
+                    NavListRoute.IsSelected = true;
                     break;
                 case "waypointview":
                     PageTitle.Text = Util.Loader.GetString("PageTitleWaypoint");
@@ -93,18 +96,21 @@ namespace NavCityBreda
             NavView.IsPaneOpen = false;
 
             if (NavListHelp.IsSelected)
-            {
                 Frame.Navigate(typeof(HelpView));
-            }
             else if (NavListSettings.IsSelected)
-            {
                 Frame.Navigate(typeof(SettingsView));
-            }
+            else if(NavListRoute.IsSelected)
+                Frame.Navigate(typeof(RouteView));
+        }
+
+        private void NavList_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            NavView.IsPaneOpen = false;
         }
 
         private void Grid_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
-            if (e.Cumulative.Translation.X > 50)
+            if (e.Cumulative.Translation.X > 20)
             {
                 NavView.IsPaneOpen = true;
             }
@@ -112,10 +118,15 @@ namespace NavCityBreda
 
         private void MySplitviewPane_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
-            if (e.Cumulative.Translation.X < -50)
+            if (e.Cumulative.Translation.X < -20)
             {
                 NavView.IsPaneOpen = false;
             }
+        }
+
+        private void GPSRefresh_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.Geo.ForceRefresh();
         }
     }
 }

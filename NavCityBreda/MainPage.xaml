@@ -16,12 +16,30 @@
         <Style x:Key="NavIcon" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
             <Setter Property="FontSize" Value="28" />
-            <Setter Property="Margin" Value="-2,5,0,0" />
+            <Setter Property="Margin" Value="0,5,0,0" />
         </Style>
 
         <Style x:Key="NavText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="28" />
             <Setter Property="Margin" Value="20,0,0,0" />
+        </Style>
+
+
+        <Style x:Key="GPSInfoPanel" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="10,0,10,0" />
+        </Style>
+
+        <Style x:Key="GPSInfoIcon" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="5,5,0,0" />
+        </Style>
+
+        <Style x:Key="GPSInfoText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="15,0,0,0" />
         </Style>
     </Page.Resources>
 
@@ -38,14 +56,20 @@
         </RelativePanel>
 
         <!-- http://stackoverflow.com/questions/32108362/uwp-swipe-to-open-splitview-pane-->
-        <SplitView Grid.Row="1" Name="NavView" DisplayMode="Overlay" OpenPaneLength="300">
+        <SplitView Grid.Row="1" Name="NavView" DisplayMode="Overlay" OpenPaneLength="275">
             <SplitView.Pane>
-                <StackPanel Name="MySplitviewPane"   VerticalAlignment="Stretch"
-                      HorizontalAlignment="Stretch"
+                <RelativePanel Name="MySplitviewPane" VerticalAlignment="Stretch"
                       ManipulationMode="TranslateX"
-                      ManipulationCompleted="MySplitviewPane_ManipulationCompleted">
+                      ManipulationCompleted="MySplitviewPane_ManipulationCompleted"
+                      Background="Transparent">
                     
-                    <ListBox SelectionMode="Single" Name="NavList" SelectionChanged="NavList_SelectionChanged">
+                    <ListBox RelativePanel.AlignTopWithPanel="True" SelectionMode="Single" Name="NavList" SelectionChanged="NavList_SelectionChanged" Tapped="NavList_Tapped">
+                        <ListBoxItem Name="NavListRoute">
+                            <StackPanel Style="{StaticResource NavStackPanel}">
+                                <TextBlock Style="{StaticResource NavIcon}" Text="&#xE7AD;"/>
+                                <TextBlock Style="{StaticResource NavText}" x:Uid="MenuItemRoute" Text="[MenuItemRoute]"/>
+                            </StackPanel>
+                        </ListBoxItem>
                         <ListBoxItem Name="NavListHelp">
                             <StackPanel Style="{StaticResource NavStackPanel}">
                                 <TextBlock Style="{StaticResource NavIcon}" Text="&#xE897;"/>
@@ -59,19 +83,38 @@
                             </StackPanel>
                         </ListBoxItem>
                     </ListBox>
-                </StackPanel>
+
+                    <StackPanel RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Background="Transparent">
+                        <StackPanel Style="{StaticResource GPSInfoPanel}" Tapped="GPSRefresh_Tapped">
+                            <TextBlock Style="{StaticResource GPSInfoIcon}" Text="&#xE81D;"/>
+                            <TextBlock Style="{StaticResource GPSInfoText}" Text="{Binding Status}"/>
+                        </StackPanel>
+
+                        <StackPanel Style="{StaticResource GPSInfoPanel}">
+                            <TextBlock Style="{StaticResource GPSInfoIcon}" Text="&#xE774;"/>
+                            <TextBlock Style="{StaticResource GPSInfoText}" Text="{Binding Source}"/>
+                        </StackPanel>
+
+                        <StackPanel Style="{StaticResource GPSInfoPanel}">
+                            <TextBlock Style="{StaticResource GPSInfoIcon}" Text="&#xE707;"/>
+                            <TextBlock Style="{StaticResource GPSInfoText}" Text="{Binding Accuracy}"/>
+                        </StackPanel>
+                        
+                        <TextBlock Text="Nav City Breda @ 2015" Margin="15, 5"/>
+                    </StackPanel>
+                </RelativePanel>
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid>
                     <Frame Name="Frame"/>
 
-                    <Grid ManipulationMode="TranslateX"
+                    <StackPanel ManipulationMode="TranslateX"
                           ManipulationCompleted="Grid_ManipulationCompleted"
-                          Width="150"
+                          Width="10"
                           Background="Transparent"
                           HorizontalAlignment="Left"
                           VerticalAlignment="Stretch">
-                    </Grid>
+                    </StackPanel>
                 </Grid>
             </SplitView.Content>
         </SplitView>
