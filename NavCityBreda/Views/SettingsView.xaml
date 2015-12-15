@@ -8,6 +8,17 @@
     mc:Ignorable="d">
 
     <Grid>
-        <TextBlock Text="Settings"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            
+        </Grid.RowDefinitions>
+        
+        <TextBlock Text="Settings - Add TileMapOption" Grid.Row="0"/>
+        <Button Name="DeutschesKnopfe" Click="DeutschesKnopfe_Click" Content="Deutsch" Grid.Row="1"/>
+        <Button Name="EnglishButton" Click="EnglishButton_Click" Content="English" Grid.Row="2" />
+        <Button Name="NederlandseKnop" Click="NederlandseKnop_Click" Content="Nederlands" Grid.Row="3" />
     </Grid>
 </Page>

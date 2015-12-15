@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NavCityBreda.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,21 @@ namespace NavCityBreda.Views
         public SettingsView()
         {
             this.InitializeComponent();
+        }
+
+        private void DeutschesKnopfe_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.ChangeLanguage("de-DE");
+        }
+
+        private void EnglishButton_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.ChangeLanguage("en-US");
+        }
+
+        private void NederlandseKnop_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.ChangeLanguage("nl-NL");
         }
     }
 }

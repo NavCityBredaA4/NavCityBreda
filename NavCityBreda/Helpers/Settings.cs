@@ -17,16 +17,11 @@ namespace NavCityBreda.Helpers
             //Define default settings here
         }
 
-        public static string Language
+        public static async void ChangeLanguage(string lang)
         {
-            get
-            {
-                return "";
-            }
-            set
-            {
-                ApplicationLanguages.PrimaryLanguageOverride = value;
-            }
+                ApplicationLanguages.PrimaryLanguageOverride = lang;
+                await Task.Delay(TimeSpan.FromMilliseconds(100));
+                App.rootFrame.Navigate(typeof(MainPage));
         }
     }
 }

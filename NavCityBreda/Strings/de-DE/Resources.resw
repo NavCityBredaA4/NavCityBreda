@@ -123,4 +123,25 @@
   <data name="MenuItemSettings.Text" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
+  <data name="PageTitleDefault.Text" xml:space="preserve">
+    <value>Wilkommen</value>
+  </data>
+  <data name="PageTitleHelp" xml:space="preserve">
+    <value>Hilfe</value>
+  </data>
+  <data name="PageTitleMap" xml:space="preserve">
+    <value>Karte</value>
+  </data>
+  <data name="PageTitleRoute" xml:space="preserve">
+    <value>kut</value>
+  </data>
+  <data name="PageTitleRouteDetail" xml:space="preserve">
+    <value>kut detail</value>
+  </data>
+  <data name="PageTitleSettings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="PageTitleWaypoint" xml:space="preserve">
+    <value>Wegpunkt</value>
+  </data>
 </root>
