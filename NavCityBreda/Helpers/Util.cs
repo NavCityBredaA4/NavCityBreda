@@ -20,6 +20,22 @@ namespace NavCityBreda.Helpers
             }
         }
 
+        public static string RouteWaypointsFolder
+        {
+            get
+            {
+                return "Routes/Waypoints/";
+            }
+        }
+
+        public static string RouteImagesFolder
+        {
+            get
+            {
+                return "Routes/Images/";
+            }
+        }
+
         public static async Task<MapLocation> FindLocation(string location, Geopoint reference)
         {
             MapLocationFinderResult result = await MapLocationFinder.FindLocationsAsync(location, reference);
