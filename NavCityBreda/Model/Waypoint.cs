@@ -7,18 +7,21 @@ using Windows.Devices.Geolocation;
 
 namespace NavCityBreda.Model
 {
-    class Waypoint
+    public class Waypoint
     {
-        Geopoint location;
+        public Geopoint Location { get; protected set; }
+        public string Name { get; protected set; }
 
-        public Waypoint(Geopoint p)
+        public Waypoint(Geopoint p, string name)
         {
-            location = p;
+            Location = p;
+            Name = name;
         }
 
-        public Waypoint(int a, int la, int lo)
+        public Waypoint(double la, double lo, string name)
         {
-            location = new Geopoint(new BasicGeoposition() { Altitude = a, Latitude = la, Longitude = lo });
+            Location = new Geopoint(new BasicGeoposition() { Altitude = 0, Latitude = la, Longitude = lo });
+            Name = name;
         }
     }
 }
