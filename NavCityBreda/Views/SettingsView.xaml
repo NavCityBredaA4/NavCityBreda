@@ -8,17 +8,23 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            
-        </Grid.RowDefinitions>
-        
-        <TextBlock Text="Settings - Add TileMapOption" Grid.Row="0"/>
-        <Button Name="DeutschesKnopfe" Click="DeutschesKnopfe_Click" Content="Deutsch" Grid.Row="1"/>
-        <Button Name="EnglishButton" Click="EnglishButton_Click" Content="English" Grid.Row="2" />
-        <Button Name="NederlandseKnop" Click="NederlandseKnop_Click" Content="Nederlands" Grid.Row="3" />
+        <ScrollViewer>
+            <StackPanel HorizontalAlignment="Stretch">
+
+                <StackPanel Margin="10">
+                    <TextBlock FontSize="20" Text="Language" Margin="0,0,0,10"/>
+                    <ComboBox Name="Language" SelectionChanged="Language_SelectionChanged" HorizontalAlignment="Stretch">
+                        <ComboBoxItem>English</ComboBoxItem>
+                        <ComboBoxItem>Nederlands</ComboBoxItem>
+                        <ComboBoxItem>Deutsch</ComboBoxItem>
+                        <ComboBoxItem>日本語</ComboBoxItem>
+                    </ComboBox>
+                    <ProgressRing IsActive="False" Name="LanguageLoading" />
+                </StackPanel>
+
+
+                <TextBlock Text="Settings - Add TileMapOption" Grid.Row="0" Margin="10"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

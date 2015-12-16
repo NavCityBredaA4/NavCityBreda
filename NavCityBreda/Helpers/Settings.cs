@@ -23,5 +23,7 @@ namespace NavCityBreda.Helpers
                 await Task.Delay(TimeSpan.FromMilliseconds(100));
                 App.rootFrame.Navigate(typeof(MainPage));
         }
+
+        public static string CurrentLanguage { get { return ApplicationLanguages.PrimaryLanguageOverride; } }
     }
 }
