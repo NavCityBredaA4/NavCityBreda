@@ -31,13 +31,27 @@ namespace NavCityBreda
 
         public static Frame rootFrame;
 
-        private static GeoTracker geo = new GeoTracker();
+
+        // =======================
+        //      SINGLETONS
+        // =======================
+        private static GeoTracker geo;
 
         public static GeoTracker Geo
         {
             get
             {
                 return geo;
+            }
+        }
+
+        private static RouteManager rm;
+
+        public static RouteManager RouteManager
+        {
+            get
+            {
+                return rm;
             }
         }
 
@@ -49,6 +63,10 @@ namespace NavCityBreda
         public App()
         {
             this.InitializeComponent();
+
+            geo = new GeoTracker();
+            rm = new RouteManager();
+
             this.Suspending += OnSuspending;
         }
 
