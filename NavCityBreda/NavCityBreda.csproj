@@ -90,6 +90,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Routes\Waypoints\historische_kilometer.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <PRIResource Include="Strings\ja-JP\Resources.resw" />
     <PRIResource Include="Strings\de-DE\Resources.resw" />
     <PRIResource Include="Strings\nl-NL\Resources.resw" />
@@ -100,7 +103,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BoudingBox.cs" />
     <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\JSONParser.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\Util.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -109,6 +114,7 @@
     <Compile Include="Model\GeoTracker.cs" />
     <Compile Include="Model\Landmark.cs" />
     <Compile Include="Model\Route.cs" />
+    <Compile Include="Model\RouteManager.cs" />
     <Compile Include="Model\Waypoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\MapVM.cs" />
@@ -148,6 +154,33 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Routes\Images\default.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_1.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_10.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_11.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_12.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_13.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_14.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_15.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_16.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_17.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_18.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_19.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_2.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_20.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_21.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_22.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_23.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_24.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_25.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_26.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_3.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_4.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_5.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_6.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_7.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_8.jpg" />
+    <Content Include="Routes\Images\historische_kilometer_9.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
