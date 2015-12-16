@@ -1,0 +1,56 @@
+{
+	"name": "Historische kilometer",
+	"description": "De historische kilometer door Breda",
+	"landmarks": "Kasteel van Breda, Grote Kerk, Stadhuis",
+	"minutes": 205,
+	"waypoints": [{
+		"name": "VVV",
+		"landmark": true,
+		"description": "VVV van Breda",
+		"image": "historische_kilometer_1.jpg",
+		"latitude": 51.594112,
+		"longitude": 4.779417
+	},
+	{
+		"name": "Liefdeszuster",
+		"landmark": true,
+		"description": "Liefdeszuster NL",
+		"image": "historische_kilometer_3.jpg",
+		"latitude": 51.593278,
+		"longitude": 4.779388
+	},
+	{
+		"name": "Nassau Baronie Monument",
+		"landmark": true,
+		"description": "Nassau Baronie Monument NL",
+		"image": "historische_kilometer_4.jpg",
+		"latitude": 51.5925,
+		"longitude": 4.779695
+	},
+	{
+		"name": "Pad ten westen van monument ",
+		"landmark": false,
+		"latitude": 51.5925,
+		"longitude": 4.779388
+	},
+	{
+		"name": "The Light House",
+		"landmark": true,
+		"description": "The Light House NL",
+		"image": "historische_kilometer_5.jpg",
+		"latitude": 51.592833,
+		"longitude": 4.778472
+	},
+	{
+		"name": "Navigatiepunt",
+		"landmark": false,
+		"latitude": 51.592667,
+		"longitude": 4.777917
+	},
+	{
+		"name": "Einde park",
+		"landmark": false,
+		"latitude": 51.590612,
+		"longitude": 4.777
+	}]
+}
