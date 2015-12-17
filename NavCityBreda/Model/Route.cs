@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using Windows.Services.Maps;
 using Windows.UI.Xaml.Controls.Maps;
 
 namespace NavCityBreda.Model
 {
     public class Route
     {
-        private GeoboundingBox _bounds;
-        public GeoboundingBox Bounds { get { if (_bounds == null) CalculateBounds(); return _bounds; } }
+        public GeoboundingBox Bounds { get { return _route.BoundingBox; } }
 
         public string Name { get; private set; }
         public string Description { get; private set; }
@@ -22,6 +22,9 @@ namespace NavCityBreda.Model
 
         private List<Waypoint> _waypoints;
         public List<Waypoint> Waypoints { get { return _waypoints; } }
+
+        private MapRoute _route;
+        public MapRoute RouteObject { get { return _route; } }
 
         public Route(string name, string desc, string landmarks, int minutes)
         {
@@ -57,9 +60,10 @@ namespace NavCityBreda.Model
             _waypoints.Remove(w);
         }
 
-        private void CalculateBounds()
+        public async Task<String> CalculateRoute()
         {
-            _bounds = BoundingBox.GetBoundingBox(_waypoints.Select(p => p.Location).ToList());
+            _route = await Util.FindWalkingRoute(_waypoints.Select(p => p.Location).ToList());
+            return "";
         }
     }
 }

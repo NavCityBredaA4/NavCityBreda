@@ -90,7 +90,19 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\SplashScreen.scale-100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SplashScreen.scale-150.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Routes\Waypoints\historische_kilometer.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Waypoints\test_route_1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Waypoints\test_route_2.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <PRIResource Include="Strings\ja-JP\Resources.resw" />
@@ -103,11 +115,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BoolToCheckmarkConverter.cs" />
+    <Compile Include="Helpers\BoolToVisitedConverter.cs" />
     <Compile Include="Helpers\BoudingBox.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\JSONParser.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\Util.cs" />
+    <Compile Include="InitPage.xaml.cs">
+      <DependentUpon>InitPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -119,6 +136,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\MapVM.cs" />
     <Compile Include="ViewModel\MenuVM.cs" />
+    <Compile Include="ViewModel\RouteDetailVM.cs" />
     <Compile Include="ViewModel\RouteVM.cs" />
     <Compile Include="Views\HelpView.xaml.cs">
       <DependentUpon>HelpView.xaml</DependentUpon>
@@ -146,53 +164,132 @@
     <None Include="NavCityBreda_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="Routes\Images\default.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_1.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_10.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_11.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_12.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_13.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_14.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_15.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_16.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_17.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_18.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_19.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_2.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_20.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_21.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_22.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_23.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_24.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_25.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_26.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_3.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_4.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_5.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_6.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_7.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_8.jpg" />
-    <Content Include="Routes\Images\historische_kilometer_9.jpg" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SplashScreen.scale-200.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Square150x150Logo.scale-200.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Square44x44Logo.scale-200.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\StoreLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Wide310x150Logo.scale-200.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\default.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_10.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_11.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_12.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_13.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_14.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_15.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_16.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_17.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_18.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_19.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_20.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_21.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_22.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_23.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_24.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_25.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_26.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\Images\historische_kilometer_9.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="InitPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\DarkTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\DefaultStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

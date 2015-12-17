@@ -15,6 +15,8 @@ namespace NavCityBreda.Helpers
         static Settings()
         {
             //Define default settings here
+            if (LOCAL_SETTINGS.Values["track"] == null)
+                LOCAL_SETTINGS.Values["track"] = true;
         }
 
         public static async void ChangeLanguage(string lang)

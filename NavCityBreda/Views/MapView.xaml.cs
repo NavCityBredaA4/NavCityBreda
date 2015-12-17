@@ -19,6 +19,8 @@ using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using System.Diagnostics;
 using NavCityBreda.Helpers;
+using Windows.UI;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,7 +31,7 @@ namespace NavCityBreda.Views
     /// </summary>
     public sealed partial class MapView : Page
     {
-        MapIcon CurrenPosition;
+        MapIcon CurrentPosition;
 
         public MapView()
         {
@@ -38,19 +40,27 @@ namespace NavCityBreda.Views
 
             this.DataContext = new MapVM();
 
-            CurrenPosition = new MapIcon();
-            Map.MapElements.Add(CurrenPosition);
+            CurrentPosition = new MapIcon();
+            CurrentPosition.NormalizedAnchorPoint = new Point(0.5, 1.0);
+            CurrentPosition.Title = "Current Position";
+            CurrentPosition.ZIndex = 999;
+            Map.MapElements.Add(CurrentPosition);
 
             App.Geo.PositionChanged += Geo_PositionChanged;
-
-            DrawLandmarks();
         }
 
-        private void DrawLandmarks()
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (App.RouteManager.CurrentRoute != null)
+                DrawRoute();
+        }
+
+        private void DrawRoute()
         {
             Route r = App.RouteManager.CurrentRoute;
 
             Map.MapElements.Clear();
+            Map.MapElements.Add(CurrentPosition);
 
             foreach(Landmark l in r.Waypoints.Where(l => l is Landmark))
             {
@@ -59,9 +69,12 @@ namespace NavCityBreda.Views
                 m.NormalizedAnchorPoint = new Point(0.5, 1.0);
                 m.Title = l.Name;
                 m.ZIndex = 10;
-                //m.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///" + l.Image));
                 Map.MapElements.Add(m);
             }
+
+            Map.MapElements.Add(Util.GetRouteLine(App.RouteManager.CurrentRoute.RouteObject, Color.FromArgb(255, 100, 100, 255)));
+
+            ZoomRoute();
         }
 
         private void Geo_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
@@ -74,10 +87,25 @@ namespace NavCityBreda.Views
 
         private void DrawCurrenPosition(Geopoint p)
         {
-            CurrenPosition.Location = p;
-            CurrenPosition.NormalizedAnchorPoint = new Point(0.5, 1.0);
-            CurrenPosition.Title = "Current Position";
-            CurrenPosition.ZIndex = 999;
+            if (!Map.MapElements.Contains(CurrentPosition))
+                Map.MapElements.Add(CurrentPosition);
+
+            CurrentPosition.Location = p;
+            if ((bool)Settings.LOCAL_SETTINGS.Values["track"]) ;
+                Zoom();
+        }
+
+        private async void Zoom()
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            await Map.TrySetViewAsync(CurrentPosition.Location);
+            Map.ZoomLevel = 14;
+        }
+
+        private async void ZoomRoute()
+        {
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            await Map.TrySetViewBoundsAsync(App.RouteManager.CurrentRoute.Bounds, null, Windows.UI.Xaml.Controls.Maps.MapAnimationKind.Linear);
         }
 
         private void Map_MapElementClick(MapControl sender, MapElementClickEventArgs args)
@@ -91,8 +119,6 @@ namespace NavCityBreda.Views
             Landmark l = w as Landmark;
 
             Util.MainPage.Navigate(typeof(LandmarkView), l);
-
-            //Map.TrySetViewBoundsAsync(App.RouteManager.Routes.First().Bounds, new Thickness(10), MapAnimationKind.Bow);
         }
     }
 }

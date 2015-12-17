@@ -96,13 +96,12 @@ namespace NavCityBreda
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                if (e.PreviousExecutionState != ApplicationExecutionState.Running)
                 {
-                    //TODO: Load state from previously suspended application
+                    InitPage extendedSplash = new InitPage(e.SplashScreen);
+                    rootFrame.Content = extendedSplash;
+                    Window.Current.Content = rootFrame;
                 }
-
-                // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
             }
 
             if (rootFrame.Content == null)

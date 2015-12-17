@@ -7,15 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <RelativePanel Grid.Row="2" Margin="0,10,0,0" Name="RouteListPanel">
-        <ListView x:Name="RouteList" ItemsSource="{Binding}" IsItemClickEnabled="True" ItemClick="RouteList_ItemClick" SelectionMode="Extended" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+    <RelativePanel Grid.Row="2" Name="RouteListPanel">
+        <ListView x:Name="RouteList" ItemsSource="{Binding}" Margin="0,10,0,0" IsItemClickEnabled="True" ItemClick="RouteList_ItemClick" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="ListViewDataTemplate">
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical" Width="140" Margin="10,0,0,0" >
-                            <TextBlock Text="{Binding Name}" FontSize="24" />
-                            <TextBlock Text="{Binding Landmarks}" FontSize="14" />
-                        </StackPanel>
+                    <StackPanel Margin="5,0,0,0" Grid.Column="0">
+                        <TextBlock Text="{Binding Name}" FontSize="20" TextWrapping="NoWrap"/>
+                        <TextBlock Text="{Binding Landmarks}" FontSize="14" TextWrapping="WrapWholeWords" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

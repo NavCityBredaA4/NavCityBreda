@@ -19,7 +19,7 @@ namespace NavCityBreda.Model
         private Geoposition pos;
         public Geoposition Position { get { return pos; } }
 
-        public bool Connected { get; private set; }
+        public bool? Connected { get; private set; }
 
         public GeoTracker()
         {
@@ -30,13 +30,13 @@ namespace NavCityBreda.Model
 
         public event TypedEventHandler<Geolocator, StatusChangedEventArgs> StatusChanged
         {
-            add { if(Connected)geo.StatusChanged += value; }
+            add { if(Connected == true) geo.StatusChanged += value; }
             remove { geo.StatusChanged -= value; }
         }
 
         public event TypedEventHandler<Geolocator, PositionChangedEventArgs> PositionChanged
         {
-            add { if (Connected) geo.PositionChanged += value; }
+            add { if (Connected == true) geo.PositionChanged += value; }
             remove { geo.PositionChanged -= value; }
         }
 
@@ -57,7 +57,7 @@ namespace NavCityBreda.Model
                     geo = new Geolocator {
                         DesiredAccuracy = PositionAccuracy.High,
                         //MovementThreshold = 1
-                        ReportInterval = 500
+                        ReportInterval = 5000
                     };
 
                     Connected = true;
@@ -69,12 +69,14 @@ namespace NavCityBreda.Model
                     break;
 
                 case GeolocationAccessStatus.Denied:
+                    Connected = false;
                     status = "Access Denied";
                     bool result = await Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-location"));
                     break;
 
                 default:
                 case GeolocationAccessStatus.Unspecified:
+                    Connected = false;
                     status = "Unspecified Error Occured";
                     break;
             }

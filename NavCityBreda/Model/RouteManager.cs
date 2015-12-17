@@ -16,16 +16,16 @@ namespace NavCityBreda.Model
         private Route _currentroute;
         public Route CurrentRoute { get { return _currentroute; } }
 
+        public string LoadingElement;
+
         public RouteManager()
         {
             _routes = new List<Route>();
+            LoadingElement = "Initializing...";
             LoadRoutes();
-
-            if (_routes.Count > 0)
-                _currentroute = _routes.First();
         }
 
-        private void LoadRoutes()
+        private async void LoadRoutes()
         {
             string[] routefiles = Directory.GetFiles(Util.RouteWaypointsFolder);
 
@@ -33,8 +33,14 @@ namespace NavCityBreda.Model
 
             foreach(string file in routefiles)
             {
-                _routes.Add(JSONParser.LoadRoute(file));
+                Route r = JSONParser.LoadRoute(file);
+                LoadingElement = "Loading " + r.Name + "...";
+                await r.CalculateRoute();
+                _routes.Add(r);
+                await Task.Delay(TimeSpan.FromMilliseconds(250));
             }
+
+            LoadingElement = "Done";
         }
 
         public void SetCurrentRoute(int index)

@@ -57,7 +57,7 @@ namespace NavCityBreda.ViewModel
         {
             get
             {
-                if (App.Geo.Connected && App.Geo.Position != null)
+                if (App.Geo.Connected == true && App.Geo.Position != null)
                     return App.Geo.Position.Coordinate.PositionSource.ToString();
                 else
                     return "N/A";
@@ -69,7 +69,7 @@ namespace NavCityBreda.ViewModel
             get
             {
                 
-                if (App.Geo.Connected && App.Geo.Position != null)
+                if (App.Geo.Connected == true && App.Geo.Position != null)
                     return App.Geo.Position.Coordinate.Accuracy.ToString() + "m";
                 else
                     return "0m";

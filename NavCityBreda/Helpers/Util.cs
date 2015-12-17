@@ -5,8 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Devices.Geolocation;
+using Windows.Foundation;
+using Windows.Graphics.Display;
 using Windows.Services.Maps;
 using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
@@ -38,6 +41,17 @@ namespace NavCityBreda.Helpers
             }
         }
 
+        public static Size ScreenSize
+        {
+            get
+            {
+                var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
+                var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+                Size size = new Size(bounds.Width * scaleFactor, bounds.Height * scaleFactor);
+                return size;
+            }
+        }
+
         public static MainPage MainPage
         {
             get {
@@ -61,6 +75,13 @@ namespace NavCityBreda.Helpers
             return b;
         }
 
+        public static async Task<MapRoute> FindWalkingRoute(List<Geopoint> points)
+        {
+            MapRouteFinderResult routeResult = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(points);
+            MapRoute b = routeResult.Route;
+            return b;
+        }
+
         public static async Task<MapRoute> FindWalkingRoute(string from, string to, Geopoint reference)
         {
             MapLocation f = await FindLocation(from, reference);
@@ -72,6 +93,13 @@ namespace NavCityBreda.Helpers
         public static async Task<MapRoute> FindDrivingRoute(Geopoint from, Geopoint to)
         {
             MapRouteFinderResult routeResult = await MapRouteFinder.GetDrivingRouteAsync(from, to);
+            MapRoute b = routeResult.Route;
+            return b;
+        }
+
+        public static async Task<MapRoute> FindDrivingRoute(List<Geopoint> points)
+        {
+            MapRouteFinderResult routeResult = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(points);
             MapRoute b = routeResult.Route;
             return b;
         }
@@ -124,7 +152,8 @@ namespace NavCityBreda.Helpers
                 ZIndex = 2
             };
 
-            line.Path = new Geopath(m.Path.Positions);
+            if (m != null)
+                line.Path = new Geopath(m.Path.Positions);
 
             return line;
         }

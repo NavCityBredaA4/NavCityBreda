@@ -62,8 +62,14 @@
                       ManipulationMode="TranslateX"
                       ManipulationCompleted="MySplitviewPane_ManipulationCompleted"
                       Background="Transparent">
-                    
+
                     <ListBox RelativePanel.AlignTopWithPanel="True" SelectionMode="Single" Name="NavList" SelectionChanged="NavList_SelectionChanged" Tapped="NavList_Tapped">
+                        <ListBoxItem Name="NavListMap">
+                            <StackPanel Style="{StaticResource NavStackPanel}">
+                                <TextBlock Style="{StaticResource NavIcon}" Text="&#xE909;"/>
+                                <TextBlock Style="{StaticResource NavText}" x:Uid="MenuItemMap" Text="[MenuItemMap]"/>
+                            </StackPanel>
+                        </ListBoxItem> 
                         <ListBoxItem Name="NavListRoute">
                             <StackPanel Style="{StaticResource NavStackPanel}">
                                 <TextBlock Style="{StaticResource NavIcon}" Text="&#xE7AD;"/>

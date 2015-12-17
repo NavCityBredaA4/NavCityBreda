@@ -78,21 +78,22 @@ namespace NavCityBreda
                     break;
                 case "helpview":
                     PageTitle.Text = Util.Loader.GetString("PageTitleHelp");
-                    NavListHelp.IsSelected = true;
+                    NavList.SelectedIndex = 2;
                     break;
                 case "settingsview":
                     PageTitle.Text = Util.Loader.GetString("PageTitleSettings");
-                    NavListSettings.IsSelected = true;
+                    NavList.SelectedIndex = 3;
                     break;
                 case "mapview":
                     PageTitle.Text = Util.Loader.GetString("PageTitleMap");
+                    NavList.SelectedIndex = 0;
                     break;
                 case "routedetailview":
                     PageTitle.Text = Util.Loader.GetString("PageTitleRouteDetail");
                     break;
                 case "routeview":
                     PageTitle.Text = Util.Loader.GetString("PageTitleRoute");
-                    NavListRoute.IsSelected = true;
+                    NavList.SelectedIndex = 1;
                     break;
                 case "landmarkview":
                     PageTitle.Text = Util.Loader.GetString("PageTitleWaypoint");
@@ -109,12 +110,26 @@ namespace NavCityBreda
         {
             NavView.IsPaneOpen = false;
 
-            if (NavListHelp.IsSelected)
+            if (NavListMap.IsSelected)
+            {
+                if (Frame != null)
+                {
+                    if (Frame.CanGoBack)
+                        Frame.BackStack.Clear();
+                    Frame.Navigate(typeof(MapView));
+                }
+            }
+            else if (NavListHelp.IsSelected)
                 Frame.Navigate(typeof(HelpView));
             else if (NavListSettings.IsSelected)
                 Frame.Navigate(typeof(SettingsView));
-            else if(NavListRoute.IsSelected)
-                Frame.Navigate(typeof(RouteView));
+            else if (NavListRoute.IsSelected)
+            {
+                if (App.RouteManager.CurrentRoute == null)
+                    Frame.Navigate(typeof(RouteView));
+                else
+                    Frame.Navigate(typeof(RouteDetailView), App.RouteManager.CurrentRoute);
+            }
         }
 
         private void NavList_Tapped(object sender, TappedRoutedEventArgs e)
