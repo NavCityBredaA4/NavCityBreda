@@ -17,6 +17,8 @@ using Windows.UI.Xaml.Controls.Maps;
 using NavCityBreda.Model;
 using Windows.Storage.Streams;
 using Windows.UI.Popups;
+using System.Diagnostics;
+using NavCityBreda.Helpers;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -46,18 +48,19 @@ namespace NavCityBreda.Views
 
         private void DrawLandmarks()
         {
-            foreach(Route r in App.RouteManager.Routes)
+            Route r = App.RouteManager.CurrentRoute;
+
+            Map.MapElements.Clear();
+
+            foreach(Landmark l in r.Waypoints.Where(l => l is Landmark))
             {
-                foreach(Landmark l in r.Waypoints.Where(l => l is Landmark))
-                {
-                    MapIcon m = new MapIcon();
-                    m.Location = l.Location;
-                    m.NormalizedAnchorPoint = new Point(0.5, 1.0);
-                    m.Title = l.Name;
-                    m.ZIndex = 10;
-                    //m.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///" + l.Image));
-                    Map.MapElements.Add(m);
-                }
+                MapIcon m = new MapIcon();
+                m.Location = l.Location;
+                m.NormalizedAnchorPoint = new Point(0.5, 1.0);
+                m.Title = l.Name;
+                m.ZIndex = 10;
+                //m.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///" + l.Image));
+                Map.MapElements.Add(m);
             }
         }
 
@@ -79,10 +82,17 @@ namespace NavCityBreda.Views
 
         private void Map_MapElementClick(MapControl sender, MapElementClickEventArgs args)
         {
-            MessageDialog m = new MessageDialog("Not yet implemnted. Not sure how to get the tapped element.", "Element tapped");
-            m.ShowAsync();
+            MapIcon i = args.MapElements.Where(p => p is MapIcon).Cast<MapIcon>().First();
 
-            Map.TrySetViewBoundsAsync(App.RouteManager.Routes.First().Bounds, new Thickness(10), MapAnimationKind.Bow);
+            Waypoint w = App.RouteManager.CurrentRoute.Get(i);
+            if (!(w is Landmark))
+                return;
+
+            Landmark l = w as Landmark;
+
+            Util.MainPage.Navigate(typeof(LandmarkView), l);
+
+            //Map.TrySetViewBoundsAsync(App.RouteManager.Routes.First().Bounds, new Thickness(10), MapAnimationKind.Bow);
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using NavCityBreda.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using Windows.UI.Xaml.Controls.Maps;
 
 namespace NavCityBreda.Model
 {
@@ -33,6 +35,21 @@ namespace NavCityBreda.Model
         public void Add(Waypoint w)
         {
             _waypoints.Add(w);
+        }
+
+        public Waypoint Get(int i)
+        {
+            return _waypoints.ElementAt(i);
+        }
+
+        public Waypoint Get(MapIcon m)
+        {
+            List<Waypoint> ws = _waypoints.Where(p => p.Equals(m)).ToList();
+
+            if (ws.Count < 1)
+                return null;
+
+            return ws.First();
         }
 
         public void Remove(Waypoint w)

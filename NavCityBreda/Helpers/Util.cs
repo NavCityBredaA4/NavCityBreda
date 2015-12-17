@@ -7,6 +7,8 @@ using Windows.ApplicationModel.Resources;
 using Windows.Devices.Geolocation;
 using Windows.Services.Maps;
 using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
 
 namespace NavCityBreda.Helpers
@@ -33,6 +35,15 @@ namespace NavCityBreda.Helpers
             get
             {
                 return "Routes/Images/";
+            }
+        }
+
+        public static MainPage MainPage
+        {
+            get {
+                Frame f = Window.Current.Content as Frame;
+                MainPage mp = f.Content as MainPage;
+                return mp;
             }
         }
 
@@ -71,6 +82,36 @@ namespace NavCityBreda.Helpers
             MapLocation t = await FindLocation(to, reference);
             MapRoute m = await FindDrivingRoute(f.Point, t.Point);
             return m;
+        }
+
+        public static async Task<String> FindAddress(Geopoint p)
+        {
+            // Reverse geocode the specified geographic location.
+            MapLocationFinderResult result =
+                await MapLocationFinder.FindLocationsAtAsync(p);
+
+            string returnstring = "";
+
+            // If the query returns results, display the name of the town
+            // contained in the address of the first result.
+            if (result.Status == MapLocationFinderStatus.Success)
+            {
+                MapAddress address = result.Locations[0].Address;
+
+                //returnstring = address.Street + " " + address.StreetNumber + ", " + address.Town;
+                returnstring += (address.BuildingName == "" ? "" : address.BuildingName + ", ");
+                returnstring += (address.Street == "" ? "" : address.Street + (address.StreetNumber == "" ? ", " : " " + address.StreetNumber + ", "));
+                returnstring += address.Town;
+            }
+
+            return returnstring;
+        }
+
+        public static async Task<String> FindAddress(double latitude, double longitude)
+        {
+            Geopoint p = new Geopoint(new BasicGeoposition() { Latitude = latitude, Longitude = longitude });
+            string address = await FindAddress(p);
+            return address;
         }
 
         public static MapPolyline GetRouteLine(MapRoute m, Color color, int thickness = 10, bool dashed = false)
