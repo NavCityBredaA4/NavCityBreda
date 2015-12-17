@@ -3,54 +3,320 @@
 	"description": "De historische kilometer door Breda",
 	"landmarks": "Kasteel van Breda, Grote Kerk, Stadhuis",
 	"minutes": 205,
-	"waypoints": [{
-		"name": "VVV",
-		"landmark": true,
-		"description": "VVV van Breda",
-		"image": "historische_kilometer_1.jpg",
-		"latitude": 51.594112,
-		"longitude": 4.779417
-	},
-	{
-		"name": "Liefdeszuster",
-		"landmark": true,
-		"description": "Liefdeszuster NL",
-		"image": "historische_kilometer_3.jpg",
-		"latitude": 51.593278,
-		"longitude": 4.779388
-	},
-	{
-		"name": "Nassau Baronie Monument",
-		"landmark": true,
-		"description": "Nassau Baronie Monument NL",
-		"image": "historische_kilometer_4.jpg",
-		"latitude": 51.5925,
-		"longitude": 4.779695
-	},
-	{
-		"name": "Pad ten westen van monument ",
-		"landmark": false,
-		"latitude": 51.5925,
-		"longitude": 4.779388
-	},
-	{
-		"name": "The Light House",
-		"landmark": true,
-		"description": "The Light House NL",
-		"image": "historische_kilometer_5.jpg",
-		"latitude": 51.592833,
-		"longitude": 4.778472
-	},
-	{
-		"name": "Navigatiepunt",
-		"landmark": false,
-		"latitude": 51.592667,
-		"longitude": 4.777917
-	},
-	{
-		"name": "Einde park",
-		"landmark": false,
-		"latitude": 51.590612,
-		"longitude": 4.777
-	}]
+    "waypoints": [
+        {
+            "name": "VVV",
+            "landmark": true,
+            "description": "VVV van Breda",
+            "image": "historische_kilometer_1.jpg",
+            "latitude": 51.594112,
+            "longitude": 4.779417
+        },
+
+        {
+            "name": "Liefdeszuster",
+            "landmark": true,
+            "description": "Liefdeszuster NL",
+            "image": "historische_kilometer_3.jpg",
+            "latitude": 51.593278,
+            "longitude": 4.779388
+        },
+        {
+            "name": "Nassau Baronie Monument",
+            "landmark": true,
+            "description": "Nassau Baronie Monument NL",
+            "image": "historische_kilometer_4.jpg",
+            "latitude": 51.5925,
+            "longitude": 4.779695
+        },
+        {
+            "name": "Pad ten westen van monument ",
+            "landmark": false,
+            "latitude": 51.5925,
+            "longitude": 4.779388
+        },
+        {
+            "name": "The Light House",
+            "landmark": true,
+            "description": "The Light House NL",
+            "image": "historische_kilometer_5.jpg",
+            "latitude": 51.592833,
+            "longitude": 4.778472
+        },
+        {
+            "name": "Navigatiepunt",
+            "landmark": false,
+            "latitude": 51.592667,
+            "longitude": 4.777917
+        },
+        {
+            "name": "Einde park",
+            "landmark": false,
+            "latitude": 51.590612,
+            "longitude": 4.777
+        },
+        {
+            "name": "Kasteel van Breda",
+            "landmark": true,
+            "description": "Het Kasteel van Breda en het Kasteelplein",
+            "image": "historische_kilometer_9.jpg",
+            "latitude": 51.590612,
+            "longitude": 4.776167
+        },
+        {
+            "name": "Stadhouderspoort",
+            "landmark": true,
+            "description": "De Stathouderspoort is een poort in Breda",
+            "image": "historische_kilometer_11.jpg",
+            "latitude": 51.589695,
+            "longitude": 4.776138
+        },
+        {
+            "name": "Kruising Kasteelplein/Cingelstaart",
+            "landmark": false,
+            "latitude": 51.590333,
+            "longitude": 4.776
+        },
+        {
+            "name": "Bocht Cingelstraat",
+            "landmark": false,
+            "latitude": 51.590388,
+            "longitude": 4.775
+        },
+        {
+            "name": "Huis van Brecht",
+            "landmark": true,
+            "description": "Het Huis van Brecht is een van de meer historyse gebouwen in Breda.",
+            "image": "historische_kilometer_7.jpg",
+            "latitude": 51.590028,
+            "longitude": 4.774362
+        },
+        {
+            "name": "Spanjaardsgat",
+            "landmark": true,
+            "description": "Het Spanjaardsgat is een monument",
+            "image": "historische_kilometer_6.jpg",
+            "latitude": 51.590195,
+            "longitude": 4.773445
+        },
+        {
+            "name": "Begin Vismarkt",
+            "landmark": true,
+            "description": "De vismarkt van Breda is hier al honderde jaren gevestigt en is....",
+            "image": "historische_kilometer_20.jpg",
+            "latitude": 51.589833,
+            "longitude": 4.773333
+        },
+        {
+            "name": "Begin Havenmarkt",
+            "landmark": true,
+            "description": "De haven markt die hier gevestigt is bestaat sins 1934.....",
+            "image": "historische_kilometer_19.jpg",
+            "latitude": 51.589362,
+            "longitude": 4.774445
+        },
+        {
+            "name": "Kruising Torenstraat/Kerkplein",
+            "landmark": false,
+            "latitude": 51.588778,
+            "longitude": 4.774888
+        },
+        {
+            "name": "Grote Kerk",
+            "landmark": true,
+            "description": "Deze Kerk die hier staat sins.....",
+            "image": "historische_kilometer_10.jpg",
+            "latitude": 51.588833,
+            "longitude": 4.775278
+        },
+        {
+            "name": "Kruising Torenstraat/Kerkplein",
+            "landmark": false,
+            "latitude": 51.588778,
+            "longitude": 4.774888
+        },
+        {
+            "name": "Het Poortje",
+            "landmark": true,
+            "description": "Het Poortje ..........",
+            "latitude": 51.588195,
+            "longitude": 4.775138
+        },
+        {
+            "name": "Ridderstraat",
+            "landmark": true,
+            "description": "Ridderstraat ..........",
+            "latitude": 51.587083,
+            "longitude": 4.77575
+        },
+        {
+            "name": "Grote Markt",
+            "landmark": true,
+            "description": "De Grote Markt",
+            "image": "historische_kilometer_17.jpg",
+            "latitude": 51.587417,
+            "longitude": 4.776555
+        },
+        {
+            "name": "Bevrijdingsmonument",
+            "landmark": true,
+            "description": "Dit monument is geplaats naar de bevrijding in 1951 om dit te herdenken.",
+            "image": "historische_kilometer_24.jpg",
+            "latitude": 51.588028,
+            "longitude": 4.776333
+        },
+        {
+            "name": "Stadhuis",
+            "landmark": true,
+            "description": "Stadhuis",
+            "latitude": 51.58875,
+            "longitude": 4.776112
+        },
+        { // corordinaten
+            "name": "terug naar de grote markt",
+            "landmark": false,
+            "latitude": 51.587972,
+            "longitude": 4.776362
+        },
+        {
+            "name": "zuidpunt Grote makrt",
+            "landmark": false,
+            "latitude": 51.5875,
+            "longitude": 4.776555
+        },
+        {
+            "name": "Antonius van Paduakerk",
+            "landmark": true,
+            "description": "Antonius van Paduakerk",
+            "latitude": 51.587638,
+            "longitude": 4.77725
+        },
+        {
+            "name": "Kruising St.Janstraat/Molenstraat",
+            "landmark": false,
+            "latitude": 51.588278,
+            "longitude": 4.7785
+        },
+        {
+            "name": "Bibliotheek",
+            "landmark": true,
+            "description": "Bibliotheek",
+            "latitude": 51.588,
+            "longitude": 4.778945
+        },
+        {
+            "name": "Kruising Molenstraat/Kloosterplein",
+            "landmark": true,
+            "description": "Kruising Molenstraat/Kloosterplein",
+            "latitude": 51.587362,
+            "longitude": 4.780222
+        },
+        {
+            "name": "Kloosterkazerne",
+            "landmark": true,
+            "description": "Kloosterkazerne",
+            "latitude": 51.587722,
+            "longitude": 4.781028
+        },
+        {
+            "name": "Chasse theater",
+            "landmark": true,
+            "description": "Chasse theater",
+            "latitude": 51.58775,
+            "longitude": 4.782
+        },
+        {
+            "name": "Kruising Kloosterplein/Vlaszak",
+            "landmark": false,
+            "latitude": 51.58775,
+            "longitude": 4.78125
+        },
+        {
+            "name": "Binding van Isaac",
+            "landmark": true,
+            "description": "Binding van Isaac",
+            "latitude": 51.588612,
+            "longitude": 4.780888
+        },
+        {
+            "name": "Kruising Vlaszak/Boschstraat",
+            "landmark": false,
+            "latitude": 51.5895,
+            "longitude": 4.780445
+        },
+        {
+            "name": "Beyerd",
+            "landmark": true,
+            "description": "Beyerd",
+            "latitude": 51.589667,
+            "longitude": 4.781
+        },
+        {
+            "name": "Kruising Vlaszak/Boschstraat",
+            "landmark": false,
+            "latitude": 51.5895,
+            "longitude": 4.780445
+        },
+        {
+            "name": "Gasthuispoort",
+            "landmark": true,
+            "description": "Gasthuispoort",
+            "latitude": 51.589555,
+            "longitude": 4.78
+        },
+        {
+            "name": "Ingang Veemarktstraat",
+            "landmark": false,
+            "latitude": 51.589417,
+            "longitude": 4.779862
+        },
+        {
+            "name": "1e bocht Veemarktstraatt",
+            "landmark": false,
+            "latitude": 51.589028,
+            "longitude": 4.779695
+        },
+        {
+            "name": "Kruising Veemarktstraat/St.Annastraat",
+            "landmark": false,
+            "latitude": 51.588555,
+            "longitude": 4.778333
+        },
+        {
+            "name": "Willem Merkxtuin",
+            "landmark": true,
+            "description": "Willem Merkxtuin",
+            "latitude": 51.589112,
+            "longitude": 4.777945
+        },
+        {
+            "name": "Kruising St.Annastraat/Catharinastraat",
+            "landmark": false,
+            "latitude": 51.589667,
+            "longitude": 4.777805
+        },
+        {
+            "name": "Begijnenhof",
+            "landmark": true,
+            "description": "Begijnenhof",
+            "latitude": 51.589695,
+            "longitude": 4.778362
+        },
+        {
+            "name": "Kruising St.Annastraat/Catharinastraat",
+            "landmark": false,
+            "latitude": 51.589667,
+            "longitude": 4.777805
+        },
+        {
+             "name": "Einde stadswandeling",
+            "landmark": true,
+            "description": "Einde stadswandeling",
+            "latitude": 51.5895,
+            "longitude": 4.77625
+        }
+        
+        
+    ]
+
 }
