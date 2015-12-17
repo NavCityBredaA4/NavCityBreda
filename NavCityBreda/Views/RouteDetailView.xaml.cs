@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NavCityBreda.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,17 @@ namespace NavCityBreda.Views
     /// </summary>
     public sealed partial class RouteDetailView : Page
     {
+        private Route route;
+
         public RouteDetailView()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            route = e.Parameter as Route;
+            this.DataContext = route;
         }
     }
 }

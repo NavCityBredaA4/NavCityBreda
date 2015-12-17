@@ -8,6 +8,6 @@
     mc:Ignorable="d">
 
     <Grid>
-        <TextBlock Text="Route Detail"/>
+        <TextBlock Text="{Binding Name}"/>
     </Grid>
 </Page>

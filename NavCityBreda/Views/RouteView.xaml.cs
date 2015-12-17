@@ -1,4 +1,7 @@
-﻿using System;
+﻿using NavCityBreda.Helpers;
+using NavCityBreda.Model;
+using NavCityBreda.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +25,22 @@ namespace NavCityBreda.Views
     /// </summary>
     public sealed partial class RouteView : Page
     {
+        private RouteVM _routemodel = new RouteVM();
+        public List<Route> RouteViewModel
+        {
+            get { return _routemodel.GetRoutes(); }
+        }
+
         public RouteView()
         {
             this.InitializeComponent();
+            this.DataContext = RouteViewModel;
+        }
+
+        private void RouteList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            MainPage mp = Util.MainPage;
+            mp.Navigate(typeof(RouteDetailView), e.ClickedItem as Route);
         }
     }
 }
