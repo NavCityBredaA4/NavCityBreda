@@ -99,8 +99,12 @@
                             <TextBlock Style="{StaticResource GPSInfoIcon}" Text="&#xE707;"/>
                             <TextBlock Style="{StaticResource GPSInfoText}" Text="{Binding Accuracy}"/>
                         </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="15,5">
+                            <TextBlock Text="Nav City Breda @"/>
+                            <TextBlock Text="{Binding Year}" Margin="5,0,0,0" />
+                        </StackPanel>
                         
-                        <TextBlock Text="Nav City Breda @ 2015" Margin="15, 5"/>
                     </StackPanel>
                 </RelativePanel>
             </SplitView.Pane>

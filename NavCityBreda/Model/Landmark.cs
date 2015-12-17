@@ -16,22 +16,22 @@ namespace NavCityBreda.Model
         public bool Visited { get; set; }
 
 
-        public Landmark(Geopoint p, string name, string desc, string image_loc = "default.jpg") : base (p, name)
+        public Landmark(Geopoint p, string name, string desc, int num, string image_loc = "default.jpg") : base (p, name, num)
         {
             Visited = false;
             Description = desc;
             if (image_loc == "" || !File.Exists(Util.RouteImagesFolder + image_loc))
                 image_loc = "default.jpg";
-            Image = Util.RouteImagesFolder + image_loc;
+            Image = "/" + Util.RouteImagesFolder + image_loc;
         }
 
-        public Landmark(double la, double lo, string name, string desc, string image_loc = "default.jpg") : base(la, lo, name)
+        public Landmark(double la, double lo, string name, string desc, int num, string image_loc = "default.jpg") : base(la, lo, name, num)
         {
             Visited = false;
             Description = desc;
             if (image_loc == "" || !File.Exists(Util.RouteImagesFolder + image_loc))
                 image_loc = "default.jpg";
-            Image = Util.RouteImagesFolder + image_loc;
+            Image = "/" + Util.RouteImagesFolder + image_loc;
         }
     }
 }

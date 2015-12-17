@@ -47,6 +47,18 @@ namespace NavCityBreda
             }
         }
 
+        public void Navigate(Type type)
+        {
+            Frame.Navigate(type);
+        }
+
+        public void Navigate(Type type, object param)
+        {
+            Frame.Navigate(type, param);
+        }
+
+        public string Title { get { return PageTitle.Text; } set { PageTitle.Text = value; } }
+
         public void NavButton_Click(object sender, RoutedEventArgs arg)
         {
             NavView.IsPaneOpen = !NavView.IsPaneOpen;
@@ -60,8 +72,10 @@ namespace NavCityBreda
             NavList.SelectedIndex = -1;
 
             switch (pagename.ToLower())
-            { 
+            {
                 default:
+                    PageTitle.Text = "Nav City Breda";
+                    break;
                 case "helpview":
                     PageTitle.Text = Util.Loader.GetString("PageTitleHelp");
                     NavListHelp.IsSelected = true;
@@ -80,7 +94,7 @@ namespace NavCityBreda
                     PageTitle.Text = Util.Loader.GetString("PageTitleRoute");
                     NavListRoute.IsSelected = true;
                     break;
-                case "waypointview":
+                case "landmarkview":
                     PageTitle.Text = Util.Loader.GetString("PageTitleWaypoint");
                     break;
             }

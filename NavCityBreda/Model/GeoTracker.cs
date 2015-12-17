@@ -42,7 +42,8 @@ namespace NavCityBreda.Model
 
         public async void ForceRefresh()
         {
-            pos = await geo.GetGeopositionAsync();
+            if(geo != null)
+                pos = await geo.GetGeopositionAsync();
         }
 
         private async void StartTracking()

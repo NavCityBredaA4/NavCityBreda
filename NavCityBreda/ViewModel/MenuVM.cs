@@ -75,5 +75,14 @@ namespace NavCityBreda.ViewModel
                     return "0m";
             }
         }
+
+        public string Year
+        {
+            get
+            {
+                int year = DateTime.Now.Year;
+                return year.ToString();
+            }
+        }
     }
 }

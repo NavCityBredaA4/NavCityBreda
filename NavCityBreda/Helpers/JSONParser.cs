@@ -26,6 +26,7 @@ namespace NavCityBreda.Helpers
             Route r = new Route((string)o["name"], (string)o["description"], (string)o["landmarks"], Int32.Parse((string)o["minutes"]));
 
             JToken[] waypoints = o["waypoints"].ToArray();
+            int count = 0;
             foreach(JToken t in waypoints)
             {
                 if(!ValidateWaypointObject(t, out error))
@@ -34,11 +35,12 @@ namespace NavCityBreda.Helpers
                 Waypoint w;
 
                 if ((bool)t["landmark"])
-                    w = new Landmark((double)t["latitude"], (double)t["longitude"], (string)t["name"], (string)o["description"], t["image"].NullOrEmpty() ? "" : (string)t["image"]);
+                    w = new Landmark((double)t["latitude"], (double)t["longitude"], (string)t["name"], (string)t["description"], count, t["image"].NullOrEmpty() ? "" : (string)t["image"]);
                 else
-                    w = new Waypoint((double)t["latitude"], (double)t["longitude"], (string)t["name"]);
+                    w = new Waypoint((double)t["latitude"], (double)t["longitude"], (string)t["name"], count);
 
                 r.Add(w);
+                count++;
             }
 
             return r;
