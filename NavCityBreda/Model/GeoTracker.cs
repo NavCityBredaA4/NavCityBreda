@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using Windows.Devices.Geolocation.Geofencing;
 using Windows.Foundation;
 using Windows.System;
 
@@ -56,8 +57,8 @@ namespace NavCityBreda.Model
                 case GeolocationAccessStatus.Allowed:
                     geo = new Geolocator {
                         DesiredAccuracy = PositionAccuracy.High,
-                        //MovementThreshold = 1
-                        ReportInterval = 5000
+                        //MovementThreshold = 5
+                        ReportInterval = 1500
                     };
 
                     Connected = true;

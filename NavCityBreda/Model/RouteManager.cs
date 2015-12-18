@@ -11,6 +11,12 @@ namespace NavCityBreda.Model
 {
     public class RouteManager
     {
+        public delegate void StatusUpdateHandler(object sender, RouteStatusChangedEventArgs e);
+        public event StatusUpdateHandler OnStatusUpdate;
+
+        public delegate void PositionUpdateHandler(object sender, RoutePositionChangedEventArgs e);
+        public event PositionUpdateHandler OnPositionUpdate;
+
         private List<Route> _routes;
         public List<Route> Routes { get { return _routes;  } }
 
@@ -34,16 +40,20 @@ namespace NavCityBreda.Model
         public RouteManager()
         {
             _routes = new List<Route>();
+            _history = new List<Geoposition>();
             LoadingElement = "Initializing...";
-            RouteState = State.STOPPED;
-            LoadRoutes();
             App.Geo.PositionChanged += Geo_PositionChanged;
+            RouteState = State.STOPPED;
+            LoadRoutes();  
         }
 
         private void Geo_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
             if (RouteState == State.STARTED)
+            {
+                OnPositionUpdate(this, new RoutePositionChangedEventArgs(_history.Last(), args.Position));
                 _history.Add(args.Position);
+            }
         }
 
         private async void LoadRoutes()
@@ -63,21 +73,54 @@ namespace NavCityBreda.Model
             LoadingElement = "Done";
         }
 
+        private void UpdateStatus(State status)
+        {
+            RouteState = status;
+            // Make sure someone is listening to event
+            if (OnStatusUpdate == null) return;
+
+            OnStatusUpdate(this, new RouteStatusChangedEventArgs(status));
+        }
+
         public void StartRoute(Route r)
         {
             _currentroute = r;
-            RouteState = State.STARTED;
+            _history.Add(App.Geo.Position);
+            UpdateStatus(State.STARTED);
         }
 
         public void StopRoute()
         {
             if (RouteState == State.STARTED)
             {
+                _currentroute.Reset();
                 _currentroute = null;
-                RouteState = State.STOPPED;
+                UpdateStatus(State.STOPPED);
             }
 
             _history.Clear();
+        }
+    }
+
+    public class RouteStatusChangedEventArgs : EventArgs
+    {
+        public RouteManager.State Status { get; private set; }
+
+        public RouteStatusChangedEventArgs(RouteManager.State status)
+        {
+            Status = status;
+        }
+    }
+
+    public class RoutePositionChangedEventArgs : EventArgs
+    {
+        public Geoposition Old { get; private set; }
+        public Geoposition New { get; private set; }
+
+        public RoutePositionChangedEventArgs(Geoposition old, Geoposition notold)
+        {
+            Old = old;
+            New = notold;
         }
     }
 }

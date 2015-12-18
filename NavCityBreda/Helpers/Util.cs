@@ -157,5 +157,39 @@ namespace NavCityBreda.Helpers
 
             return line;
         }
+
+        public static MapPolyline GetRouteLine(List<BasicGeoposition> positions, Color color, int thickness = 10, bool dashed = false)
+        {
+            var line = new MapPolyline
+            {
+                StrokeThickness = thickness,
+                StrokeColor = color,
+                StrokeDashed = dashed,
+                ZIndex = 2
+            };
+
+            line.Path = new Geopath(positions);
+
+            return line;
+        }
+
+        public static MapPolyline GetRouteLine(BasicGeoposition p1, BasicGeoposition p2, Color color, int thickness = 10, bool dashed = false)
+        {
+            var line = new MapPolyline
+            {
+                StrokeThickness = thickness,
+                StrokeColor = color,
+                StrokeDashed = dashed,
+                ZIndex = 2
+            };
+
+            List<BasicGeoposition> plist = new List<BasicGeoposition>();
+            plist.Add(p1);
+            plist.Add(p2);
+
+            line.Path = new Geopath(plist);
+
+            return line;
+        }
     }
 }

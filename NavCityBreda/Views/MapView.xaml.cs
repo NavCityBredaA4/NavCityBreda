@@ -21,6 +21,9 @@ using System.Diagnostics;
 using NavCityBreda.Helpers;
 using Windows.UI;
 using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Devices.Geolocation.Geofencing;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -38,56 +41,101 @@ namespace NavCityBreda.Views
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
 
-            this.DataContext = new MapVM();
-
             CurrentPosition = new MapIcon();
-            CurrentPosition.NormalizedAnchorPoint = new Point(0.5, 1.0);
-            CurrentPosition.Title = "Current Position";
+            CurrentPosition.NormalizedAnchorPoint = new Point(0.5, 0.5);
+            CurrentPosition.Title = "";
             CurrentPosition.ZIndex = 999;
+            CurrentPosition.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/CurrentLocationRound.png"));
             Map.MapElements.Add(CurrentPosition);
 
             App.Geo.PositionChanged += Geo_PositionChanged;
+            GeofenceMonitor.Current.GeofenceStateChanged += Current_GeofenceStateChanged;
+            App.RouteManager.OnPositionUpdate += RouteManager_OnPositionUpdate;
+            App.RouteManager.OnStatusUpdate += RouteManager_OnStatusUpdate;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void Current_GeofenceStateChanged(GeofenceMonitor sender, object args)
         {
-            if (App.RouteManager.CurrentRoute != null)
-                DrawRoute();
-            else
+            var reports = sender.ReadReports();
+
+            Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                Map.MapElements.Clear();
-                Map.MapElements.Add(CurrentPosition);
-            }
+                foreach (GeofenceStateChangeReport report in reports)
+                {
+                    GeofenceState state = report.NewState;
+                    Geofence geofence = report.Geofence;
+
+                    if (state == GeofenceState.Removed)
+                    {
+                        GeofenceMonitor.Current.Geofences.Remove(geofence);
+                    }
+
+                    else if (state == GeofenceState.Entered)
+                    {
+                        Landmark i = App.RouteManager.CurrentRoute.Landmarks.Where(t => t.Id == geofence.Id).First();
+                        i.Visited = true;
+                        Util.MainPage.Navigate(typeof(LandmarkView), i);
+                    }
+                }
+            });
+
+        }
+
+        private void RouteManager_OnPositionUpdate(object sender, RoutePositionChangedEventArgs e)
+        {
+            Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                MapPolyline linebit = Util.GetRouteLine(e.Old.Coordinate.Point.Position, e.New.Coordinate.Point.Position, Color.FromArgb(255, 155, 155, 155));
+                Map.MapElements.Add(linebit);
+            });
+        }
+
+        private void RouteManager_OnStatusUpdate(object sender, RouteStatusChangedEventArgs e)
+        {
+            Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (e.Status == RouteManager.State.STARTED)
+                    DrawRoute();
+                else
+                    RemoveRoute();
+            });           
+        }
+
+        private void Geo_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        {
+            Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+            {
+                DrawCurrenPosition(args.Position.Coordinate.Point);
+            });
         }
 
         private void DrawRoute()
         {
             Route r = App.RouteManager.CurrentRoute;
 
+            Settings.LOCAL_SETTINGS.Values["track"] = false;
+
+            GeofenceMonitor.Current.Geofences.Clear();
             Map.MapElements.Clear();
             Map.MapElements.Add(CurrentPosition);
 
-            foreach(Landmark l in r.Waypoints.Where(l => l is Landmark))
+            foreach(Landmark l in r.Landmarks)
             {
-                MapIcon m = new MapIcon();
-                m.Location = l.Location;
-                m.NormalizedAnchorPoint = new Point(0.5, 1.0);
-                m.Title = l.Name;
-                m.ZIndex = 10;
-                Map.MapElements.Add(m);
+                GeofenceMonitor.Current.Geofences.Add(new Geofence(l.Id, new Geocircle(l.Location.Position, 10)));
+                l.UpdateIconImage();
+                Map.MapElements.Add(l.Icon);
             }
 
-            Map.MapElements.Add(Util.GetRouteLine(App.RouteManager.CurrentRoute.RouteObject, Color.FromArgb(255, 100, 100, 255)));
+            Map.MapElements.Add(Util.GetRouteLine(App.RouteManager.CurrentRoute.RouteObject, Color.FromArgb(200, 100, 100, 255)));
 
             ZoomRoute();
         }
 
-        private void Geo_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        private void RemoveRoute()
         {
-            Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
-            {
-                DrawCurrenPosition(new Geopoint(args.Position.Coordinate.Point.Position));
-            });
+            Settings.LOCAL_SETTINGS.Values["track"] = true;
+            Map.MapElements.Clear();
+            DrawCurrenPosition(App.Geo.Position.Coordinate.Point);
         }
 
         private void DrawCurrenPosition(Geopoint p)

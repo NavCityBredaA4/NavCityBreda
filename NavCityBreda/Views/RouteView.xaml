@@ -13,7 +13,7 @@
                 <DataTemplate x:Name="ListViewDataTemplate">
                     <StackPanel Margin="5,0,0,0" Grid.Column="0">
                         <TextBlock Text="{Binding Name}" FontSize="20" TextWrapping="NoWrap"/>
-                        <TextBlock Text="{Binding Landmarks}" FontSize="14" TextWrapping="WrapWholeWords" />
+                        <TextBlock Text="{Binding LandmarksDescription}" FontSize="14" TextWrapping="WrapWholeWords" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

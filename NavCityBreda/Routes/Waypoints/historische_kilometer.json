@@ -2,7 +2,6 @@
 	"name": "Historische kilometer",
 	"description": "De historische kilometer door Breda",
 	"landmarks": "Kasteel van Breda, Grote Kerk, Stadhuis",
-	"minutes": 205,
     "waypoints": [
         {
             "name": "VVV",

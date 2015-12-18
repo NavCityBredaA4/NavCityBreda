@@ -17,8 +17,15 @@ namespace NavCityBreda.Model
 
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public string Landmarks { get; private set; }
-        public int Minutes { get; private set; }
+        public string LandmarksDescription { get; private set; }
+
+        public List<Landmark> Landmarks
+        {
+            get
+            {
+                return _waypoints.Where(l => l is Landmark).Cast<Landmark>().ToList();
+            }
+        }
 
         private List<Waypoint> _waypoints;
         public List<Waypoint> Waypoints { get { return _waypoints; } }
@@ -26,12 +33,11 @@ namespace NavCityBreda.Model
         private MapRoute _route;
         public MapRoute RouteObject { get { return _route; } }
 
-        public Route(string name, string desc, string landmarks, int minutes)
+        public Route(string name, string desc, string landmarks)
         {
             Name = name;
             Description = desc;
-            Landmarks = landmarks;
-            Minutes = minutes;
+            LandmarksDescription = landmarks;
             _waypoints = new List<Waypoint>();
         }
 
@@ -63,7 +69,12 @@ namespace NavCityBreda.Model
         public async Task<String> CalculateRoute()
         {
             _route = await Util.FindWalkingRoute(_waypoints.Select(p => p.Location).ToList());
-            return "";
+            return "success";
+        }
+
+        public void Reset()
+        {
+            Landmarks.ForEach(l => l.Visited = false);
         }
     }
 }

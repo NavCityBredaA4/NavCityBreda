@@ -23,7 +23,7 @@ namespace NavCityBreda.Helpers
             if (!ValidateRouteObject(o, out error))
                 throw new FileLoadException("Invalid Route information in " + file + ", " + error);
 
-            Route r = new Route((string)o["name"], (string)o["description"], (string)o["landmarks"], Int32.Parse((string)o["minutes"]));
+            Route r = new Route((string)o["name"], (string)o["description"], (string)o["landmarks"]);
 
             JToken[] waypoints = o["waypoints"].ToArray();
             int count = 0;
@@ -67,12 +67,6 @@ namespace NavCityBreda.Helpers
             {
                 valid = false;
                 error = "Landmarks missing";
-            }
-
-            if (o["minutes"].NullOrEmpty())
-            {
-                valid = false;
-                error = "Minutes missing";
             }
 
             if (o["waypoints"].NullOrEmpty())

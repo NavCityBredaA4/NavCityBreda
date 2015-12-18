@@ -34,11 +34,6 @@ namespace NavCityBreda.ViewModel
             {
                 TimeSpan length = route.RouteObject.EstimatedDuration;
                 return length.Hours + "h " + length.Minutes + "m";
-
-                //int hours = route.Minutes / 60;
-                //int minutes = route.Minutes % 60;
-
-                //return hours + "h " + minutes + "m";
             }
         }
 
@@ -65,7 +60,7 @@ namespace NavCityBreda.ViewModel
         {
             get
             {
-                return route.Waypoints.Where(p => p is Landmark).Cast<Landmark>().ToList();
+                return route.Landmarks;
             }
         }
 
@@ -89,6 +84,7 @@ namespace NavCityBreda.ViewModel
         {
             NotifyPropertyChanged(nameof(StartEnabled));
             NotifyPropertyChanged(nameof(StopEnabled));
+            NotifyPropertyChanged(nameof(Landmarks));
         }
 
 
