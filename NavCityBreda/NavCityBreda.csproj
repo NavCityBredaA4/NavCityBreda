@@ -121,6 +121,7 @@
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\JSONParser.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Helpers\BoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\Util.cs" />
     <Compile Include="InitPage.xaml.cs">
       <DependentUpon>InitPage.xaml</DependentUpon>

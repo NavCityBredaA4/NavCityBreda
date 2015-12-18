@@ -88,7 +88,7 @@ namespace NavCityBreda
         {
             while (App.RouteManager.LoadingElement != "Done")
             {
-                await Task.Delay(TimeSpan.FromMilliseconds(500));
+                await Task.Delay(TimeSpan.FromMilliseconds(150));
                 Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     splashProgressText.Text = App.RouteManager.LoadingElement;
@@ -97,7 +97,7 @@ namespace NavCityBreda
 
             while (App.Geo.Connected == null)
             {
-                await Task.Delay(TimeSpan.FromMilliseconds(250));
+                await Task.Delay(TimeSpan.FromMilliseconds(150));
                 Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     splashProgressText.Text = "Waiting on GPS...";

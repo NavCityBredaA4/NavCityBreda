@@ -2,6 +2,7 @@
 using NavCityBreda.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ using Windows.UI.Xaml;
 
 namespace NavCityBreda.ViewModel
 {
-    public class RouteDetailVM
+    public class RouteDetailVM : INotifyPropertyChanged
     {
         Route route;
 
@@ -31,10 +32,13 @@ namespace NavCityBreda.ViewModel
         {
             get
             {
-                int hours = route.Minutes / 60;
-                int minutes = route.Minutes % 60;
+                TimeSpan length = route.RouteObject.EstimatedDuration;
+                return length.Hours + "h " + length.Minutes + "m";
 
-                return hours + "h " + minutes + "m";
+                //int hours = route.Minutes / 60;
+                //int minutes = route.Minutes % 60;
+
+                //return hours + "h " + minutes + "m";
             }
         }
 
@@ -63,6 +67,36 @@ namespace NavCityBreda.ViewModel
             {
                 return route.Waypoints.Where(p => p is Landmark).Cast<Landmark>().ToList();
             }
+        }
+
+        public bool StartEnabled
+        {
+            get
+            {
+                return App.RouteManager.CurrentRoute != route;
+            }
+        }
+
+        public bool StopEnabled
+        {
+            get
+            {
+                return !StartEnabled;
+            }
+        }
+
+        public void UpdateRoute()
+        {
+            NotifyPropertyChanged(nameof(StartEnabled));
+            NotifyPropertyChanged(nameof(StopEnabled));
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

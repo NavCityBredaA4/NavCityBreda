@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 
 namespace NavCityBreda.Model
 {
@@ -18,11 +19,31 @@ namespace NavCityBreda.Model
 
         public string LoadingElement;
 
+        public enum State { STOPPED, STARTED }
+        public State RouteState;
+
+        private List<Geoposition> _history;
+        public List<Geoposition> History
+        {
+            get
+            {
+                return _history;
+            }
+        }
+
         public RouteManager()
         {
             _routes = new List<Route>();
             LoadingElement = "Initializing...";
+            RouteState = State.STOPPED;
             LoadRoutes();
+            App.Geo.PositionChanged += Geo_PositionChanged;
+        }
+
+        private void Geo_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        {
+            if (RouteState == State.STARTED)
+                _history.Add(args.Position);
         }
 
         private async void LoadRoutes()
@@ -37,20 +58,26 @@ namespace NavCityBreda.Model
                 LoadingElement = "Loading " + r.Name + "...";
                 await r.CalculateRoute();
                 _routes.Add(r);
-                await Task.Delay(TimeSpan.FromMilliseconds(250));
             }
 
             LoadingElement = "Done";
         }
 
-        public void SetCurrentRoute(int index)
-        {
-            _currentroute = _routes.ElementAt(index);
-        }
-
-        public void SetCurrentRoute(Route r)
+        public void StartRoute(Route r)
         {
             _currentroute = r;
+            RouteState = State.STARTED;
+        }
+
+        public void StopRoute()
+        {
+            if (RouteState == State.STARTED)
+            {
+                _currentroute = null;
+                RouteState = State.STOPPED;
+            }
+
+            _history.Clear();
         }
     }
 }

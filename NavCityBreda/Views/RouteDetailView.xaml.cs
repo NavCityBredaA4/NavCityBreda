@@ -31,6 +31,7 @@ namespace NavCityBreda.Views
     public sealed partial class RouteDetailView : Page
     {
         private Route route;
+        private RouteDetailVM vm;
 
         public RouteDetailView()
         {
@@ -41,15 +42,17 @@ namespace NavCityBreda.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Route r = e.Parameter as Route;
+            
             if (r == route)
             {
+                vm.UpdateRoute();
                 LandmarkList.SelectedIndex = -1;
                 return;
             }
 
             route = r;
-
-            this.DataContext = new RouteDetailVM(route);
+            vm = new RouteDetailVM(route);
+            this.DataContext = vm;
             Util.MainPage.Title = route.Name;
 
             Zoom();
@@ -82,7 +85,13 @@ namespace NavCityBreda.Views
 
         private void StartRouteButton_Click(object sender, RoutedEventArgs e)
         {
-            App.RouteManager.SetCurrentRoute(route);
+            App.RouteManager.StartRoute(route);
+            Util.MainPage.Navigate(typeof(MapView));
+        }
+
+        private void StopRouteButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.RouteManager.StartRoute(null);
             Util.MainPage.Navigate(typeof(MapView));
         }
     }

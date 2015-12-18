@@ -12,6 +12,7 @@
 
     <Page.Resources>
         <convert:BoolToCheckmarkConverter x:Key="BoolConverter"/>
+        <convert:BoolToVisibilityConverter x:Key="VisConverter"/>
     </Page.Resources>
 
     <ScrollViewer>
@@ -25,6 +26,9 @@
         </Grid.RowDefinitions>
 
         <map:MapControl Grid.Row="0" Name="Map" ZoomInteractionMode="Disabled" RotateInteractionMode="Disabled" TiltInteractionMode="Disabled" PanInteractionMode="Disabled" MapServiceToken="74Y70e71HVjjN7lnx4Eh~3wugTlBDe2DbPGuR_AM2aA~AjMbg-pU2qn4gYf97oH0GZI1oY9Jc4vH-4WyIRyoYQM0Q71CnfbWalEN37bdSgms"/>
+        <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
+                <!-- Nothing here -->
+        </StackPanel>
 
         <Grid  Grid.Row="1" Margin="10">
             <Grid.ColumnDefinitions>
@@ -42,9 +46,10 @@
             </StackPanel>
         </Grid>
 
-            <StackPanel Grid.Row="2" Margin="10">
-                <Button Name="StartRouteButton" Click="StartRouteButton_Click" Content="Start Route" Background="DarkGreen" Foreground="White" HorizontalAlignment="Stretch" />
-            </StackPanel>
+        <StackPanel Grid.Row="2" Margin="10" Visibility="Visible">
+            <Button Name="StartRouteButton" Click="StartRouteButton_Click" Content="Start Route" Background="DarkGreen" Foreground="White" HorizontalAlignment="Stretch" Visibility="{Binding StartEnabled, Converter={StaticResource VisConverter}}"/>
+            <Button Name="StopRouteButton" Click="StopRouteButton_Click" Content="Stop Route" Background="DarkRed" Foreground="White" HorizontalAlignment="Stretch" Visibility="{Binding StopEnabled, Converter={StaticResource VisConverter}}"/>
+        </StackPanel>
 
         <StackPanel  Grid.Row="3" Margin="10">
             <TextBlock Text="[WaypointDescription]" x:Uid="WaypointDescription" Style="{StaticResource Header}"/>

@@ -13,6 +13,16 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <map:MapControl Grid.Row="0" Name="Map" MapElementClick="Map_MapElementClick" ZoomInteractionMode="GestureAndControl" PedestrianFeaturesVisible="True" PanInteractionMode="Auto" TiltInteractionMode="ControlOnly" RotateInteractionMode="GestureAndControl" MapServiceToken="74Y70e71HVjjN7lnx4Eh~3wugTlBDe2DbPGuR_AM2aA~AjMbg-pU2qn4gYf97oH0GZI1oY9Jc4vH-4WyIRyoYQM0Q71CnfbWalEN37bdSgms" />
+        <map:MapControl Grid.Row="0" Name="Map" MapElementClick="Map_MapElementClick" ZoomInteractionMode="GestureAndControl" PedestrianFeaturesVisible="True" PanInteractionMode="Auto" TiltInteractionMode="ControlOnly" RotateInteractionMode="GestureAndControl" MapServiceToken="74Y70e71HVjjN7lnx4Eh~3wugTlBDe2DbPGuR_AM2aA~AjMbg-pU2qn4gYf97oH0GZI1oY9Jc4vH-4WyIRyoYQM0Q71CnfbWalEN37bdSgms">
+            <!-- <map:MapItemsControl x:Name="MapItems">
+                <Button x:Name="MapItemButton" Background="Transparent">
+                    <StackPanel>
+                        <Border Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+                        <Ellipse Margin="4" Width="40" Height="20" Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                        </Ellipse>
+                    </StackPanel>
+                </Button>
+            </map:MapItemsControl> -->
+        </map:MapControl>
     </Grid>
 </Page>

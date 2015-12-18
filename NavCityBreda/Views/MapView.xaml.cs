@@ -53,6 +53,11 @@ namespace NavCityBreda.Views
         {
             if (App.RouteManager.CurrentRoute != null)
                 DrawRoute();
+            else
+            {
+                Map.MapElements.Clear();
+                Map.MapElements.Add(CurrentPosition);
+            }
         }
 
         private void DrawRoute()
@@ -91,15 +96,14 @@ namespace NavCityBreda.Views
                 Map.MapElements.Add(CurrentPosition);
 
             CurrentPosition.Location = p;
-            if ((bool)Settings.LOCAL_SETTINGS.Values["track"]) ;
+            if ((bool)Settings.LOCAL_SETTINGS.Values["track"])
                 Zoom();
         }
 
         private async void Zoom()
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
-            await Map.TrySetViewAsync(CurrentPosition.Location);
-            Map.ZoomLevel = 14;
+            await Map.TrySetViewAsync(CurrentPosition.Location, 15, 0, 0, MapAnimationKind.Linear);
         }
 
         private async void ZoomRoute()
@@ -113,7 +117,7 @@ namespace NavCityBreda.Views
             MapIcon i = args.MapElements.Where(p => p is MapIcon).Cast<MapIcon>().First();
 
             Waypoint w = App.RouteManager.CurrentRoute.Get(i);
-            if (!(w is Landmark))
+            if (w == null || !(w is Landmark))
                 return;
 
             Landmark l = w as Landmark;
