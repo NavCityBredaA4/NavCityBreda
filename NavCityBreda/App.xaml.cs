@@ -67,6 +67,14 @@ namespace NavCityBreda
             }
         }
 
+        public static CoreDispatcher Dispatcher
+        {
+            get
+            {
+                 return Windows.UI.Core.CoreWindow.GetForCurrentThread().Dispatcher;
+            }
+        }
+
 
         // =========================
         // STATIC HELPER FUNCTIONS

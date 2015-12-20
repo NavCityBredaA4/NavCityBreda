@@ -57,14 +57,21 @@ namespace NavCityBreda.Views
 
         private void CompassTracker_OnHeadingUpdated(object sender, HeadingUpdatedEventArgs e)
         {
-            if (Settings.Tracking && e.Heading.HeadingTrueNorth.HasValue) return;
-               // Map.TryRotateToAsync((double)e.Heading.HeadingTrueNorth);
+            Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
+            {
+                if (Settings.Tracking && e.Heading.HeadingTrueNorth.HasValue) return;
+                // Map.TryRotateToAsync((double)e.Heading.HeadingTrueNorth);
+            });
+            
         }
 
         private void RouteManager_OnLandmarkVisited(object sender, LandmarkVisitedEventArgs e)
         {
-            if(e.Status == LandmarkVisitedEventArgs.VisitedStatus.ENTERED)
-                App.MainPage.Navigate(typeof(LandmarkView), e.Landmark);
+            Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+            {
+                if (e.Status == LandmarkVisitedEventArgs.VisitedStatus.ENTERED)
+                    App.MainPage.Navigate(typeof(LandmarkView), e.Landmark);
+            }); 
         }
 
         private void RouteManager_OnRouteChanged(object sender, RouteChangedEventArgs e)
@@ -116,7 +123,7 @@ namespace NavCityBreda.Views
 
             foreach(Landmark l in r.Landmarks)
             {
-                GeofenceMonitor.Current.Geofences.Add(new Geofence(l.Id, new Geocircle(l.Location.Position, 10)));
+                GeofenceMonitor.Current.Geofences.Add(new Geofence(l.Id, new Geocircle(l.Location.Position, 40)));
                 l.UpdateIconImage();
                 Map.MapElements.Add(l.Icon);
             }
@@ -157,7 +164,9 @@ namespace NavCityBreda.Views
 
         private void Map_MapElementClick(MapControl sender, MapElementClickEventArgs args)
         {
-            MapIcon i = args.MapElements.Where(p => p is MapIcon).Cast<MapIcon>().First();
+            if (App.RouteManager.Status == RouteManager.RouteStatus.STOPPED) return;
+
+            MapIcon i = args.MapElements.Where(p => p is MapIcon).Cast<MapIcon>().FirstOrDefault();
             if (i == null) return;
 
             Waypoint w = App.RouteManager.CurrentRoute.Get(i);

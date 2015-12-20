@@ -15,7 +15,7 @@ namespace NavCityBreda.ViewModel
 
         public MenuVM()
         {
-            dispatcher = Windows.UI.Core.CoreWindow.GetForCurrentThread().Dispatcher;
+            dispatcher = App.Dispatcher;
             App.Geo.OnPositionUpdate += Geo_OnPositionUpdate;
             App.Geo.OnStatusUpdate += Geo_OnStatusUpdate;
         }

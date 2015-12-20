@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Geolocation.Geofencing;
 using Windows.Services.Maps;
+using Windows.UI.Core;
 
 namespace NavCityBreda.Model
 {
@@ -38,10 +39,13 @@ namespace NavCityBreda.Model
         public enum RouteStatus { STOPPED, STARTED }
         public RouteStatus Status;
 
+        CoreDispatcher dispatcher;
+
         public RouteManager()
         {
             _routes = new List<Route>();
-            
+            dispatcher = App.Dispatcher;
+
             LoadingElement = "Initializing...";
             Status = RouteStatus.STOPPED;
             GeofenceMonitor.Current.GeofenceStateChanged += Current_GeofenceStateChanged;
@@ -65,7 +69,10 @@ namespace NavCityBreda.Model
 
                 else if (state == GeofenceState.Entered)
                 {
-                    i.Visited = true;
+                    dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                    {
+                        i.Visited = true;
+                    }); 
                     _currentlandmark = i;
                     LandmarkVisited(i, LandmarkVisitedEventArgs.VisitedStatus.ENTERED);
                     Util.SendToastNotification(i.Name, "You have visited a landmark.");
