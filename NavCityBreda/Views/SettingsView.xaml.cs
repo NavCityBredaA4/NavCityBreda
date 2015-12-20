@@ -27,7 +27,7 @@ namespace NavCityBreda.Views
         public SettingsView()
         {
             this.InitializeComponent();
-            throw new NotImplementedException("Tracking");
+            throw new NotImplementedException("Tracking + tilemaps");
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

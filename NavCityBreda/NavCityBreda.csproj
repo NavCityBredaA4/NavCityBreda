@@ -135,6 +135,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\CompassTracker.cs" />
     <Compile Include="Model\GeoTracker.cs" />
     <Compile Include="Model\Landmark.cs" />
     <Compile Include="Model\Route.cs" />

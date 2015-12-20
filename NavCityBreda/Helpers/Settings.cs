@@ -10,13 +10,22 @@ namespace NavCityBreda.Helpers
 {
     static class Settings
     {
-        public static ApplicationDataContainer LOCAL_SETTINGS = ApplicationData.Current.LocalSettings;
+        private static ApplicationDataContainer LOCAL_SETTINGS = ApplicationData.Current.LocalSettings;
+
+        public static bool Tracking {
+            get
+            {
+                return (bool)LOCAL_SETTINGS.Values["tracking"];
+            }
+            set
+            {
+                LOCAL_SETTINGS.Values["tracking"] = value;
+            }
+        }
 
         static Settings()
         {
-            //Define default settings here
-            if (LOCAL_SETTINGS.Values["track"] == null)
-                LOCAL_SETTINGS.Values["track"] = true;
+            LOCAL_SETTINGS.Values["tracking"] = true;
         }
 
         public static async void ChangeLanguage(string lang)

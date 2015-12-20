@@ -37,7 +37,7 @@ namespace NavCityBreda.Views
         {
             landmark = e.Parameter as Landmark;
             this.DataContext = landmark;
-            Util.MainPage.Title = landmark.Name;
+            App.MainPage.Title = landmark.Name;
             LoadStreet();
         }
 

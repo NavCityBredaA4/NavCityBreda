@@ -39,7 +39,7 @@ namespace NavCityBreda.Views
 
         private void RouteList_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MainPage mp = Util.MainPage;
+            MainPage mp = App.MainPage;
             mp.Navigate(typeof(RouteDetailView), e.ClickedItem as Route);
         }
     }

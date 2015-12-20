@@ -46,9 +46,9 @@ namespace NavCityBreda.Model
         {
             _visited = false;
             Description = desc;
-            if (image_loc == "" || !File.Exists(Util.RouteImagesFolder + image_loc))
+            if (image_loc == "" || !File.Exists(App.RouteImagesFolder + image_loc))
                 image_loc = "default.jpg";
-            Image = "/" + Util.RouteImagesFolder + image_loc;
+            Image = "/" + App.RouteImagesFolder + image_loc;
             Id = Name + "_" + Order;
 
             Icon = new MapIcon();

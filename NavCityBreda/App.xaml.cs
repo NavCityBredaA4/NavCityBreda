@@ -11,8 +11,10 @@ using Windows.ApplicationModel.Activation;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.Storage;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -35,7 +37,7 @@ namespace NavCityBreda
         // =======================
         //      SINGLETONS
         // =======================
-        private static GeoTracker geo;
+        private static GeoTracker geo = new GeoTracker();
 
         public static GeoTracker Geo
         {
@@ -45,7 +47,7 @@ namespace NavCityBreda
             }
         }
 
-        private static RouteManager rm;
+        private static RouteManager rm = new RouteManager();
 
         public static RouteManager RouteManager
         {
@@ -55,6 +57,66 @@ namespace NavCityBreda
             }
         }
 
+        private static CompassTracker cm = new CompassTracker();
+
+        public static CompassTracker CompassTracker
+        {
+            get
+            {
+                return cm;
+            }
+        }
+
+
+        // =========================
+        // STATIC HELPER FUNCTIONS
+        // =========================
+
+        public static string RouteWaypointsFolder
+        {
+            get
+            {
+                return "Routes/Waypoints/";
+            }
+        }
+
+        public static string RouteImagesFolder
+        {
+            get
+            {
+                return "Routes/Images/";
+            }
+        }
+
+        public static Size ScreenSize
+        {
+            get
+            {
+                var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
+                var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+                Size size = new Size(bounds.Width * scaleFactor, bounds.Height * scaleFactor);
+                return size;
+            }
+        }
+
+        public static MainPage MainPage
+        {
+            get
+            {
+                Frame f = Window.Current.Content as Frame;
+                MainPage mp = f.Content as MainPage;
+                return mp;
+            }
+        }
+
+
+
+
+
+        // ===============================
+        // NORMAL STUFF
+        // ===============================
+
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -63,9 +125,6 @@ namespace NavCityBreda
         public App()
         {
             this.InitializeComponent();
-
-            geo = new GeoTracker();
-            rm = new RouteManager();
 
             this.Suspending += OnSuspending;
         }
@@ -111,6 +170,7 @@ namespace NavCityBreda
                 // parameter
                 rootFrame.Navigate(typeof(MainPage), e.Arguments);
             }
+
             // Ensure the current window is active
             Window.Current.Activate();
         }

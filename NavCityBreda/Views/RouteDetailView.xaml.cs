@@ -53,7 +53,7 @@ namespace NavCityBreda.Views
             route = r;
             vm = new RouteDetailVM(route);
             this.DataContext = vm;
-            Util.MainPage.Title = route.Name;
+            App.MainPage.Title = route.Name;
 
             Map.MapElements.Clear();
 
@@ -62,13 +62,8 @@ namespace NavCityBreda.Views
             MapPolyline m = Util.GetRouteLine(route.RouteObject, Color.FromArgb(255, 100, 100, 255));
             Map.MapElements.Add(m);
 
-            Random rand = new Random();
-
             foreach (Landmark l in route.Landmarks)
             {
-                int randint = rand.Next(0,20);
-                if (randint > 15)
-                    l.Visited = true;
                 l.UpdateIconImage();
                 Map.MapElements.Add(l.Icon);
             }
@@ -82,20 +77,20 @@ namespace NavCityBreda.Views
 
         private void LandmarkList_ItemClick(object sender, ItemClickEventArgs e)
         {
-            MainPage mp = Util.MainPage;
+            MainPage mp = App.MainPage;
             mp.Navigate(typeof(LandmarkView), e.ClickedItem as Landmark);
         }
 
         private void StartRouteButton_Click(object sender, RoutedEventArgs e)
         {
             App.RouteManager.StartRoute(route);
-            Util.MainPage.Navigate(typeof(MapView));
+            App.MainPage.Navigate(typeof(MapView));
         }
 
         private void StopRouteButton_Click(object sender, RoutedEventArgs e)
         {
             App.RouteManager.StopRoute();
-            Util.MainPage.Navigate(typeof(MapView));
+            App.MainPage.Navigate(typeof(MapView));
         }
     }
 }

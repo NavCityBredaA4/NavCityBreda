@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using Windows.Devices.Geolocation.Geofencing;
+using Windows.Services.Maps;
 
 namespace NavCityBreda.Model
 {
@@ -14,8 +16,11 @@ namespace NavCityBreda.Model
         public delegate void StatusUpdateHandler(object sender, RouteStatusChangedEventArgs e);
         public event StatusUpdateHandler OnStatusUpdate;
 
-        public delegate void PositionUpdateHandler(object sender, RoutePositionChangedEventArgs e);
-        public event PositionUpdateHandler OnPositionUpdate;
+        public delegate void OnLandmarkVisitedHandler(object sender, LandmarkVisitedEventArgs e);
+        public event OnLandmarkVisitedHandler OnLandmarkVisited;
+
+        public delegate void OnRouteChangedHandler (object sender, RouteChangedEventArgs e);
+        public event OnRouteChangedHandler OnRouteChanged;
 
         private List<Route> _routes;
         public List<Route> Routes { get { return _routes;  } }
@@ -25,40 +30,58 @@ namespace NavCityBreda.Model
 
         public string LoadingElement;
 
-        public enum State { STOPPED, STARTED }
-        public State RouteState;
+        private Landmark _currentlandmark;
 
-        private List<Geoposition> _history;
-        public List<Geoposition> History
-        {
-            get
-            {
-                return _history;
-            }
-        }
+        private MapRoute _routetolandmark;
+        public MapRoute RouteToLandmark { get { return _routetolandmark;  } }
+
+        public enum RouteStatus { STOPPED, STARTED }
+        public RouteStatus Status;
 
         public RouteManager()
         {
             _routes = new List<Route>();
-            _history = new List<Geoposition>();
+            
             LoadingElement = "Initializing...";
-            App.Geo.PositionChanged += Geo_PositionChanged;
-            RouteState = State.STOPPED;
+            Status = RouteStatus.STOPPED;
+            GeofenceMonitor.Current.GeofenceStateChanged += Current_GeofenceStateChanged;
             LoadRoutes();  
         }
 
-        private void Geo_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        private void Current_GeofenceStateChanged(GeofenceMonitor sender, object args)
         {
-            if (RouteState == State.STARTED)
+            var reports = sender.ReadReports();
+
+            foreach (GeofenceStateChangeReport report in reports)
             {
-                OnPositionUpdate(this, new RoutePositionChangedEventArgs(_history.Last(), args.Position));
-                _history.Add(args.Position);
+                GeofenceState state = report.NewState;
+                Geofence geofence = report.Geofence;
+                Landmark i = App.RouteManager.CurrentRoute.Landmarks.Where(t => t.Id == geofence.Id).First();
+
+                if (state == GeofenceState.Removed)
+                {
+                    GeofenceMonitor.Current.Geofences.Remove(geofence);
+                }
+
+                else if (state == GeofenceState.Entered)
+                {
+                    i.Visited = true;
+                    _currentlandmark = i;
+                    LandmarkVisited(i, LandmarkVisitedEventArgs.VisitedStatus.ENTERED);
+                    Util.SendToastNotification(i.Name, "You have visited a landmark.");
+                    UpdateRoute();
+                }
+
+                else if(state == GeofenceState.Exited)
+                {
+                    LandmarkVisited(i, LandmarkVisitedEventArgs.VisitedStatus.EXITED);
+                }
             }
         }
 
         private async void LoadRoutes()
         {
-            string[] routefiles = Directory.GetFiles(Util.RouteWaypointsFolder);
+            string[] routefiles = Directory.GetFiles(App.RouteWaypointsFolder);
 
             _routes.Clear();
 
@@ -73,54 +96,100 @@ namespace NavCityBreda.Model
             LoadingElement = "Done";
         }
 
-        private void UpdateStatus(State status)
+        public async void UpdateRoute()
         {
-            RouteState = status;
+            if (App.Geo.Position == null) return;
+
+            _currentlandmark = _currentroute.Landmarks.FirstOrDefault(p => !p.Visited);
+            _routetolandmark = await Util.FindWalkingRoute(App.Geo.Position.Coordinate.Point, _currentlandmark.Location);
+            UpdateRoute(_routetolandmark, _currentlandmark);
+        }
+
+        public void StartRoute(Route r)
+        {
+            Util.SendToastNotification("Test", "I am testing this shit.");
+
+            App.Geo.ClearHistory();
+            _currentroute = r;
+            UpdateRoute();
+            UpdateStatus(RouteStatus.STARTED);
+        }
+
+        public void StopRoute()
+        {
+            if (Status == RouteStatus.STARTED)
+            {
+                _currentroute.Reset();
+                _currentroute = null;
+                _currentlandmark = null;
+                _routetolandmark = null;
+                UpdateStatus(RouteStatus.STOPPED);
+            }
+        }
+
+        // =============
+        // Handle Events
+        // =============
+        private void UpdateStatus(RouteStatus status)
+        {
+            Status = status;
             // Make sure someone is listening to event
             if (OnStatusUpdate == null) return;
 
             OnStatusUpdate(this, new RouteStatusChangedEventArgs(status));
         }
 
-        public void StartRoute(Route r)
+        //Handle Events
+        private void LandmarkVisited(Landmark l, LandmarkVisitedEventArgs.VisitedStatus status)
         {
-            _currentroute = r;
-            _history.Add(App.Geo.Position);
-            UpdateStatus(State.STARTED);
+            // Make sure someone is listening to event
+            if (OnLandmarkVisited == null) return;
+
+            OnLandmarkVisited(this, new LandmarkVisitedEventArgs(l, status));
         }
 
-        public void StopRoute()
+        //Handle Events
+        private void UpdateRoute(MapRoute route, Landmark l)
         {
-            if (RouteState == State.STARTED)
-            {
-                _currentroute.Reset();
-                _currentroute = null;
-                UpdateStatus(State.STOPPED);
-            }
+            // Make sure someone is listening to event
+            if (OnRouteChanged == null) return;
 
-            _history.Clear();
+            OnRouteChanged(this, new RouteChangedEventArgs(route, l));
         }
     }
 
     public class RouteStatusChangedEventArgs : EventArgs
     {
-        public RouteManager.State Status { get; private set; }
+        public RouteManager.RouteStatus Status { get; private set; }
 
-        public RouteStatusChangedEventArgs(RouteManager.State status)
+        public RouteStatusChangedEventArgs(RouteManager.RouteStatus status)
         {
             Status = status;
         }
     }
 
-    public class RoutePositionChangedEventArgs : EventArgs
+    public class LandmarkVisitedEventArgs : EventArgs
     {
-        public Geoposition Old { get; private set; }
-        public Geoposition New { get; private set; }
+        public Landmark Landmark { get; private set; }
+        public enum VisitedStatus { ENTERED, EXITED }
+        public VisitedStatus Status { get; private set; }
 
-        public RoutePositionChangedEventArgs(Geoposition old, Geoposition notold)
+        public LandmarkVisitedEventArgs(Landmark landmark, VisitedStatus status)
         {
-            Old = old;
-            New = notold;
+            Landmark = landmark;
+            Status = status;
+        }
+    }
+
+    public class RouteChangedEventArgs : EventArgs
+    {
+        public Landmark Landmark { get; private set; }
+        public MapRoute Route { get; private set; }
+
+        public RouteChangedEventArgs(MapRoute newroute, Landmark tolandmark)
+        {
+            Route = newroute;
+            Landmark = tolandmark;
         }
     }
 }

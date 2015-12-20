@@ -16,8 +16,25 @@ namespace NavCityBreda.ViewModel
         public MenuVM()
         {
             dispatcher = Windows.UI.Core.CoreWindow.GetForCurrentThread().Dispatcher;
-            App.Geo.StatusChanged += Geo_StatusChanged;
-            App.Geo.PositionChanged += Geo_PositionChanged;
+            App.Geo.OnPositionUpdate += Geo_OnPositionUpdate;
+            App.Geo.OnStatusUpdate += Geo_OnStatusUpdate;
+        }
+
+        private void Geo_OnStatusUpdate(object sender, Model.StatusUpdatedEventArgs e)
+        {
+            dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                NotifyPropertyChanged(nameof(Status));
+            });
+        }
+
+        private void Geo_OnPositionUpdate(object sender, Model.PositionUpdatedEventArgs e)
+        {
+            dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                NotifyPropertyChanged(nameof(Source));
+                NotifyPropertyChanged(nameof(Accuracy));
+            });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -27,29 +44,11 @@ namespace NavCityBreda.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void Geo_StatusChanged(Geolocator sender, StatusChangedEventArgs args)
-        {
-            dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                NotifyPropertyChanged(nameof(Status));
-            });
-            
-        }
-
-        private void Geo_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
-        {
-            dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                NotifyPropertyChanged(nameof(Source));
-                NotifyPropertyChanged(nameof(Accuracy));
-            });
-        }
-
         public string Status
         {
             get
             {
-                return App.Geo.Status;
+                return App.Geo.Status.ToString();
             }
         }
 

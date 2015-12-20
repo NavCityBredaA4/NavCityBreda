@@ -14,46 +14,61 @@ namespace NavCityBreda.Model
     {
         private Geolocator geo;
 
-        private string status;
-        public string Status { get { return status; } }
+        private PositionStatus _status;
+        public PositionStatus Status { get { return _status; } }
 
-        private Geoposition pos;
-        public Geoposition Position { get { return pos; } }
+        private Geoposition _position;
+        public Geoposition Position { get { return _position; } }
 
         public bool? Connected { get; private set; }
 
+        private List<Geoposition> _history;
+        public List<Geoposition> History
+        {
+            get
+            {
+                return _history;
+            }
+        }
+
+        //Events
+        public delegate void PositionUpdateHandler(object sender, PositionUpdatedEventArgs e);
+        public event PositionUpdateHandler OnPositionUpdate;
+
+        public delegate void StatusUpdateHandler(object sender, StatusUpdatedEventArgs e);
+        public event StatusUpdateHandler OnStatusUpdate;
+
         public GeoTracker()
         {
-            status = "Waiting...";
+            _status = PositionStatus.NotInitialized;
             Connected = false;
+            _history = new List<Geoposition>();
             StartTracking();
-        }
-
-        public event TypedEventHandler<Geolocator, StatusChangedEventArgs> StatusChanged
-        {
-            add { if(Connected == true) geo.StatusChanged += value; }
-            remove { geo.StatusChanged -= value; }
-        }
-
-        public event TypedEventHandler<Geolocator, PositionChangedEventArgs> PositionChanged
-        {
-            add { if (Connected == true) geo.PositionChanged += value; }
-            remove { geo.PositionChanged -= value; }
         }
 
         public async void ForceRefresh()
         {
-            if(geo != null)
-                pos = await geo.GetGeopositionAsync();
+            if (geo == null)
+                StartTracking();
+            else
+                _position = await geo.GetGeopositionAsync();
         }
 
-        private async void StartTracking()
+        public void ClearHistory()
+        {
+            _history.Clear();
+        }
+
+        public async void StartTracking()
         {
             // Request permission to access location
+            if (Status != PositionStatus.NotAvailable && Status != PositionStatus.NotInitialized)
+                return;
+
             var accessStatus = await Geolocator.RequestAccessAsync();
 
             switch (accessStatus)
-            {
+            { 
                 case GeolocationAccessStatus.Allowed:
                     geo = new Geolocator {
                         DesiredAccuracy = PositionAccuracy.High,
@@ -66,31 +81,75 @@ namespace NavCityBreda.Model
                     geo.PositionChanged += Geo_PositionChanged;
                     geo.StatusChanged += Geo_StatusChanged;
 
-                    status = "Waiting for update...";
+                    _status = PositionStatus.Initializing;
                     break;
 
                 case GeolocationAccessStatus.Denied:
                     Connected = false;
-                    status = "Access Denied";
+                    _status = PositionStatus.NotAvailable;
                     bool result = await Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-location"));
                     break;
 
                 default:
                 case GeolocationAccessStatus.Unspecified:
                     Connected = false;
-                    status = "Unspecified Error Occured";
+                    _status = PositionStatus.NotAvailable;
                     break;
             }
         }
 
         private void Geo_StatusChanged(Geolocator sender, StatusChangedEventArgs args)
         {
-            status = args.Status.ToString();
+            UpdateStatus(args.Status);
         }
 
         private void Geo_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
-            pos = args.Position;
+            if (_history.Count > 0)
+                UpdatePosition(_history.Last(), args.Position);
+            else
+                _position = args.Position;
+            _history.Add(args.Position);
+        }
+
+        private void UpdateStatus(PositionStatus s)
+        {
+            _status = s;
+
+            if (OnStatusUpdate == null) return;
+
+            OnStatusUpdate(this, new StatusUpdatedEventArgs(s));
+        }
+
+        private void UpdatePosition(Geoposition old, Geoposition newp)
+        {
+            _position = newp;
+
+            if (OnPositionUpdate == null) return;
+
+            OnPositionUpdate(this, new PositionUpdatedEventArgs(old, newp));
+        }
+    }
+
+    public class PositionUpdatedEventArgs : EventArgs
+    {
+        public Geoposition Old { get; private set; }
+        public Geoposition New { get; private set; }
+
+        public PositionUpdatedEventArgs(Geoposition old, Geoposition notold)
+        {
+            Old = old;
+            New = notold;
+        }
+    }
+
+    public class StatusUpdatedEventArgs : EventArgs
+    {
+        public PositionStatus Status { get; private set; }
+
+        public StatusUpdatedEventArgs(PositionStatus status)
+        {
+            Status = status;
         }
     }
 }

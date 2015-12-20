@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
+using Windows.Data.Xml.Dom;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Graphics.Display;
 using Windows.Services.Maps;
 using Windows.UI;
+using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -22,42 +24,6 @@ namespace NavCityBreda.Helpers
         {
             get {
                return new Windows.ApplicationModel.Resources.ResourceLoader();
-            }
-        }
-
-        public static string RouteWaypointsFolder
-        {
-            get
-            {
-                return "Routes/Waypoints/";
-            }
-        }
-
-        public static string RouteImagesFolder
-        {
-            get
-            {
-                return "Routes/Images/";
-            }
-        }
-
-        public static Size ScreenSize
-        {
-            get
-            {
-                var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-                var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
-                Size size = new Size(bounds.Width * scaleFactor, bounds.Height * scaleFactor);
-                return size;
-            }
-        }
-
-        public static MainPage MainPage
-        {
-            get {
-                Frame f = Window.Current.Content as Frame;
-                MainPage mp = f.Content as MainPage;
-                return mp;
             }
         }
 
@@ -190,6 +156,26 @@ namespace NavCityBreda.Helpers
             line.Path = new Geopath(plist);
 
             return line;
+        }
+
+        public static void SendToastNotification(string title, string text)
+        {
+            ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
+            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
+
+            XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
+            toastTextElements[0].AppendChild(toastXml.CreateTextNode(title));
+            toastTextElements[1].AppendChild(toastXml.CreateTextNode(text));
+
+            IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
+            XmlElement audio = toastXml.CreateElement("audio");
+
+            audio.SetAttribute("src", "ms-winsoundevent:Notification.IM");
+
+            toastNode.AppendChild(audio);
+
+            ToastNotification toast = new ToastNotification(toastXml);
+            ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
     }
 }
