@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NavCityBreda.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,9 @@ namespace NavCityBreda.Model
         public delegate void OnHeadingUpdatedHandler(object sender, HeadingUpdatedEventArgs e);
         public event OnHeadingUpdatedHandler OnHeadingUpdated;
 
+        public delegate void OnHeadingUpdateSlowHandler(object sender, HeadingUpdatedEventArgs e);
+        public event OnHeadingUpdateSlowHandler OnSlowHeadingUpdated;
+
         private Compass comp;
 
         private string status;
@@ -19,6 +23,9 @@ namespace NavCityBreda.Model
 
         private CompassReading hdn;
         public CompassReading Heading { get { return hdn; } }
+
+        private CompassReading lastreading;
+        private double lastreadingtime;
 
         public CompassTracker()
         {
@@ -39,6 +46,7 @@ namespace NavCityBreda.Model
         private void Comp_ReadingChanged(Compass sender, CompassReadingChangedEventArgs args)
         {
             UpdateHeading(args.Reading);
+            UpdateSlowHeading(args.Reading);
         }
 
         private void UpdateHeading(CompassReading r)
@@ -49,6 +57,22 @@ namespace NavCityBreda.Model
             if (OnHeadingUpdated == null) return;
 
             OnHeadingUpdated(this, new HeadingUpdatedEventArgs(r));
+        }
+
+        private void UpdateSlowHeading(CompassReading r)
+        {
+            if (lastreading == null) { lastreading = r; lastreadingtime = Util.Now; }
+
+            if (Math.Abs(r.HeadingMagneticNorth - lastreading.HeadingMagneticNorth) > 10 && Util.Now - lastreadingtime > 25)
+            {
+                lastreading = r;
+                lastreadingtime = Util.Now;
+
+                //Make sure someone is listening
+                if (OnSlowHeadingUpdated == null) return;
+
+                OnSlowHeadingUpdated(this, new HeadingUpdatedEventArgs(r));
+            }
         }
     }
 

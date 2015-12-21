@@ -35,6 +35,7 @@ namespace NavCityBreda.Views
     public sealed partial class MapView : Page
     {
         MapIcon CurrentPosition;
+        MapPolyline CurrentNavigationLine;
 
         public MapView()
         {
@@ -48,19 +49,22 @@ namespace NavCityBreda.Views
             CurrentPosition.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/CurrentLocationRound.png"));
             Map.MapElements.Add(CurrentPosition);
 
+            CurrentNavigationLine = new MapPolyline() { StrokeColor = Color.FromArgb(255, 255, 100, 100), StrokeThickness = 6, ZIndex = 20 };
+            //Map.MapElements.Add(CurrentNavigationLine);
+
             App.Geo.OnPositionUpdate += Geo_OnPositionUpdate;
             App.RouteManager.OnStatusUpdate += RouteManager_OnStatusUpdate;
             App.RouteManager.OnRouteChanged += RouteManager_OnRouteChanged;
             App.RouteManager.OnLandmarkVisited += RouteManager_OnLandmarkVisited;
-            App.CompassTracker.OnHeadingUpdated += CompassTracker_OnHeadingUpdated;
+            App.CompassTracker.OnSlowHeadingUpdated += CompassTracker_OnHeadingUpdated;
         }
 
         private void CompassTracker_OnHeadingUpdated(object sender, HeadingUpdatedEventArgs e)
         {
             Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
             {
-                if (Settings.Tracking && e.Heading.HeadingTrueNorth.HasValue) return;
-                // Map.TryRotateToAsync((double)e.Heading.HeadingTrueNorth);
+                if (Settings.Tracking && e.Heading.HeadingTrueNorth.HasValue)
+                   Map.TryRotateToAsync((double)e.Heading.HeadingTrueNorth);
             });
             
         }
@@ -78,8 +82,9 @@ namespace NavCityBreda.Views
         {
             Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                MapPolyline linebit = Util.GetRouteLine(e.Route, Color.FromArgb(255, 255, 100, 100));
-                Map.MapElements.Add(linebit);
+                Map.MapElements.Remove(CurrentNavigationLine);
+                CurrentNavigationLine.Path = e.Route.Path;
+                Map.MapElements.Add(CurrentNavigationLine);
             });
         }
 
@@ -128,7 +133,7 @@ namespace NavCityBreda.Views
                 Map.MapElements.Add(l.Icon);
             }
 
-            Map.MapElements.Add(Util.GetRouteLine(App.RouteManager.CurrentRoute.RouteObject, Color.FromArgb(200, 100, 100, 255)));
+            Map.MapElements.Add(Util.GetRouteLine(App.RouteManager.CurrentRoute.RouteObject, Color.FromArgb(200, 100, 100, 255), 3));
 
             ZoomRoute();
         }
@@ -153,7 +158,7 @@ namespace NavCityBreda.Views
         private async void Zoom()
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
-            await Map.TrySetViewAsync(CurrentPosition.Location, 15, 0, 0, MapAnimationKind.Linear);
+            await Map.TrySetViewAsync(CurrentPosition.Location, 15);
         }
 
         private async void ZoomRoute()
