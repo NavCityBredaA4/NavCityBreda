@@ -165,6 +165,8 @@ namespace NavCityBreda.Views
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
             await Map.TrySetViewBoundsAsync(App.RouteManager.CurrentRoute.Bounds, null, Windows.UI.Xaml.Controls.Maps.MapAnimationKind.Linear);
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            await Map.TryRotateToAsync(0);
         }
 
         private void Map_MapElementClick(MapControl sender, MapElementClickEventArgs args)
