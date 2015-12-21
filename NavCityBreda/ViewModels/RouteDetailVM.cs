@@ -6,18 +6,28 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 
-namespace NavCityBreda.ViewModel
+namespace NavCityBreda.ViewModels
 {
-    public class RouteDetailVM : INotifyPropertyChanged
+    public class RouteDetailVM : TemplateVM
     {
         Route route;
 
-        public RouteDetailVM(Route r)
+        public RouteDetailVM(Route r) : base(r.Name)
         {
             this.route = r;
+        }
+
+        protected override void UpdatePropertiesToNewLanguage()
+        {
+            NotifyPropertyChanged(nameof(Description));
+            NotifyPropertyChanged(nameof(DescriptionTitle));
+            NotifyPropertyChanged(nameof(LandmarksTitle));
+            NotifyPropertyChanged(nameof(StartRouteText));
+            NotifyPropertyChanged(nameof(StopRouteText));
         }
 
         public string Description
@@ -25,6 +35,22 @@ namespace NavCityBreda.ViewModel
             get
             {
                 return route.Description;
+            }
+        }
+
+        public string DescriptionTitle
+        {
+            get
+            {
+                return Util.Loader.GetString("Description");
+            }
+        }
+
+        public string LandmarksTitle
+        {
+            get
+            {
+                return Util.Loader.GetString("Landmarks");
             }
         }
 
@@ -72,6 +98,14 @@ namespace NavCityBreda.ViewModel
             }
         }
 
+        public string StartRouteText
+        {
+            get
+            {
+                return Util.Loader.GetString("StartRoute");
+            }
+        }
+
         public bool StopEnabled
         {
             get
@@ -80,19 +114,20 @@ namespace NavCityBreda.ViewModel
             }
         }
 
+        public string StopRouteText
+        {
+            get
+            {
+                return Util.Loader.GetString("StopRoute");
+            }
+        }
+
         public void UpdateRoute()
         {
             NotifyPropertyChanged(nameof(StartEnabled));
             NotifyPropertyChanged(nameof(StopEnabled));
             NotifyPropertyChanged(nameof(Landmarks));
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            App.MainPage.Title = route.Name;
         }
     }
 }

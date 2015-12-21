@@ -47,18 +47,18 @@
         </Grid>
 
         <StackPanel Grid.Row="2" Margin="10" Visibility="Visible">
-            <Button Name="StartRouteButton" Click="StartRouteButton_Click" Content="Start Route" Background="DarkGreen" Foreground="White" HorizontalAlignment="Stretch" Visibility="{Binding StartEnabled, Converter={StaticResource VisConverter}}"/>
-            <Button Name="StopRouteButton" Click="StopRouteButton_Click" Content="Stop Route" Background="DarkRed" Foreground="White" HorizontalAlignment="Stretch" Visibility="{Binding StopEnabled, Converter={StaticResource VisConverter}}"/>
+            <Button Click="StartRouteButton_Click" Content="{Binding StartRouteText}" Background="DarkGreen" Foreground="White" HorizontalAlignment="Stretch" Visibility="{Binding StartEnabled, Converter={StaticResource VisConverter}}"/>
+            <Button Click="StopRouteButton_Click" Content="{Binding StopRouteText}" Background="DarkRed" Foreground="White" HorizontalAlignment="Stretch" Visibility="{Binding StopEnabled, Converter={StaticResource VisConverter}}"/>
         </StackPanel>
 
         <StackPanel  Grid.Row="3" Margin="10">
-            <TextBlock Text="[WaypointDescription]" x:Uid="WaypointDescription" Style="{StaticResource Header}"/>
+            <TextBlock Text="{Binding DescriptionTitle}" Style="{StaticResource Header}"/>
             <TextBlock TextWrapping="WrapWholeWords" Text="{Binding Description}"/>
         </StackPanel>
         
 
         <StackPanel Grid.Row="4" Name="LandmarkListPanel" Margin="10">
-            <TextBlock Text="[LandmarksHeader]" x:Uid="LandmarksListHeader" Style="{StaticResource Header}"/>
+            <TextBlock Text="{Binding LandmarksTitle}" Style="{StaticResource Header}"/>
             <ListView x:Name="LandmarkList" ItemsSource="{Binding Landmarks}" IsItemClickEnabled="True" ItemClick="LandmarkList_ItemClick">
                 <ListView.ItemTemplate>
                     <DataTemplate x:Name="ListViewDataTemplate">

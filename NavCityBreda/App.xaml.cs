@@ -80,22 +80,6 @@ namespace NavCityBreda
         // STATIC HELPER FUNCTIONS
         // =========================
 
-        public static string RouteWaypointsFolder
-        {
-            get
-            {
-                return "Routes/Waypoints/";
-            }
-        }
-
-        public static string RouteImagesFolder
-        {
-            get
-            {
-                return "Routes/Images/";
-            }
-        }
-
         public static Size ScreenSize
         {
             get
@@ -117,7 +101,7 @@ namespace NavCityBreda
             }
         }
 
-
+        public static string RouteImagesFolder { get { return "Routes/img/"; } }
 
 
 

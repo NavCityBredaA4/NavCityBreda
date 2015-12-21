@@ -8,6 +8,6 @@
     mc:Ignorable="d">
 
     <Grid>
-        <TextBlock Text="Help"/>
+        <TextBlock Text="This needs to be designed and made"/>
     </Grid>
 </Page>

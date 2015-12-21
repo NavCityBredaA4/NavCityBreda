@@ -1,4 +1,4 @@
-﻿using NavCityBreda.ViewModel;
+﻿using NavCityBreda.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,10 +37,14 @@ namespace NavCityBreda.Views
         MapIcon CurrentPosition;
         MapPolyline CurrentNavigationLine;
 
+        MapVM mapvm;
+
         public MapView()
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
+
+            mapvm = new MapVM();
 
             CurrentPosition = new MapIcon();
             CurrentPosition.NormalizedAnchorPoint = new Point(0.5, 0.5);
@@ -57,6 +61,11 @@ namespace NavCityBreda.Views
             App.RouteManager.OnRouteChanged += RouteManager_OnRouteChanged;
             App.RouteManager.OnLandmarkVisited += RouteManager_OnLandmarkVisited;
             App.CompassTracker.OnSlowHeadingUpdated += CompassTracker_OnHeadingUpdated;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            mapvm.UpdateMap();
         }
 
         private void CompassTracker_OnHeadingUpdated(object sender, HeadingUpdatedEventArgs e)

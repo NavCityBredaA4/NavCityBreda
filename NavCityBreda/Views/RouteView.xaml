@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <RelativePanel Grid.Row="2" Name="RouteListPanel">
-        <ListView x:Name="RouteList" ItemsSource="{Binding}" Margin="0,10,0,0" IsItemClickEnabled="True" ItemClick="RouteList_ItemClick" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+        <ListView x:Name="RouteList" ItemsSource="{Binding Routes}" Margin="0,10,0,0" IsItemClickEnabled="True" ItemClick="RouteList_ItemClick" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="ListViewDataTemplate">
                     <StackPanel Margin="5,0,0,0" Grid.Column="0">

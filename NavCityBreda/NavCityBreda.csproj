@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NavCityBreda</RootNamespace>
     <AssemblyName>NavCityBreda</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
@@ -108,21 +108,48 @@
     <Content Include="Assets\SplashScreen.scale-150.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Routes\Waypoints\historische_kilometer.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <PRIResource Include="Strings\ja-JP\Resources.resw" />
-    <PRIResource Include="Strings\de-DE\Resources.resw" />
-    <PRIResource Include="Strings\nl-NL\Resources.resw" />
+    <Content Include="Routes\historische_kilometer\data.json" />
+    <Content Include="Routes\img\default.jpg" />
+    <Content Include="Routes\img\historische_kilometer_1.jpg" />
+    <Content Include="Routes\img\historische_kilometer_10.jpg" />
+    <Content Include="Routes\img\historische_kilometer_11.jpg" />
+    <Content Include="Routes\img\historische_kilometer_12.jpg" />
+    <Content Include="Routes\img\historische_kilometer_13.jpg" />
+    <Content Include="Routes\img\historische_kilometer_14.jpg" />
+    <Content Include="Routes\img\historische_kilometer_15.jpg" />
+    <Content Include="Routes\img\historische_kilometer_16.jpg" />
+    <Content Include="Routes\img\historische_kilometer_17.jpg" />
+    <Content Include="Routes\img\historische_kilometer_18.jpg" />
+    <Content Include="Routes\img\historische_kilometer_19.jpg" />
+    <Content Include="Routes\img\historische_kilometer_2.jpg" />
+    <Content Include="Routes\img\historische_kilometer_20.jpg" />
+    <Content Include="Routes\img\historische_kilometer_21.jpg" />
+    <Content Include="Routes\img\historische_kilometer_22.jpg" />
+    <Content Include="Routes\img\historische_kilometer_23.jpg" />
+    <Content Include="Routes\img\historische_kilometer_24.jpg" />
+    <Content Include="Routes\img\historische_kilometer_25.jpg" />
+    <Content Include="Routes\img\historische_kilometer_26.jpg" />
+    <Content Include="Routes\img\historische_kilometer_3.jpg" />
+    <Content Include="Routes\img\historische_kilometer_4.jpg" />
+    <Content Include="Routes\img\historische_kilometer_5.jpg" />
+    <Content Include="Routes\img\historische_kilometer_6.jpg" />
+    <Content Include="Routes\img\historische_kilometer_7.jpg" />
+    <Content Include="Routes\img\historische_kilometer_8.jpg" />
+    <Content Include="Routes\img\historische_kilometer_9.jpg" />
+    <PRIResource Include="Routes\historische_kilometer\lang\en\Resources.resw" />
+    <PRIResource Include="Routes\historische_kilometer\lang\nl\Resources.resw" />
+    <PRIResource Include="Routes\historische_kilometer\lang\de\Resources.resw" />
+    <PRIResource Include="Languages\ja\Resources.resw" />
+    <PRIResource Include="Languages\de\Resources.resw" />
+    <PRIResource Include="Languages\nl\Resources.resw" />
     <None Include="project.json" />
-    <PRIResource Include="Strings\en-US\Resources.resw" />
+    <PRIResource Include="Languages\en\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BoolToCheckmarkConverter.cs" />
-    <Compile Include="Helpers\BoolToVisitedConverter.cs" />
     <Compile Include="Helpers\BoudingBox.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\JSONParser.cs" />
@@ -142,9 +169,14 @@
     <Compile Include="Model\RouteManager.cs" />
     <Compile Include="Model\Waypoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\MenuVM.cs" />
-    <Compile Include="ViewModel\RouteDetailVM.cs" />
-    <Compile Include="ViewModel\RouteVM.cs" />
+    <Compile Include="ViewModels\HelpVM.cs" />
+    <Compile Include="ViewModels\LandmarkVM.cs" />
+    <Compile Include="ViewModels\MapVM.cs" />
+    <Compile Include="ViewModels\MainPageVM.cs" />
+    <Compile Include="ViewModels\RouteDetailVM.cs" />
+    <Compile Include="ViewModels\RouteVM.cs" />
+    <Compile Include="ViewModels\SettingsVM.cs" />
+    <Compile Include="ViewModels\TemplateVM.cs" />
     <Compile Include="Views\HelpView.xaml.cs">
       <DependentUpon>HelpView.xaml</DependentUpon>
     </Compile>
@@ -195,87 +227,6 @@
     </Content>
     <Content Include="Assets\Wide310x150Logo.scale-200.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\default.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_1.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_10.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_11.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_12.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_13.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_14.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_15.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_16.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_17.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_18.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_19.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_2.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_20.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_21.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_22.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_23.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_24.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_25.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_26.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_3.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_4.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_5.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_6.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_7.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_8.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Routes\Images\historische_kilometer_9.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -331,7 +282,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Routes\historische_kilometer\lang\ja\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

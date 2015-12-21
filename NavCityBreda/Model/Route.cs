@@ -15,9 +15,16 @@ namespace NavCityBreda.Model
     {
         public GeoboundingBox Bounds { get { return _route.BoundingBox; } }
 
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public string LandmarksDescription { get; private set; }
+        private string _namekey;
+        public string Name { get { return Util.Loader.GetString( _namekey ); } }
+
+        private string _desckey;
+        public string Description { get { return Util.Loader.GetString( _desckey ); } }
+
+        private string _landdesckey;
+        public string LandmarksDescription { get { return Util.Loader.GetString( _landdesckey ); } }
+
+        private string foldername { get; set; }
 
         public List<Landmark> Landmarks
         {
@@ -33,11 +40,12 @@ namespace NavCityBreda.Model
         private MapRoute _route;
         public MapRoute RouteObject { get { return _route; } }
 
-        public Route(string name, string desc, string landmarks)
+        public Route(string name, string desc, string landmarks, string folder)
         {
-            Name = name;
-            Description = desc;
-            LandmarksDescription = landmarks;
+            _namekey = name;
+            _desckey = desc;
+            _landdesckey = landmarks;
+            foldername = folder;
             _waypoints = new List<Waypoint>();
         }
 

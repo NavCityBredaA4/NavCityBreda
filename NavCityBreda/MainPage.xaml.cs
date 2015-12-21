@@ -1,5 +1,5 @@
 ﻿using NavCityBreda.Helpers;
-using NavCityBreda.ViewModel;
+using NavCityBreda.ViewModels;
 using NavCityBreda.Views;
 using System;
 using System.Collections.Generic;
@@ -33,9 +33,9 @@ namespace NavCityBreda
             this.InitializeComponent();
             Frame.Navigated += Frame_Navigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+            
+            this.DataContext = new MainPageVM();
             Frame.Navigate(typeof(MapView));
-
-            this.DataContext = new MenuVM();
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
@@ -77,26 +77,21 @@ namespace NavCityBreda
                     PageTitle.Text = "Nav City Breda";
                     break;
                 case "helpview":
-                    PageTitle.Text = Util.Loader.GetString("PageTitleHelp");
                     NavList.SelectedIndex = 2;
                     break;
                 case "settingsview":
-                    PageTitle.Text = Util.Loader.GetString("PageTitleSettings");
                     NavList.SelectedIndex = 3;
                     break;
                 case "mapview":
-                    PageTitle.Text = Util.Loader.GetString("PageTitleMap");
                     NavList.SelectedIndex = 0;
                     break;
                 case "routedetailview":
-                    PageTitle.Text = Util.Loader.GetString("PageTitleRouteDetail");
+                    NavList.SelectedIndex = 1;
                     break;
                 case "routeview":
-                    PageTitle.Text = Util.Loader.GetString("PageTitleRoute");
                     NavList.SelectedIndex = 1;
                     break;
                 case "landmarkview":
-                    PageTitle.Text = Util.Loader.GetString("PageTitleWaypoint");
                     break;
             }
 

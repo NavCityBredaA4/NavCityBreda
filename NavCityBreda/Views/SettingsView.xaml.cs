@@ -1,4 +1,5 @@
 ﻿using NavCityBreda.Helpers;
+using NavCityBreda.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,29 +25,31 @@ namespace NavCityBreda.Views
     /// </summary>
     public sealed partial class SettingsView : Page
     {
+        SettingsVM settingsvm;
+
         public SettingsView()
         {
             this.InitializeComponent();
-            throw new NotImplementedException("Tracking + tilemaps");
+            settingsvm = new SettingsVM();
+            this.DataContext = settingsvm;
+            //throw new NotImplementedException("Tracking + tilemaps");
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Debug.WriteLine("Switching to settings: " + Settings.CurrentLanguage);
-
             switch (Settings.CurrentLanguage)
             {
                 default:
-                    Debug.WriteLine("No language found: " + Settings.CurrentLanguage);
+                    Debug.WriteLine("Unsupported language: " + Settings.CurrentLanguage);
                     break;
-                case "en-US":
+                case "en":
                     Language.SelectedIndex = 0;
                     break;
-                case "de-DE":
-                    Language.SelectedIndex = 2;
-                    break;
-                case "nl-NL":
+                case "nl":
                     Language.SelectedIndex = 1;
+                    break;
+                case "de":
+                    Language.SelectedIndex = 2;
                     break;
                 case "ja":
                     Language.SelectedIndex = 3;
@@ -64,20 +67,20 @@ namespace NavCityBreda.Views
                     Language.SelectedIndex = 0;
                     break;
                 case 0:
-                    if(Settings.CurrentLanguage != "en-US")
-                        Settings.ChangeLanguage("en-US");
-                    break;
-                case 2:
-                    if (Settings.CurrentLanguage != "de-DE")
-                        Settings.ChangeLanguage("de-DE");
+                    if(Settings.CurrentLanguage != "en")
+                        Settings.ChangeLanguage("en");
                     break;
                 case 1:
-                    if (Settings.CurrentLanguage != "nl-NL")
-                        Settings.ChangeLanguage("nl-NL");
+                    if (Settings.CurrentLanguage != "nl")
+                        Settings.ChangeLanguage("nl");
+                    break;
+                case 2:
+                    if (Settings.CurrentLanguage != "de")
+                        Settings.ChangeLanguage("de");
                     break;
                 case 3:
                     if (Settings.CurrentLanguage != "ja")
-                        Settings.ChangeLanguage("ja-JP");
+                        Settings.ChangeLanguage("ja");
                     break;
             }
 

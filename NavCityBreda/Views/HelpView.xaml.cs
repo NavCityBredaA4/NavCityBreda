@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NavCityBreda.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,8 +23,12 @@ namespace NavCityBreda.Views
     /// </summary>
     public sealed partial class HelpView : Page
     {
+        HelpVM helpvm;
+
         public HelpView()
         {
+            helpvm = new HelpVM();
+            this.DataContext = helpvm;
             this.InitializeComponent();
         }
     }

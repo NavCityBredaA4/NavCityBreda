@@ -1,6 +1,6 @@
 ﻿using NavCityBreda.Helpers;
 using NavCityBreda.Model;
-using NavCityBreda.ViewModel;
+using NavCityBreda.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -31,7 +31,7 @@ namespace NavCityBreda.Views
     public sealed partial class RouteDetailView : Page
     {
         private Route route;
-        private RouteDetailVM vm;
+        private RouteDetailVM routedetailvm;
 
         public RouteDetailView()
         {
@@ -45,15 +45,14 @@ namespace NavCityBreda.Views
             
             if (r == route)
             {
-                vm.UpdateRoute();
+                routedetailvm.UpdateRoute();
                 LandmarkList.SelectedIndex = -1;
                 return;
             }
 
             route = r;
-            vm = new RouteDetailVM(route);
-            this.DataContext = vm;
-            App.MainPage.Title = route.Name;
+            routedetailvm = new RouteDetailVM(route);
+            this.DataContext = routedetailvm;
 
             Map.MapElements.Clear();
 

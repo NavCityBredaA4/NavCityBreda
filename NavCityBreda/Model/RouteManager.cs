@@ -1,6 +1,7 @@
 ﻿using NavCityBreda.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -36,7 +37,7 @@ namespace NavCityBreda.Model
         private MapRoute _routetolandmark;
         public MapRoute RouteToLandmark { get { return _routetolandmark;  } }
 
-        public enum RouteStatus { STOPPED, STARTED }
+        public enum RouteStatus { LOADING, STOPPED, STARTED }
         public RouteStatus Status;
 
         CoreDispatcher dispatcher;
@@ -46,8 +47,8 @@ namespace NavCityBreda.Model
             _routes = new List<Route>();
             dispatcher = App.Dispatcher;
 
-            LoadingElement = "Initializing...";
-            Status = RouteStatus.STOPPED;
+            LoadingElement = Util.Loader.GetString("Initializing") + "...";
+            Status = RouteStatus.LOADING;
             GeofenceMonitor.Current.GeofenceStateChanged += Current_GeofenceStateChanged;
             LoadRoutes();  
         }
@@ -75,7 +76,7 @@ namespace NavCityBreda.Model
                     }); 
                     _currentlandmark = i;
                     LandmarkVisited(i, LandmarkVisitedEventArgs.VisitedStatus.ENTERED);
-                    Util.SendToastNotification(i.Name, "You have visited a landmark.");
+                    Util.SendToastNotification(i.Name, "TRANSLATED MESSAGE");
                     UpdateRoute();
                 }
 
@@ -88,19 +89,25 @@ namespace NavCityBreda.Model
 
         private async void LoadRoutes()
         {
-            string[] routefiles = Directory.GetFiles(App.RouteWaypointsFolder);
+            string[] routefolders = Directory.GetDirectories("Routes/");
 
             _routes.Clear();
 
-            foreach(string file in routefiles)
+            foreach(string folder in routefolders)
             {
-                Route r = JSONParser.LoadRoute(file);
-                LoadingElement = "Loading " + r.Name + "...";
-                await r.CalculateRoute();
-                _routes.Add(r);
+                Debug.WriteLine(folder);
+                string foldername = Path.GetFileName(folder);
+                if (foldername != "img")
+                {
+                    Route r = JSONParser.LoadRoute(foldername);
+                    LoadingElement =  Util.Loader.GetString("Loading") + " " + r.Name + "...";
+                    await r.CalculateRoute();
+                    _routes.Add(r);
+                }
             }
 
-            LoadingElement = "Done";
+            LoadingElement = Util.Loader.GetString("Done") + "...";
+            Status = RouteStatus.STOPPED;
         }
 
         public async void UpdateRoute()
@@ -114,7 +121,7 @@ namespace NavCityBreda.Model
 
         public void StartRoute(Route r)
         {
-            Util.SendToastNotification("Test", "I am testing this shit.");
+            Util.SendToastNotification("Starting", "TRANSLATED MESSAGE");
 
             App.Geo.ClearHistory();
             _currentroute = r;

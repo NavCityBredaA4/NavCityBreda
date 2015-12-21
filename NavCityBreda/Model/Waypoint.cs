@@ -12,20 +12,23 @@ namespace NavCityBreda.Model
     public class Waypoint
     {
         public Geopoint Location { get; protected set; }
-        public string Name { get; protected set; }
+
+        protected string _namekey;
+        public string Name { get { return Util.Loader.GetString( _namekey ); } }
+
         public int Order { get; protected set; }
 
         public Waypoint(Geopoint p, string name, int num)
         {
             Location = p;
-            Name = name;
+            _namekey = name;
             Order = num;
         }
 
         public Waypoint(double la, double lo, string name, int num)
         {
             Location = new Geopoint(new BasicGeoposition() { Altitude = 0, Latitude = la, Longitude = lo });
-            Name = name;
+            _namekey = name;
             Order = num;
         }
 

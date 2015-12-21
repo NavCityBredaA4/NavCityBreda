@@ -14,7 +14,9 @@ namespace NavCityBreda.Model
 {
     public class Landmark : Waypoint
     {
-        public string Description { get; private set; }
+        private string _desckey;
+        public string Description { get { return Util.Loader.GetString(_desckey); } }
+
         public string Image { get; private set; }
 
         private bool _visited;
@@ -45,7 +47,7 @@ namespace NavCityBreda.Model
         private void Create(Geopoint p, string name, string desc, int num, string image_loc)
         {
             _visited = false;
-            Description = desc;
+            _desckey = desc;
             if (image_loc == "" || !File.Exists(App.RouteImagesFolder + image_loc))
                 image_loc = "default.jpg";
             Image = "/" + App.RouteImagesFolder + image_loc;

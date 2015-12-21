@@ -12,12 +12,12 @@
             <StackPanel HorizontalAlignment="Stretch">
 
                 <StackPanel Margin="10">
-                    <TextBlock FontSize="20" Text="Language" Margin="0,0,0,10"/>
+                    <TextBlock FontSize="20" Text="{Binding Language}" Margin="0,0,0,10"/>
                     <ComboBox Name="Language" SelectionChanged="Language_SelectionChanged" HorizontalAlignment="Stretch">
                         <ComboBoxItem>English</ComboBoxItem>
                         <ComboBoxItem>Nederlands</ComboBoxItem>
-                        <ComboBoxItem>Deutsch</ComboBoxItem>
-                        <ComboBoxItem>日本語</ComboBoxItem>
+                        <!-- <ComboBoxItem>Deutsch</ComboBoxItem> -->
+                        <!-- <ComboBoxItem>日本語</ComboBoxItem> --> 
                     </ComboBox>
                     <ProgressRing IsActive="False" Name="LanguageLoading" />
                 </StackPanel>

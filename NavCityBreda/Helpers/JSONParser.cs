@@ -11,26 +11,31 @@ namespace NavCityBreda.Helpers
 {
     class JSONParser
     {
-        public static Route LoadRoute(string file)
+        public static Route LoadRoute(string foldername)
         {
-            if (!File.Exists(file))
-                throw new FileNotFoundException("The file does not exist: " + file);
+            if (!Directory.Exists("Routes/" + foldername))
+                throw new FileNotFoundException("The route folder does not exist: " + foldername);
 
-            string json = File.ReadAllText(file);
+            string datafile = "Routes/" + foldername + "/data.json";
+
+            if (!File.Exists(datafile))
+                throw new FileNotFoundException("The route data file does not exist.");
+
+            string json = File.ReadAllText(datafile);
             JObject o = JObject.Parse(json);
 
             string error;
             if (!ValidateRouteObject(o, out error))
-                throw new FileLoadException("Invalid Route information in " + file + ", " + error);
+                throw new FileLoadException("Invalid Route information in " + datafile + ", " + error);
 
-            Route r = new Route((string)o["name"], (string)o["description"], (string)o["landmarks"]);
+            Route r = new Route((string)o["name"], (string)o["description"], (string)o["landmarks"], foldername);
 
             JToken[] waypoints = o["waypoints"].ToArray();
             int count = 0;
             foreach(JToken t in waypoints)
             {
                 if(!ValidateWaypointObject(t, out error))
-                    throw new FileLoadException("Invalid Waypoint information in " + file + ", " + error);
+                    throw new FileLoadException("Invalid Waypoint information in " + datafile + ", " + error);
 
                 Waypoint w;
 

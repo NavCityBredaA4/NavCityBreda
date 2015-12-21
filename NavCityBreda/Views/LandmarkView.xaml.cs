@@ -1,5 +1,6 @@
 ﻿using NavCityBreda.Helpers;
 using NavCityBreda.Model;
+using NavCityBreda.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,7 +27,7 @@ namespace NavCityBreda.Views
     /// </summary>
     public sealed partial class LandmarkView : Page
     {
-        Landmark landmark; 
+        LandmarkVM landmarkvm;
 
         public LandmarkView()
         {
@@ -35,19 +36,9 @@ namespace NavCityBreda.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            landmark = e.Parameter as Landmark;
-            this.DataContext = landmark;
-            App.MainPage.Title = landmark.Name;
-            LoadStreet();
-        }
-
-        private async void LoadStreet()
-        {
-            await Task.Delay(TimeSpan.FromMilliseconds(350));
-            string address = await Util.FindAddress(landmark.Location);
-            StreetLoading.IsActive = false;
-            StreetLoading.Visibility = Visibility.Collapsed;
-            StreetAddress.Text = address;
+            Landmark landmark = e.Parameter as Landmark;
+            landmarkvm = new LandmarkVM(landmark);
+            this.DataContext = landmarkvm;
         }
     }
 }

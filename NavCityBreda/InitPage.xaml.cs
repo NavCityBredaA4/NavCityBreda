@@ -86,7 +86,7 @@ namespace NavCityBreda
 
         private async void AwaitInitialize()
         {
-            while (App.RouteManager.LoadingElement != "Done")
+            while (App.RouteManager.Status == Model.RouteManager.RouteStatus.LOADING)
             {
                 await Task.Delay(TimeSpan.FromMilliseconds(150));
                 Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -95,22 +95,13 @@ namespace NavCityBreda
                 }); 
             }
 
-            while (App.Geo.Connected == null)
-            {
-                await Task.Delay(TimeSpan.FromMilliseconds(150));
-                Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                {
-                    splashProgressText.Text = "Waiting on GPS...";
-                });
-            }
-
             Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
             {
-                // Navigate to mainpage
-                rootFrame.Navigate(typeof(MainPage));
-                App.rootFrame = rootFrame;
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
+                // Navigate to mainpage
+                App.rootFrame = rootFrame;
+                rootFrame.Navigate(typeof(MainPage));
             });
             
         }
