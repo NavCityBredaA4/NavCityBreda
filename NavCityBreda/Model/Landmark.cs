@@ -17,7 +17,7 @@ namespace NavCityBreda.Model
         private string _desckey;
         public string Description { get { return Util.Loader.GetString(_desckey); } }
 
-        public string Image { get; private set; }
+        public List<Image> Images { get; private set; }
 
         private bool _visited;
         public bool Visited
@@ -26,7 +26,7 @@ namespace NavCityBreda.Model
             set
             {
                 _visited = value;
-                UpdateIconImage();
+                UpdateIcon();
             }
         }
 
@@ -34,34 +34,36 @@ namespace NavCityBreda.Model
         public MapIcon Icon { get; set; }
 
 
-        public Landmark(Geopoint p, string name, string desc, int num, string image_loc = "default.jpg") : base (p, name, num)
+        public Landmark(Geopoint p, string name, int num, string desc, List<Image> images) : base (p, name, num)
         {
-            Create(Location, name, desc, num, image_loc);
+            Create(name, desc, num, images);
         }
 
-        public Landmark(double la, double lo, string name, string desc, int num, string image_loc = "default.jpg") : base(la, lo, name, num)
+        public Landmark(double la, double lo, string name, int num, string desc, List<Image> images) : base(la, lo, name, num)
         {
-            Create(Location, name, desc, num, image_loc);
+            Create(name, desc, num, images);
         }
 
-        private void Create(Geopoint p, string name, string desc, int num, string image_loc)
+        private void Create(string name, string desc, int num, List<Image> images)
         {
             _visited = false;
             _desckey = desc;
-            if (image_loc == "" || !File.Exists(App.RouteImagesFolder + image_loc))
-                image_loc = "default.jpg";
-            Image = "/" + App.RouteImagesFolder + image_loc;
-            Id = Name + "_" + Order;
+
+            Images = images;
+
+            Id = _namekey + "_" + Order;
 
             Icon = new MapIcon();
             Icon.Location = Location;
             Icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
             Icon.Title = Name;
-            Icon.ZIndex = 10;
+            Icon.ZIndex = 500;
         }
 
-        public void UpdateIconImage()
+        public void UpdateIcon()
         {
+            Icon.Title = Name;
+
             if(_visited)
                 Icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/LandmarkVisited.png"));
             else

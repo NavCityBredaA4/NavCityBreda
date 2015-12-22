@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 
 namespace NavCityBreda.ViewModels
 {
@@ -39,11 +41,11 @@ namespace NavCityBreda.ViewModels
             }
         }
 
-        public string Image
+        public List<Image> Images
         {
             get
             {
-                return landmark.Image;
+                return landmark.Images;
             }
         }
 

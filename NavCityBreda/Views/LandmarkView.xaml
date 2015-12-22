@@ -19,7 +19,31 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Image Source="{Binding Image}" Grid.Row="0"  />
+
+            <ListView Grid.Row="0" ItemsSource="{Binding Images}"
+                        ScrollViewer.HorizontalScrollMode="Auto"
+                        ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                        ScrollViewer.VerticalScrollMode="Disabled"
+                        ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:Name="ListViewDataTemplate">
+                        <Image Source="{Binding Source}" Height="{Binding Width}" Width="{Binding Width}" Stretch="UniformToFill"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!--<Image Source="{Binding Image}" Grid.Row="0"  />-->
 
             <Grid  Grid.Row="1" Margin="10">
                 <Grid.ColumnDefinitions>
