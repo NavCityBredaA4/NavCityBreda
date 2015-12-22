@@ -52,7 +52,10 @@
         <RelativePanel Grid.Row="0">
             <Button RelativePanel.AlignLeftWithPanel="True" Name="NavButton" Click="NavButton_Click" VerticalAlignment="Stretch" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" FontSize="28" />
 
-            <TextBlock RelativePanel.RightOf="NavButton" FontSize="28" Margin="10,0,0,0" Name="PageTitle" Text="{Binding Map}" />
+            <Viewbox RelativePanel.RightOf="NavButton" RelativePanel.AlignBottomWith="NavButton" StretchDirection="DownOnly" Stretch="UniformToFill" Margin="10,0,10,0">
+                <TextBlock FontSize="28" Name="PageTitle" Text="{Binding Map}" />
+            </Viewbox>
+            
         </RelativePanel>
 
         <!-- http://stackoverflow.com/questions/32108362/uwp-swipe-to-open-splitview-pane-->

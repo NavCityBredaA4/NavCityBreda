@@ -101,8 +101,6 @@ namespace NavCityBreda
             }
         }
 
-        public static string RouteImagesFolder { get { return "Routes/img/"; } }
-
 
 
         // ===============================

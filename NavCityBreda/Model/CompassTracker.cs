@@ -10,16 +10,13 @@ namespace NavCityBreda.Model
 {
     public class CompassTracker
     {
-        public delegate void OnHeadingUpdatedHandler(object sender, HeadingUpdatedEventArgs e);
-        public event OnHeadingUpdatedHandler OnHeadingUpdated;
+        public delegate void OnHeadingUpdateHandler(object sender, HeadingUpdatedEventArgs e);
+        public event OnHeadingUpdateHandler OnHeadingUpdate;
 
         public delegate void OnHeadingUpdateSlowHandler(object sender, HeadingUpdatedEventArgs e);
         public event OnHeadingUpdateSlowHandler OnSlowHeadingUpdated;
 
         private Compass comp;
-
-        private string status;
-        public string Status { get { return status; } }
 
         private CompassReading hdn;
         public CompassReading Heading { get { return hdn; } }
@@ -29,7 +26,6 @@ namespace NavCityBreda.Model
 
         public CompassTracker()
         {
-            status = "Waiting...";
             comp = Compass.GetDefault();
 
             // Assign an event handler for the compass reading-changed event
@@ -54,9 +50,9 @@ namespace NavCityBreda.Model
             hdn = r;
 
             //Make sure someone is listening
-            if (OnHeadingUpdated == null) return;
+            if (OnHeadingUpdate == null) return;
 
-            OnHeadingUpdated(this, new HeadingUpdatedEventArgs(r));
+            OnHeadingUpdate(this, new HeadingUpdatedEventArgs(r));
         }
 
         private void UpdateSlowHeading(CompassReading r)

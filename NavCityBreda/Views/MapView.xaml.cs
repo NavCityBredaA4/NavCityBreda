@@ -45,6 +45,7 @@ namespace NavCityBreda.Views
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
 
             mapvm = new MapVM();
+            this.DataContext = mapvm;
 
             CurrentPosition = new MapIcon();
             CurrentPosition.NormalizedAnchorPoint = new Point(0.5, 0.5);
@@ -53,19 +54,26 @@ namespace NavCityBreda.Views
             CurrentPosition.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/CurrentLocationRound.png"));
             Map.MapElements.Add(CurrentPosition);
 
-            CurrentNavigationLine = new MapPolyline() { StrokeColor = Color.FromArgb(255, 255, 100, 100), StrokeThickness = 6, ZIndex = 20 };
+            CurrentNavigationLine = new MapPolyline() { StrokeColor = Color.FromArgb(255, 255, 100, 100), StrokeThickness = 6, ZIndex = 100 };
             //Map.MapElements.Add(CurrentNavigationLine);
 
             App.Geo.OnPositionUpdate += Geo_OnPositionUpdate;
             App.RouteManager.OnStatusUpdate += RouteManager_OnStatusUpdate;
-            App.RouteManager.OnRouteChanged += RouteManager_OnRouteChanged;
+            App.RouteManager.OnLandmarkChanged += RouteManager_OnLandmarkChanged;
             App.RouteManager.OnLandmarkVisited += RouteManager_OnLandmarkVisited;
             App.CompassTracker.OnSlowHeadingUpdated += CompassTracker_OnHeadingUpdated;
+            Settings.OnLanguageUpdate += Settings_OnLanguageUpdate;
+        }
+
+        private void Settings_OnLanguageUpdate(EventArgs e)
+        {
+            DrawRoute();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             mapvm.UpdateMap();
+            App.Geo.TryConnectIfNull();
         }
 
         private void CompassTracker_OnHeadingUpdated(object sender, HeadingUpdatedEventArgs e)
@@ -87,13 +95,14 @@ namespace NavCityBreda.Views
             }); 
         }
 
-        private void RouteManager_OnRouteChanged(object sender, RouteChangedEventArgs e)
+        private void RouteManager_OnLandmarkChanged(object sender, LandmarkChangedEventArgs e)
         {
             Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                Map.MapElements.Remove(CurrentNavigationLine);
                 CurrentNavigationLine.Path = e.Route.Path;
-                Map.MapElements.Add(CurrentNavigationLine);
+
+                if (!Map.MapElements.Contains(CurrentNavigationLine))
+                    Map.MapElements.Add(CurrentNavigationLine);
             });
         }
 
@@ -103,7 +112,7 @@ namespace NavCityBreda.Views
             {
                 Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
-                    MapPolyline linebit = Util.GetRouteLine(e.Old.Coordinate.Point.Position, e.New.Coordinate.Point.Position, Color.FromArgb(255, 155, 155, 155));
+                    MapPolyline linebit = Util.GetRouteLine(e.Old.Coordinate.Point.Position, e.New.Coordinate.Point.Position, Color.FromArgb(255, 155, 155, 155), 250, 6);
                     Map.MapElements.Add(linebit);
                 });
             }
@@ -127,22 +136,27 @@ namespace NavCityBreda.Views
 
         private void DrawRoute()
         {
+            if (App.RouteManager.Status != RouteManager.RouteStatus.STARTED) return;
+
             Route r = App.RouteManager.CurrentRoute;
 
-            Settings.Tracking = false;
+            if (r == null) return;
 
             GeofenceMonitor.Current.Geofences.Clear();
             Map.MapElements.Clear();
             Map.MapElements.Add(CurrentPosition);
+            Map.MapElements.Add(CurrentNavigationLine);
+            Map.MapElements.Add(Util.GetRouteLine(App.Geo.History.Select(p => p.Coordinate.Point.Position).ToList(), Color.FromArgb(255, 155, 155, 155), 250, 6));
 
-            foreach(Landmark l in r.Landmarks)
+            foreach (Landmark l in r.Landmarks)
             {
-                GeofenceMonitor.Current.Geofences.Add(new Geofence(l.Id, new Geocircle(l.Location.Position, 40)));
-                l.UpdateIconImage();
+                if (!l.Visited)
+                    GeofenceMonitor.Current.Geofences.Add(new Geofence(l.Id, new Geocircle(l.Location.Position, 35), MonitoredGeofenceStates.Entered, true));
+                l.UpdateIcon();
                 Map.MapElements.Add(l.Icon);
             }
 
-            Map.MapElements.Add(Util.GetRouteLine(App.RouteManager.CurrentRoute.RouteObject, Color.FromArgb(200, 100, 100, 255), 3));
+            Map.MapElements.Add(Util.GetRouteLine(App.RouteManager.CurrentRoute.RouteObject, Color.FromArgb(200, 100, 100, 255), 50, 3));
 
             ZoomRoute();
         }
@@ -164,18 +178,36 @@ namespace NavCityBreda.Views
                 Zoom();
         }
 
-        private async void Zoom()
+        private async Task<String> Zoom()
         {
-            await Task.Delay(TimeSpan.FromSeconds(1));
-            await Map.TrySetViewAsync(CurrentPosition.Location, 15);
+            await Task.Delay(TimeSpan.FromMilliseconds(500));
+            await Map.TrySetViewAsync(CurrentPosition.Location, 17);
+
+            if(App.RouteManager.Status == RouteManager.RouteStatus.STARTED)
+            {
+                await Task.Delay(TimeSpan.FromMilliseconds(500));
+                await Map.TryTiltToAsync(40);
+            }
+            else
+            {
+                await Task.Delay(TimeSpan.FromMilliseconds(500));
+                await Map.TryTiltToAsync(0);
+            }
+            return "";
         }
 
         private async void ZoomRoute()
         {
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            Settings.Tracking = false;
+            await Task.Delay(TimeSpan.FromMilliseconds(500));
             await Map.TrySetViewBoundsAsync(App.RouteManager.CurrentRoute.Bounds, null, Windows.UI.Xaml.Controls.Maps.MapAnimationKind.Linear);
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            await Task.Delay(TimeSpan.FromMilliseconds(500));
             await Map.TryRotateToAsync(0);
+            await Task.Delay(TimeSpan.FromMilliseconds(1500));
+            await Zoom();
+            await Task.Delay(TimeSpan.FromMilliseconds(500));
+            await Map.TryRotateToAsync((double)App.CompassTracker.Heading.HeadingTrueNorth);
+            Settings.Tracking = true;
         }
 
         private void Map_MapElementClick(MapControl sender, MapElementClickEventArgs args)

@@ -201,4 +201,43 @@
   <data name="WiFi" xml:space="preserve">
     <value>WiFi</value>
   </data>
+  <data name="RouteEnd" xml:space="preserve">
+    <value>U heeft uw bestemming bereikt</value>
+  </data>
+  <data name="RouteGoStraight" xml:space="preserve">
+    <value>Ga rechtdoor</value>
+  </data>
+  <data name="RouteKeepLeft" xml:space="preserve">
+    <value>Links aanhouden</value>
+  </data>
+  <data name="RouteKeepRight" xml:space="preserve">
+    <value>Rechts aanhouden</value>
+  </data>
+  <data name="RouteLeft" xml:space="preserve">
+    <value>Ga linksaf</value>
+  </data>
+  <data name="RouteNone" xml:space="preserve">
+    <value>Geen nieuw actie vereist</value>
+  </data>
+  <data name="RouteOn" xml:space="preserve">
+    <value>op</value>
+  </data>
+  <data name="RouteRight" xml:space="preserve">
+    <value>Ga rechtsaf</value>
+  </data>
+  <data name="RouteSeeMap" xml:space="preserve">
+    <value>Zie de kaart voor meer detail</value>
+  </data>
+  <data name="RouteStart" xml:space="preserve">
+    <value>Volg de route die op de kaart getekent is</value>
+  </data>
+  <data name="RouteTrafficCircleLeft" xml:space="preserve">
+    <value>Sla op de rotonde linksaf</value>
+  </data>
+  <data name="RouteTrafficCircleRight" xml:space="preserve">
+    <value>Sla op de rotonde rechtsaf</value>
+  </data>
+  <data name="RouteUTurn" xml:space="preserve">
+    <value>Keer indien mogelijk om</value>
+  </data>
 </root>

@@ -11,7 +11,7 @@
         <ListView x:Name="RouteList" ItemsSource="{Binding Routes}" Margin="0,10,0,0" IsItemClickEnabled="True" ItemClick="RouteList_ItemClick" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="ListViewDataTemplate">
-                    <StackPanel Margin="5,0,0,0" Grid.Column="0">
+                    <StackPanel Margin="5,0,0,0">
                         <TextBlock Text="{Binding Name}" FontSize="20" TextWrapping="NoWrap"/>
                         <TextBlock Text="{Binding LandmarksDescription}" FontSize="14" TextWrapping="WrapWholeWords" />
                     </StackPanel>

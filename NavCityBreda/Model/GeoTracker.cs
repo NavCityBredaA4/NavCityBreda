@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,9 +50,15 @@ namespace NavCityBreda.Model
         public async void ForceRefresh()
         {
             if (geo == null)
-                StartTracking();
+                await StartTracking();
             else
                 _position = await geo.GetGeopositionAsync();
+        }
+
+        public async void TryConnectIfNull()
+        {
+            if (geo == null)
+                await StartTracking();
         }
 
         public void ClearHistory()
@@ -59,11 +66,11 @@ namespace NavCityBreda.Model
             _history.Clear();
         }
 
-        public async void StartTracking()
+        public async Task<String> StartTracking()
         {
             // Request permission to access location
             if (Status != PositionStatus.NotAvailable && Status != PositionStatus.NotInitialized)
-                return;
+                return "Already Connected";
 
             var accessStatus = await Geolocator.RequestAccessAsync();
 
@@ -76,30 +83,39 @@ namespace NavCityBreda.Model
                         ReportInterval = 1500
                     };
 
+                    ClearHistory();
+
                     Connected = true;
 
                     geo.PositionChanged += Geo_PositionChanged;
                     geo.StatusChanged += Geo_StatusChanged;
 
                     _status = PositionStatus.Initializing;
-                    break;
+
+                    return "Connected";
 
                 case GeolocationAccessStatus.Denied:
                     Connected = false;
                     _status = PositionStatus.NotAvailable;
                     bool result = await Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-location"));
-                    break;
+                    return "Denied";
 
                 default:
                 case GeolocationAccessStatus.Unspecified:
                     Connected = false;
                     _status = PositionStatus.NotAvailable;
-                    break;
+                    return "Error";
             }
         }
 
         private void Geo_StatusChanged(Geolocator sender, StatusChangedEventArgs args)
         {
+            if(args.Status == PositionStatus.Disabled)
+            {
+                geo = null;
+                Connected = false;
+            }
+
             UpdateStatus(args.Status);
         }
 
@@ -109,6 +125,7 @@ namespace NavCityBreda.Model
                 UpdatePosition(_history.Last(), args.Position);
             else
                 _position = args.Position;
+
             _history.Add(args.Position);
         }
 

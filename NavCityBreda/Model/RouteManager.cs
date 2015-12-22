@@ -21,8 +21,13 @@ namespace NavCityBreda.Model
         public delegate void OnLandmarkVisitedHandler(object sender, LandmarkVisitedEventArgs e);
         public event OnLandmarkVisitedHandler OnLandmarkVisited;
 
-        public delegate void OnRouteChangedHandler (object sender, RouteChangedEventArgs e);
-        public event OnRouteChangedHandler OnRouteChanged;
+        public delegate void OnLandmarkChangedHandler (object sender, LandmarkChangedEventArgs e);
+        public event OnLandmarkChangedHandler OnLandmarkChanged;
+
+        public delegate void OnManeuverChangedHandler (object sender, ManeuverChangedEventArgs e);
+        public event OnManeuverChangedHandler OnManeuverChanged;
+
+
 
         private List<Route> _routes;
         public List<Route> Routes { get { return _routes;  } }
@@ -30,12 +35,22 @@ namespace NavCityBreda.Model
         private Route _currentroute;
         public Route CurrentRoute { get { return _currentroute; } }
 
-        public string LoadingElement;
-
         private Landmark _currentlandmark;
+        public Landmark CurrentLandmark { get { return _currentlandmark; } }
 
         private MapRoute _routetolandmark;
-        public MapRoute RouteToLandmark { get { return _routetolandmark;  } }
+        public MapRoute RouteToLandmark { get { return _routetolandmark; } }
+
+        private int _currentroutelegcount;
+        private List<MapRouteLeg> _currentroutelegs;
+
+        private int _currentmaneuvercount;
+        private MapRouteManeuver _currentmaneuver;
+        public MapRouteManeuver CurrentManeuver { get { return _currentmaneuver; } }
+
+
+
+        public string LoadingElement;
 
         public enum RouteStatus { LOADING, STOPPED, STARTED }
         public RouteStatus Status;
@@ -50,18 +65,50 @@ namespace NavCityBreda.Model
             LoadingElement = Util.Loader.GetString("Initializing") + "...";
             Status = RouteStatus.LOADING;
             GeofenceMonitor.Current.GeofenceStateChanged += Current_GeofenceStateChanged;
+            App.Geo.OnPositionUpdate += Geo_OnPositionUpdate;
             LoadRoutes();  
+        }
+
+        private void Geo_OnPositionUpdate(object sender, PositionUpdatedEventArgs e)
+        {
+            if(Status == RouteStatus.STARTED)
+            {
+                double dif_lat = Math.Abs(_currentmaneuver.StartingPoint.Position.Latitude - e.New.Coordinate.Point.Position.Latitude);
+                double dif_lon = Math.Abs(_currentmaneuver.StartingPoint.Position.Longitude - e.New.Coordinate.Point.Position.Longitude);
+
+                if (dif_lat > 0.000012 && dif_lon > 0.000012) return;
+                //Only continue if you are at the maneuver point
+
+
+                _currentmaneuvercount++;
+                if(_currentmaneuvercount >= _currentroutelegs[_currentroutelegcount].Maneuvers.Count)
+                {
+                    _currentmaneuvercount--;
+
+                    _currentroutelegcount++;
+                    if(_currentroutelegcount >= _currentroutelegs.Count)
+                    {
+                        _currentroutelegcount--;
+                        return;
+                    }
+                }
+
+                _currentmaneuver = _currentroutelegs[_currentroutelegcount].Maneuvers[_currentmaneuvercount];
+                UpdateManeuver(_currentmaneuver);
+            }
         }
 
         private void Current_GeofenceStateChanged(GeofenceMonitor sender, object args)
         {
+            if (Status != RouteStatus.STARTED) return;
+
             var reports = sender.ReadReports();
 
             foreach (GeofenceStateChangeReport report in reports)
             {
                 GeofenceState state = report.NewState;
                 Geofence geofence = report.Geofence;
-                Landmark i = App.RouteManager.CurrentRoute.Landmarks.Where(t => t.Id == geofence.Id).First();
+                Landmark i = CurrentRoute.Landmarks.Where(t => t.Id == geofence.Id).FirstOrDefault();
 
                 if (state == GeofenceState.Removed)
                 {
@@ -95,11 +142,10 @@ namespace NavCityBreda.Model
 
             foreach(string folder in routefolders)
             {
-                Debug.WriteLine(folder);
                 string foldername = Path.GetFileName(folder);
                 if (foldername != "img")
                 {
-                    Route r = JSONParser.LoadRoute(foldername);
+                    Route r = RouteParser.LoadRoute(foldername);
                     LoadingElement =  Util.Loader.GetString("Loading") + " " + r.Name + "...";
                     await r.CalculateRoute();
                     _routes.Add(r);
@@ -110,22 +156,30 @@ namespace NavCityBreda.Model
             Status = RouteStatus.STOPPED;
         }
 
-        public async void UpdateRoute()
+        public async Task<String> UpdateRoute()
         {
-            if (App.Geo.Position == null) return;
+            if (App.Geo.Position == null) return "error";
 
             _currentlandmark = _currentroute.Landmarks.FirstOrDefault(p => !p.Visited);
             _routetolandmark = await Util.FindWalkingRoute(App.Geo.Position.Coordinate.Point, _currentlandmark.Location);
+            _currentroutelegs = _routetolandmark.Legs.ToList() as List<MapRouteLeg>;
+            _currentroutelegcount = 0;
+            _currentmaneuvercount = 0;
+            _currentmaneuver = _currentroutelegs[_currentroutelegcount].Maneuvers[_currentmaneuvercount];
+            
             UpdateRoute(_routetolandmark, _currentlandmark);
+            UpdateManeuver(_currentmaneuver);
+
+            return "success";
         }
 
-        public void StartRoute(Route r)
+        public async void StartRoute(Route r)
         {
             Util.SendToastNotification("Starting", "TRANSLATED MESSAGE");
 
             App.Geo.ClearHistory();
             _currentroute = r;
-            UpdateRoute();
+            await UpdateRoute();
             UpdateStatus(RouteStatus.STARTED);
         }
 
@@ -137,6 +191,10 @@ namespace NavCityBreda.Model
                 _currentroute = null;
                 _currentlandmark = null;
                 _routetolandmark = null;
+                _currentroutelegcount = 0;
+                _currentroutelegs = null;
+                _currentmaneuvercount = 0;
+                _currentmaneuver = null;
                 UpdateStatus(RouteStatus.STOPPED);
             }
         }
@@ -153,7 +211,6 @@ namespace NavCityBreda.Model
             OnStatusUpdate(this, new RouteStatusChangedEventArgs(status));
         }
 
-        //Handle Events
         private void LandmarkVisited(Landmark l, LandmarkVisitedEventArgs.VisitedStatus status)
         {
             // Make sure someone is listening to event
@@ -162,13 +219,20 @@ namespace NavCityBreda.Model
             OnLandmarkVisited(this, new LandmarkVisitedEventArgs(l, status));
         }
 
-        //Handle Events
         private void UpdateRoute(MapRoute route, Landmark l)
         {
             // Make sure someone is listening to event
-            if (OnRouteChanged == null) return;
+            if (OnLandmarkChanged == null) return;
 
-            OnRouteChanged(this, new RouteChangedEventArgs(route, l));
+            OnLandmarkChanged(this, new LandmarkChangedEventArgs(route, l));
+        }
+
+        private void UpdateManeuver(MapRouteManeuver curman)
+        {
+            // Make sure someone is listening to event
+            if (OnManeuverChanged == null) return;
+
+            OnManeuverChanged(this, new ManeuverChangedEventArgs(curman));
         }
     }
 
@@ -195,15 +259,25 @@ namespace NavCityBreda.Model
         }
     }
 
-    public class RouteChangedEventArgs : EventArgs
+    public class LandmarkChangedEventArgs : EventArgs
     {
         public Landmark Landmark { get; private set; }
         public MapRoute Route { get; private set; }
 
-        public RouteChangedEventArgs(MapRoute newroute, Landmark tolandmark)
+        public LandmarkChangedEventArgs(MapRoute newroute, Landmark tolandmark)
         {
             Route = newroute;
             Landmark = tolandmark;
+        }
+    }
+
+    public class ManeuverChangedEventArgs
+    {
+        public MapRouteManeuver Maneuver { get; private set; }
+
+        public ManeuverChangedEventArgs(MapRouteManeuver curman)
+        {
+            Maneuver = curman;
         }
     }
 }

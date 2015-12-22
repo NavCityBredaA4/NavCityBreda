@@ -37,6 +37,12 @@ namespace NavCityBreda.Views
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
+            Settings.OnLanguageUpdate += Settings_OnLanguageUpdate;
+        }
+
+        private void Settings_OnLanguageUpdate(EventArgs e)
+        {
+            DrawRoute();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -54,23 +60,28 @@ namespace NavCityBreda.Views
             routedetailvm = new RouteDetailVM(route);
             this.DataContext = routedetailvm;
 
+            DrawRoute(); 
+        }
+
+        private async void DrawRoute()
+        {
             Map.MapElements.Clear();
 
             Zoom();
 
-            MapPolyline m = Util.GetRouteLine(route.RouteObject, Color.FromArgb(255, 100, 100, 255));
+            MapPolyline m = Util.GetRouteLine(route.RouteObject, Color.FromArgb(255, 100, 100, 255), 25, 6);
             Map.MapElements.Add(m);
 
             foreach (Landmark l in route.Landmarks)
             {
-                l.UpdateIconImage();
+                l.UpdateIcon();
                 Map.MapElements.Add(l.Icon);
             }
         }
 
         private async void Zoom()
         {
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            await Task.Delay(TimeSpan.FromMilliseconds(500));
             await Map.TrySetViewBoundsAsync(route.Bounds, null, Windows.UI.Xaml.Controls.Maps.MapAnimationKind.None);
         }
 

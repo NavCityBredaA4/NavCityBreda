@@ -29,6 +29,9 @@ namespace NavCityBreda.Helpers
         static Settings()
         {
             LOCAL_SETTINGS.Values["tracking"] = true;
+
+            if (CurrentLanguage == "")
+                ApplicationLanguages.PrimaryLanguageOverride = "en";
         }
 
         public static async void ChangeLanguage(string lang)

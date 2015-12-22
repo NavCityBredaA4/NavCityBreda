@@ -117,14 +117,14 @@ namespace NavCityBreda.Helpers
             return address;
         }
 
-        public static MapPolyline GetRouteLine(MapRoute m, Color color, int thickness = 10, bool dashed = false)
+        public static MapPolyline GetRouteLine(MapRoute m, Color color, int zindex, int thickness = 5)
         {
             var line = new MapPolyline
             {
                 StrokeThickness = thickness,
                 StrokeColor = color,
-                StrokeDashed = dashed,
-                ZIndex = 2
+                StrokeDashed = false,
+                ZIndex = zindex
             };
 
             if (m != null)
@@ -133,14 +133,14 @@ namespace NavCityBreda.Helpers
             return line;
         }
 
-        public static MapPolyline GetRouteLine(List<BasicGeoposition> positions, Color color, int thickness = 10, bool dashed = false)
+        public static MapPolyline GetRouteLine(List<BasicGeoposition> positions, Color color, int zindex, int thickness = 5)
         {
             var line = new MapPolyline
             {
                 StrokeThickness = thickness,
                 StrokeColor = color,
-                StrokeDashed = dashed,
-                ZIndex = 2
+                StrokeDashed = false,
+                ZIndex = zindex
             };
 
             line.Path = new Geopath(positions);
@@ -148,14 +148,14 @@ namespace NavCityBreda.Helpers
             return line;
         }
 
-        public static MapPolyline GetRouteLine(BasicGeoposition p1, BasicGeoposition p2, Color color, int thickness = 10, bool dashed = false)
+        public static MapPolyline GetRouteLine(BasicGeoposition p1, BasicGeoposition p2, Color color, int zindex, int thickness = 5)
         {
             var line = new MapPolyline
             {
                 StrokeThickness = thickness,
                 StrokeColor = color,
-                StrokeDashed = dashed,
-                ZIndex = 2
+                StrokeDashed = false,
+                ZIndex = zindex
             };
 
             List<BasicGeoposition> plist = new List<BasicGeoposition>();
@@ -185,6 +185,67 @@ namespace NavCityBreda.Helpers
 
             ToastNotification toast = new ToastNotification(toastXml);
             ToastNotificationManager.CreateToastNotifier().Show(toast);
+        }
+
+        public static string TranslatedManeuver(MapRouteManeuver maneuver)
+        {
+            string response = "";
+            bool onstreet = false;
+
+            switch(maneuver.Kind)
+            {
+                default:
+                    response = Util.Loader.GetString("RouteSeeMap");
+                    break;
+                case MapRouteManeuverKind.End:
+                    response = Util.Loader.GetString("RouteEnd");
+                    break;
+                case MapRouteManeuverKind.GoStraight:
+                    response = Util.Loader.GetString("RouteGoStraight");
+                    onstreet = true;
+                    break;
+                case MapRouteManeuverKind.None:
+                    response = Util.Loader.GetString("RouteNone");
+                    break;
+                case MapRouteManeuverKind.Start:
+                    response = Util.Loader.GetString("RouteStart");
+                    break;
+                case MapRouteManeuverKind.TurnHardLeft:
+                case MapRouteManeuverKind.TurnLeft:
+                    response = Util.Loader.GetString("RouteLeft");
+                    onstreet = true;
+                    break;
+                case MapRouteManeuverKind.TurnHardRight:
+                case MapRouteManeuverKind.TurnRight:
+                    response = Util.Loader.GetString("RouteRight");
+                    onstreet = true;
+                    break;
+                case MapRouteManeuverKind.TrafficCircleLeft:
+                    response = Util.Loader.GetString("RouteTrafficCircleLeft");
+                    onstreet = true;
+                    break;
+                case MapRouteManeuverKind.TrafficCircleRight:
+                    response = Util.Loader.GetString("RouteTrafficCircleRight");
+                    onstreet = true;
+                    break;
+                case MapRouteManeuverKind.TurnKeepLeft:
+                case MapRouteManeuverKind.TurnLightLeft:
+                    response = Util.Loader.GetString("RouteKeepLeft");
+                    break;
+                case MapRouteManeuverKind.TurnKeepRight:
+                case MapRouteManeuverKind.TurnLightRight:
+                    response = Util.Loader.GetString("RouteKeepRight");
+                    break;
+                case MapRouteManeuverKind.UTurnLeft:
+                case MapRouteManeuverKind.UTurnRight:
+                    response = Util.Loader.GetString("RouteUTurn");
+                    break;
+            }
+
+            if (onstreet)
+                response += " " + Util.Loader.GetString("RouteOn") + " " + maneuver.StreetName;
+
+            return response;
         }
     }
 }

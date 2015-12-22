@@ -3,26 +3,36 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:NavCityBreda.Views"
+    xmlns:convert="using:NavCityBreda.Helpers"
     xmlns:map="using:Windows.UI.Xaml.Controls.Maps"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <convert:BoolToVisibilityConverter x:Key="BoolConverter" />
+    </Page.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <map:MapControl Grid.Row="0" Name="Map" MapElementClick="Map_MapElementClick" ZoomInteractionMode="GestureAndControl" PedestrianFeaturesVisible="True" PanInteractionMode="Auto" TiltInteractionMode="ControlOnly" RotateInteractionMode="GestureAndControl" MapServiceToken="74Y70e71HVjjN7lnx4Eh~3wugTlBDe2DbPGuR_AM2aA~AjMbg-pU2qn4gYf97oH0GZI1oY9Jc4vH-4WyIRyoYQM0Q71CnfbWalEN37bdSgms">
-            <!-- <map:MapItemsControl x:Name="MapItems">
-                <Button x:Name="MapItemButton" Background="Transparent">
-                    <StackPanel>
-                        <Border Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
-                        <Ellipse Margin="4" Width="40" Height="20" Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                        </Ellipse>
-                    </StackPanel>
-                </Button>
-            </map:MapItemsControl> -->
-        </map:MapControl>
+        <StackPanel Grid.Row="0" Background="Gray" Visibility="{Binding Instructions, Converter={StaticResource BoolConverter}}">
+            <Viewbox StretchDirection="DownOnly" Stretch="UniformToFill" Margin="10,5,10,5">
+                <TextBlock FontSize="20" Text="{Binding Landmark}" Foreground="White" />
+            </Viewbox>
+        </StackPanel>
+        
+        <map:MapControl Grid.Row="1" Name="Map" MapElementClick="Map_MapElementClick" ZoomInteractionMode="GestureAndControl" PedestrianFeaturesVisible="True" PanInteractionMode="Auto" TiltInteractionMode="ControlOnly" RotateInteractionMode="GestureAndControl" MapServiceToken="74Y70e71HVjjN7lnx4Eh~3wugTlBDe2DbPGuR_AM2aA~AjMbg-pU2qn4gYf97oH0GZI1oY9Jc4vH-4WyIRyoYQM0Q71CnfbWalEN37bdSgms" />
+
+        <StackPanel Grid.Row="2" Background="LightGray" Visibility="{Binding Instructions, Converter={StaticResource BoolConverter}}">
+            <Viewbox StretchDirection="DownOnly" Stretch="UniformToFill" Margin="10,5,10,5">
+                <TextBlock FontSize="14" Text="{Binding Maneuver}" />
+            </Viewbox>
+        </StackPanel>
+
     </Grid>
 </Page>

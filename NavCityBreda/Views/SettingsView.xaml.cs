@@ -41,6 +41,7 @@ namespace NavCityBreda.Views
             {
                 default:
                     Debug.WriteLine("Unsupported language: " + Settings.CurrentLanguage);
+                    Language.SelectedIndex = 0;
                     break;
                 case "en":
                     Language.SelectedIndex = 0;

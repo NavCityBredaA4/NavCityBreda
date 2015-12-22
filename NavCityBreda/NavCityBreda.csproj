@@ -109,38 +109,36 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Routes\historische_kilometer\data.json" />
-    <Content Include="Routes\img\default.jpg" />
-    <Content Include="Routes\img\historische_kilometer_1.jpg" />
-    <Content Include="Routes\img\historische_kilometer_10.jpg" />
-    <Content Include="Routes\img\historische_kilometer_11.jpg" />
-    <Content Include="Routes\img\historische_kilometer_12.jpg" />
-    <Content Include="Routes\img\historische_kilometer_13.jpg" />
-    <Content Include="Routes\img\historische_kilometer_14.jpg" />
-    <Content Include="Routes\img\historische_kilometer_15.jpg" />
-    <Content Include="Routes\img\historische_kilometer_16.jpg" />
-    <Content Include="Routes\img\historische_kilometer_17.jpg" />
-    <Content Include="Routes\img\historische_kilometer_18.jpg" />
-    <Content Include="Routes\img\historische_kilometer_19.jpg" />
-    <Content Include="Routes\img\historische_kilometer_2.jpg" />
-    <Content Include="Routes\img\historische_kilometer_20.jpg" />
-    <Content Include="Routes\img\historische_kilometer_21.jpg" />
-    <Content Include="Routes\img\historische_kilometer_22.jpg" />
-    <Content Include="Routes\img\historische_kilometer_23.jpg" />
-    <Content Include="Routes\img\historische_kilometer_24.jpg" />
-    <Content Include="Routes\img\historische_kilometer_25.jpg" />
-    <Content Include="Routes\img\historische_kilometer_26.jpg" />
-    <Content Include="Routes\img\historische_kilometer_3.jpg" />
-    <Content Include="Routes\img\historische_kilometer_4.jpg" />
-    <Content Include="Routes\img\historische_kilometer_5.jpg" />
-    <Content Include="Routes\img\historische_kilometer_6.jpg" />
-    <Content Include="Routes\img\historische_kilometer_7.jpg" />
-    <Content Include="Routes\img\historische_kilometer_8.jpg" />
-    <Content Include="Routes\img\historische_kilometer_9.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_1.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_10.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_11.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_12.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_13.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_14.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_15.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_16.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_17.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_18.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_19.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_2.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_20.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_21.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_22.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_23.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_24.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_25.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_26.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_3.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_4.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_5.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_6.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_7.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_8.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_9.jpg" />
     <PRIResource Include="Routes\historische_kilometer\lang\en\Resources.resw" />
     <PRIResource Include="Routes\historische_kilometer\lang\nl\Resources.resw" />
     <PRIResource Include="Routes\historische_kilometer\lang\de\Resources.resw" />
     <PRIResource Include="Languages\ja\Resources.resw" />
-    <PRIResource Include="Languages\de\Resources.resw" />
     <PRIResource Include="Languages\nl\Resources.resw" />
     <None Include="project.json" />
     <PRIResource Include="Languages\en\Resources.resw" />
@@ -152,7 +150,7 @@
     <Compile Include="Helpers\BoolToCheckmarkConverter.cs" />
     <Compile Include="Helpers\BoudingBox.cs" />
     <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="Helpers\JSONParser.cs" />
+    <Compile Include="Helpers\RouteParser.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\BoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\Util.cs" />
@@ -164,6 +162,7 @@
     </Compile>
     <Compile Include="Model\CompassTracker.cs" />
     <Compile Include="Model\GeoTracker.cs" />
+    <Compile Include="Model\Image.cs" />
     <Compile Include="Model\Landmark.cs" />
     <Compile Include="Model\Route.cs" />
     <Compile Include="Model\RouteManager.cs" />
@@ -283,6 +282,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Languages\de\" />
     <Folder Include="Routes\historische_kilometer\lang\ja\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
