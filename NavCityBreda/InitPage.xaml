@@ -7,9 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="White">
+    <Grid>
         <Canvas>
-            <Image x:Name="extendedSplashImage" Source="Assets/SplashScreen.png" VerticalAlignment="Center"/>
+            <Image x:Name="extendedSplashImage" Source="/Assets/SplashScreen.png" VerticalAlignment="Center"/>
         </Canvas>
 
         <RelativePanel Name="splashProgress" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

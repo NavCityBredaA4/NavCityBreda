@@ -90,6 +90,8 @@ namespace NavCityBreda.Model
                     geo.PositionChanged += Geo_PositionChanged;
                     geo.StatusChanged += Geo_StatusChanged;
 
+                    _position = await geo.GetGeopositionAsync();
+
                     _status = PositionStatus.Initializing;
 
                     return "Connected";
@@ -110,11 +112,13 @@ namespace NavCityBreda.Model
 
         private void Geo_StatusChanged(Geolocator sender, StatusChangedEventArgs args)
         {
-            if(args.Status == PositionStatus.Disabled)
+            if (args.Status == PositionStatus.Disabled)
             {
-                geo = null;
                 Connected = false;
+                _position = null;
             }
+            else if (!(bool)Connected)
+                Connected = true;
 
             UpdateStatus(args.Status);
         }
