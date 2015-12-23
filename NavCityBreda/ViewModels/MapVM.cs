@@ -73,6 +73,19 @@ namespace NavCityBreda.ViewModels
             }
         }
 
+        public bool Tracking
+        {
+            get
+            {
+                return Settings.Tracking;
+            }
+            set
+            {
+                Settings.Tracking = value;
+                NotifyPropertyChanged(nameof(Tracking));
+            }
+        }
+
         public void UpdateMap()
         {
             if(App.MainPage != null)

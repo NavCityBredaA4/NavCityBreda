@@ -63,8 +63,7 @@
             <SplitView.Pane>
                 <RelativePanel Name="MySplitviewPane" VerticalAlignment="Stretch"
                       ManipulationMode="TranslateX"
-                      ManipulationCompleted="MySplitviewPane_ManipulationCompleted"
-                      Background="Transparent">
+                      ManipulationCompleted="MySplitviewPane_ManipulationCompleted" Style="{ThemeResource DarkModeFix}">
 
                     <ListBox RelativePanel.AlignTopWithPanel="True" SelectionMode="Single" Name="NavList" SelectionChanged="NavList_SelectionChanged" Tapped="NavList_Tapped">
                         <ListBoxItem Name="NavListMap">

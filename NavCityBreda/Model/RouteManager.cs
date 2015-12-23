@@ -145,7 +145,7 @@ namespace NavCityBreda.Model
                     }); 
                     _currentlandmark = i;
                     LandmarkVisited(i, LandmarkVisitedEventArgs.VisitedStatus.ENTERED);
-                    Util.SendToastNotification(i.Name, "TRANSLATED MESSAGE");
+                    Util.SendToastNotification(i.Name, Util.Loader.GetString("LandmarkReached"));
                     UpdateRoute();
                 }
 
@@ -197,8 +197,6 @@ namespace NavCityBreda.Model
 
         public async void StartRoute(Route r)
         {
-            Util.SendToastNotification("Starting", "TRANSLATED MESSAGE");
-
             App.Geo.ClearHistory();
             _currentroute = r;
             await UpdateRoute();

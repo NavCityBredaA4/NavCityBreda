@@ -243,4 +243,7 @@
   <data name="RouteIn" xml:space="preserve">
     <value>in</value>
   </data>
+  <data name="LandmarkReached" xml:space="preserve">
+    <value>You have reached a landmark</value>
+  </data>
 </root>

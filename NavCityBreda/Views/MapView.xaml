@@ -12,7 +12,7 @@
     <Page.Resources>
         <convert:BoolToVisibilityConverter x:Key="BoolConverter" />
     </Page.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -21,18 +21,32 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Background="Gray" Visibility="{Binding Instructions, Converter={StaticResource BoolConverter}}">
-            <Viewbox StretchDirection="DownOnly" Stretch="UniformToFill" Margin="10,5,10,5">
-                <TextBlock FontSize="20" Text="{Binding Landmark}" Foreground="White" />
+            <Viewbox Grid.Column="1" StretchDirection="DownOnly" Stretch="UniformToFill" Margin="10,5,10,5">
+                <TextBlock FontSize="20" Text="{Binding Landmark}" Foreground="White" Tapped="LandmarkName_Tapped" />
             </Viewbox>
         </StackPanel>
-        
-        <map:MapControl Grid.Row="1" Name="Map" MapElementClick="Map_MapElementClick" ZoomInteractionMode="GestureAndControl" PedestrianFeaturesVisible="True" PanInteractionMode="Auto" TiltInteractionMode="ControlOnly" RotateInteractionMode="GestureAndControl" MapServiceToken="74Y70e71HVjjN7lnx4Eh~3wugTlBDe2DbPGuR_AM2aA~AjMbg-pU2qn4gYf97oH0GZI1oY9Jc4vH-4WyIRyoYQM0Q71CnfbWalEN37bdSgms" />
 
-        <StackPanel Grid.Row="2" Background="LightGray" Visibility="{Binding Instructions, Converter={StaticResource BoolConverter}}">
-            <Viewbox StretchDirection="DownOnly" Stretch="UniformToFill" Margin="10,5,10,5">
+        <map:MapControl Grid.Row="1" Name="Map" MapElementClick="Map_MapElementClick" PedestrianFeaturesVisible="True" MapServiceToken="74Y70e71HVjjN7lnx4Eh~3wugTlBDe2DbPGuR_AM2aA~AjMbg-pU2qn4gYf97oH0GZI1oY9Jc4vH-4WyIRyoYQM0Q71CnfbWalEN37bdSgms" />
+
+        <Grid Grid.Row="2" Background="LightGray" Visibility="{Binding Instructions, Converter={StaticResource BoolConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Click="RecalculateRoute_Click" VerticalAlignment="Stretch">
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE72C;" />
+            </Button>
+
+            <Viewbox Grid.Column="1" StretchDirection="DownOnly" Stretch="UniformToFill" Margin="10,5,10,5">
                 <TextBlock FontSize="14" Text="{Binding Maneuver}" />
             </Viewbox>
-        </StackPanel>
+
+            <ToggleButton Grid.Column="2" Name="TrackUser" Click="TrackUser_Click" IsChecked="{Binding Tracking}" VerticalAlignment="Stretch">
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE81D;" />
+            </ToggleButton>
+        </Grid>
 
     </Grid>
 </Page>

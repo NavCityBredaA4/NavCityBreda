@@ -37,6 +37,8 @@ namespace NavCityBreda.Views
         MapIcon CurrentPosition;
         MapPolyline CurrentNavigationLine;
 
+        private bool Zooming = false;
+
         MapVM mapvm;
 
         public MapView()
@@ -52,10 +54,8 @@ namespace NavCityBreda.Views
             CurrentPosition.Title = "";
             CurrentPosition.ZIndex = 999;
             CurrentPosition.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/CurrentLocationRound.png"));
-            Map.MapElements.Add(CurrentPosition);
 
-            CurrentNavigationLine = new MapPolyline() { StrokeColor = Color.FromArgb(255, 255, 100, 100), StrokeThickness = 6, ZIndex = 100 };
-            //Map.MapElements.Add(CurrentNavigationLine);
+            CurrentNavigationLine = new MapPolyline() { StrokeColor = Color.FromArgb(255, 125, 255, 150), StrokeThickness = 5, ZIndex = 100 };
 
             App.Geo.OnPositionUpdate += Geo_OnPositionUpdate;
             App.RouteManager.OnStatusUpdate += RouteManager_OnStatusUpdate;
@@ -63,6 +63,8 @@ namespace NavCityBreda.Views
             App.RouteManager.OnLandmarkVisited += RouteManager_OnLandmarkVisited;
             App.CompassTracker.OnSlowHeadingUpdated += CompassTracker_OnHeadingUpdated;
             Settings.OnLanguageUpdate += Settings_OnLanguageUpdate;
+
+            Track(false);
         }
 
         private void Settings_OnLanguageUpdate(EventArgs e)
@@ -80,10 +82,9 @@ namespace NavCityBreda.Views
         {
             Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
             {
-                if (Settings.Tracking && e.Heading.HeadingTrueNorth.HasValue)
+                if (mapvm.Tracking && e.Heading.HeadingTrueNorth.HasValue)
                    Map.TryRotateToAsync((double)e.Heading.HeadingTrueNorth);
             });
-            
         }
 
         private void RouteManager_OnLandmarkVisited(object sender, LandmarkVisitedEventArgs e)
@@ -128,13 +129,16 @@ namespace NavCityBreda.Views
             Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 if (e.Status == RouteManager.RouteStatus.STARTED)
+                {
                     DrawRoute();
+                    ZoomRoute();
+                }
                 else
                     RemoveRoute();
             });           
         }
 
-        private void DrawRoute()
+        private async void DrawRoute()
         {
             if (App.RouteManager.Status != RouteManager.RouteStatus.STARTED) return;
 
@@ -144,8 +148,11 @@ namespace NavCityBreda.Views
 
             GeofenceMonitor.Current.Geofences.Clear();
             Map.MapElements.Clear();
+            await Task.Delay(TimeSpan.FromMilliseconds(10));
             Map.MapElements.Add(CurrentPosition);
             Map.MapElements.Add(CurrentNavigationLine);
+
+            Map.MapElements.Add(Util.GetRouteLine(App.RouteManager.CurrentRoute.RouteObject, Color.FromArgb(200, 100, 100, 255), 50, 3));
 
             if (App.Geo.History.Count > 1) 
                 Map.MapElements.Add(Util.GetRouteLine(App.Geo.History.Select(p => p.Coordinate.Point.Position).ToList(), Color.FromArgb(255, 155, 155, 155), 250, 6));
@@ -155,59 +162,89 @@ namespace NavCityBreda.Views
                 if (!l.Visited)
                     GeofenceMonitor.Current.Geofences.Add(new Geofence(l.Id, new Geocircle(l.Location.Position, 35), MonitoredGeofenceStates.Entered, true));
                 l.UpdateIcon();
+                await Task.Delay(TimeSpan.FromMilliseconds(3));
                 Map.MapElements.Add(l.Icon);
             }
-
-            Map.MapElements.Add(Util.GetRouteLine(App.RouteManager.CurrentRoute.RouteObject, Color.FromArgb(200, 100, 100, 255), 50, 3));
-
-            ZoomRoute();
         }
 
         private void RemoveRoute()
         {
-            Settings.Tracking = true;
+            Track(false);
             Map.MapElements.Clear();
+            GeofenceMonitor.Current.Geofences.Clear();
             DrawCurrenPosition(App.Geo.Position.Coordinate.Point);
         }
 
         private void DrawCurrenPosition(Geopoint p)
         {
             if (!Map.MapElements.Contains(CurrentPosition))
+            {
                 Map.MapElements.Add(CurrentPosition);
+                Zoom();
+            }
 
             CurrentPosition.Location = p;
-            if (Settings.Tracking)
+            if (mapvm.Tracking)
                 Zoom();
         }
 
         private async Task<String> Zoom()
         {
-            await Task.Delay(TimeSpan.FromMilliseconds(500));
-            await Map.TrySetViewAsync(CurrentPosition.Location, 17);
+            if (!Zooming)
+            {
+                Zooming = true;
 
-            if(App.RouteManager.Status == RouteManager.RouteStatus.STARTED)
-            {
                 await Task.Delay(TimeSpan.FromMilliseconds(500));
-                await Map.TryTiltToAsync(40);
+                await Map.TrySetViewAsync(CurrentPosition.Location, 18);
+
+                if (mapvm.Tracking)
+                {
+                    if (Map.Pitch != 55)
+                    {
+                        await Task.Delay(TimeSpan.FromMilliseconds(300));
+                        await Map.TryTiltToAsync(55);
+                    }
+
+                    if (App.CompassTracker.Heading.HeadingTrueNorth.HasValue)
+                    {
+                        await Task.Delay(TimeSpan.FromMilliseconds(300));
+                        await Map.TryRotateToAsync((double)App.CompassTracker.Heading.HeadingTrueNorth);
+                    }
+                }
+                else
+                {
+                    if (Map.Pitch != 0)
+                    {
+                        await Task.Delay(TimeSpan.FromMilliseconds(300));
+                        await Map.TryTiltToAsync(0);
+                    }
+                    if (Map.Heading != 0)
+                    {
+                        await Task.Delay(TimeSpan.FromMilliseconds(300));
+                        await Map.TryRotateToAsync(0);
+                    }
+                    
+                }
+                Zooming = false;
+                return "success";
             }
-            else
-            {
-                await Task.Delay(TimeSpan.FromMilliseconds(500));
-                await Map.TryTiltToAsync(0);
-            }
-            return "";
+
+            return "error";
         }
 
         private async void ZoomRoute()
         {
-            Settings.Tracking = false;
-            await Task.Delay(TimeSpan.FromMilliseconds(500));
-            await Map.TrySetViewBoundsAsync(App.RouteManager.CurrentRoute.Bounds, null, Windows.UI.Xaml.Controls.Maps.MapAnimationKind.Default);
+            DisableControls(true);
+            mapvm.Tracking = false;
+            TrackUser.IsEnabled = false;
             await Task.Delay(TimeSpan.FromMilliseconds(500));
             await Map.TryRotateToAsync(0);
-            await Task.Delay(TimeSpan.FromMilliseconds(1500));
+            await Task.Delay(TimeSpan.FromMilliseconds(300));
+            await Map.TrySetViewBoundsAsync(App.RouteManager.CurrentRoute.Bounds, null, Windows.UI.Xaml.Controls.Maps.MapAnimationKind.Default);
+            await Task.Delay(TimeSpan.FromMilliseconds(1000));
+            mapvm.Tracking = true;
             await Zoom();
-            Settings.Tracking = true;
+            TrackUser.IsEnabled = true;
         }
 
         private void Map_MapElementClick(MapControl sender, MapElementClickEventArgs args)
@@ -224,6 +261,59 @@ namespace NavCityBreda.Views
             Landmark l = w as Landmark;
 
             App.MainPage.Navigate(typeof(LandmarkView), l);
+        }
+
+        private void LandmarkName_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            App.MainPage.Navigate(typeof(LandmarkView), App.RouteManager.CurrentLandmark);
+        }
+
+        private void RecalculateRoute_Click(object sender, RoutedEventArgs e)
+        {
+            App.RouteManager.UpdateRoute();
+        }
+
+        private void TrackUser_Click(object sender, RoutedEventArgs e)
+        {
+            Track((bool)((ToggleButton)sender).IsChecked);
+        }
+
+        private async void Track(bool tracking)
+        {
+            mapvm.Tracking = tracking;
+
+            if(tracking)
+            {
+                DisableControls(true);
+
+                if (CurrentPosition.Location != null)
+                    await Zoom();
+            }
+            else
+            {
+                if (CurrentPosition.Location != null)
+                    await Zoom();
+
+                DisableControls(false);
+            }
+        }
+
+        private void DisableControls(bool disable)
+        {
+            if (disable)
+            {
+                Map.PanInteractionMode = MapPanInteractionMode.Disabled;
+                Map.RotateInteractionMode = MapInteractionMode.Disabled;
+                Map.TiltInteractionMode = MapInteractionMode.Disabled;
+                Map.ZoomInteractionMode = MapInteractionMode.Disabled;
+            }
+            else
+            {
+                Map.PanInteractionMode = MapPanInteractionMode.Auto;
+                Map.RotateInteractionMode = MapInteractionMode.GestureAndControl;
+                Map.TiltInteractionMode = MapInteractionMode.GestureOnly;
+                Map.ZoomInteractionMode = MapInteractionMode.GestureAndControl;
+            }
         }
     }
 }

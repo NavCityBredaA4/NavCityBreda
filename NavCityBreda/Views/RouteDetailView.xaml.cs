@@ -69,14 +69,16 @@ namespace NavCityBreda.Views
 
             Zoom();
 
+            await Task.Delay(TimeSpan.FromMilliseconds(10));
+
             MapPolyline m = Util.GetRouteLine(route.RouteObject, Color.FromArgb(255, 100, 100, 255), 25, 6);
             Map.MapElements.Add(m);
 
             foreach (Landmark l in route.Landmarks)
             {
                 l.UpdateIcon();
-                Map.MapElements.Add(l.Icon);
                 await Task.Delay(TimeSpan.FromMilliseconds(3));
+                Map.MapElements.Add(l.Icon);
             }
         }
 
