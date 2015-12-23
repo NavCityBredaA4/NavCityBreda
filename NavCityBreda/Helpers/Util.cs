@@ -242,8 +242,11 @@ namespace NavCityBreda.Helpers
                     break;
             }
 
+            if (maneuver.StreetName == "")
+                onstreet = false;
+
             if (onstreet)
-                response += " " + Util.Loader.GetString("RouteOn") + " " + maneuver.StreetName;
+               response += " " + Util.Loader.GetString("RouteOn") + " " + maneuver.StreetName;
 
             return response;
         }

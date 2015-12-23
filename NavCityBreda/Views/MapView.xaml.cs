@@ -146,6 +146,7 @@ namespace NavCityBreda.Views
             Map.MapElements.Clear();
             Map.MapElements.Add(CurrentPosition);
             Map.MapElements.Add(CurrentNavigationLine);
+
             if (App.Geo.History.Count > 1) 
                 Map.MapElements.Add(Util.GetRouteLine(App.Geo.History.Select(p => p.Coordinate.Point.Position).ToList(), Color.FromArgb(255, 155, 155, 155), 250, 6));
 

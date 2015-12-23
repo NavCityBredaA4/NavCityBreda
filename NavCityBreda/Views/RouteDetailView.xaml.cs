@@ -76,6 +76,7 @@ namespace NavCityBreda.Views
             {
                 l.UpdateIcon();
                 Map.MapElements.Add(l.Icon);
+                await Task.Delay(TimeSpan.FromMilliseconds(3));
             }
         }
 

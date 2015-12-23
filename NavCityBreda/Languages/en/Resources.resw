@@ -187,7 +187,7 @@
     <value>Keep right</value>
   </data>
   <data name="RouteLeft" xml:space="preserve">
-    <value>Go left</value>
+    <value>Turn left</value>
   </data>
   <data name="RouteNone" xml:space="preserve">
     <value>No new action required</value>
@@ -196,7 +196,7 @@
     <value>on</value>
   </data>
   <data name="RouteRight" xml:space="preserve">
-    <value>Go right</value>
+    <value>Turn right</value>
   </data>
   <data name="RouteSeeMap" xml:space="preserve">
     <value>See the map for details</value>
@@ -239,5 +239,8 @@
   </data>
   <data name="WiFi" xml:space="preserve">
     <value>WiFi</value>
+  </data>
+  <data name="RouteIn" xml:space="preserve">
+    <value>in</value>
   </data>
 </root>

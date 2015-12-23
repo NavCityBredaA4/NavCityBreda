@@ -42,13 +42,13 @@ namespace NavCityBreda.Model
         public MapRoute RouteToLandmark { get { return _routetolandmark; } }
 
         private int _currentroutelegcount;
+        private MapRouteLeg _currentrouteleg { get { return _currentroutelegs[_currentroutelegcount];  } }
         private List<MapRouteLeg> _currentroutelegs;
 
         private int _currentmaneuvercount;
         private MapRouteManeuver _currentmaneuver;
+        private List<MapRouteManeuver> _currentmaneuvers { get { return _currentrouteleg.Maneuvers.ToList(); } }
         public MapRouteManeuver CurrentManeuver { get { return _currentmaneuver; } }
-
-
 
         public string LoadingElement;
 
@@ -73,28 +73,50 @@ namespace NavCityBreda.Model
         {
             if(Status == RouteStatus.STARTED)
             {
-                double dif_lat = Math.Abs(_currentmaneuver.StartingPoint.Position.Latitude - e.New.Coordinate.Point.Position.Latitude);
-                double dif_lon = Math.Abs(_currentmaneuver.StartingPoint.Position.Longitude - e.New.Coordinate.Point.Position.Longitude);
+                bool found = false;
 
-                if (dif_lat > 0.000012 && dif_lon > 0.000012) return;
-                //Only continue if you are at the maneuver point
-
-
-                _currentmaneuvercount++;
-                if(_currentmaneuvercount >= _currentroutelegs[_currentroutelegcount].Maneuvers.Count)
+                for (int q = _currentroutelegcount; q < _currentroutelegs.Count; q++)
                 {
-                    _currentmaneuvercount--;
+                    int startindex = 0;
+                    if (q == _currentroutelegcount)
+                        startindex = _currentmaneuvercount;
 
-                    _currentroutelegcount++;
-                    if(_currentroutelegcount >= _currentroutelegs.Count)
+                    for (int i = startindex; i < _currentroutelegs[q].Maneuvers.Count; i++)
                     {
-                        _currentroutelegcount--;
-                        return;
+                        double dif_lat = Math.Abs(_currentroutelegs[q].Maneuvers[i].StartingPoint.Position.Latitude - e.New.Coordinate.Point.Position.Latitude);
+                        double dif_lon = Math.Abs(_currentroutelegs[q].Maneuvers[i].StartingPoint.Position.Longitude - e.New.Coordinate.Point.Position.Longitude);
+
+                        if (dif_lat < 0.00003 || dif_lon < 0.00003)
+                        {
+                            _currentroutelegcount = q;
+                            _currentmaneuvercount = i + 1;
+                            found = true;
+                            break;
+                        }
                     }
                 }
 
-                _currentmaneuver = _currentroutelegs[_currentroutelegcount].Maneuvers[_currentmaneuvercount];
-                UpdateManeuver(_currentmaneuver);
+                if(found)
+                {
+                    if(_currentmaneuvercount >= _currentmaneuvers.Count)
+                    {
+                        if(_currentroutelegcount+1 < _currentroutelegs.Count)
+                        {
+                            _currentroutelegcount++;
+                            _currentmaneuvercount = 0;
+                        }
+                        else
+                        {
+                            _currentmaneuvercount--;
+                        }
+                    }
+
+                    if (_currentmaneuver != _currentmaneuvers[_currentmaneuvercount])
+                    {
+                        _currentmaneuver = _currentmaneuvers[_currentmaneuvercount];
+                        UpdateManeuver(_currentmaneuver);
+                    }
+                }
             }
         }
 
@@ -146,7 +168,7 @@ namespace NavCityBreda.Model
                 if (foldername != "img")
                 {
                     Route r = RouteParser.LoadRoute(foldername);
-                    LoadingElement =  Util.Loader.GetString("Loading") + " " + r.Name + "...";
+                    LoadingElement =  Util.Loader.GetString("Loading") + " " + r.Name.ToLower() + "...";
                     await r.CalculateRoute();
                     _routes.Add(r);
                 }
@@ -165,7 +187,7 @@ namespace NavCityBreda.Model
             _currentroutelegs = _routetolandmark.Legs.ToList() as List<MapRouteLeg>;
             _currentroutelegcount = 0;
             _currentmaneuvercount = 0;
-            _currentmaneuver = _currentroutelegs[_currentroutelegcount].Maneuvers[_currentmaneuvercount];
+            _currentmaneuver = _currentmaneuvers[_currentmaneuvercount];
             
             UpdateRoute(_routetolandmark, _currentlandmark);
             UpdateManeuver(_currentmaneuver);
