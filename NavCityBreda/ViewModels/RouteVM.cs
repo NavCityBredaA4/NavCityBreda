@@ -22,6 +22,15 @@ namespace NavCityBreda.ViewModels
         protected override void UpdatePropertiesToNewLanguage()
         {
             NotifyPropertyChanged(nameof(Routes));
+            NotifyPropertyChanged(nameof(Description));
+        }
+
+        public string Description
+        {
+            get
+            {
+                return Util.Loader.GetString("RouteListDescription");
+            }
         }
 
         public List<Route> Routes
