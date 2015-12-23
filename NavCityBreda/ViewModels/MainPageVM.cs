@@ -27,6 +27,7 @@ namespace NavCityBreda.ViewModels
             NotifyPropertyChanged(nameof(Status));
             NotifyPropertyChanged(nameof(Source));
             NotifyPropertyChanged(nameof(Accuracy));
+            NotifyPropertyChanged(nameof(GPSInfo));
         }
 
 
@@ -77,6 +78,14 @@ namespace NavCityBreda.ViewModels
                 NotifyPropertyChanged(nameof(Source));
                 NotifyPropertyChanged(nameof(Accuracy));
             });
+        }
+
+        public string GPSInfo
+        {
+            get
+            {
+                return Util.Loader.GetString("GPSInfo");
+            }
         }
 
         public string Status

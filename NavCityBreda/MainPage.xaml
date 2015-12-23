@@ -92,7 +92,11 @@
                         </ListBoxItem>
                     </ListBox>
 
-                    <StackPanel RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Background="Transparent">
+                    <StackPanel RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Background="Transparent" Tapped="GPSRefresh_Tapped">
+                        <StackPanel Style="{StaticResource GPSInfoPanel}">
+                            <TextBlock Margin="5,0,0,0" FontSize="16" FontWeight="Bold" Text="{Binding GPSInfo}"/>
+                        </StackPanel>
+                        
                         <StackPanel Style="{StaticResource GPSInfoPanel}" Tapped="GPSRefresh_Tapped">
                             <TextBlock Style="{StaticResource GPSInfoIcon}" Text="&#xE81D;"/>
                             <TextBlock Style="{StaticResource GPSInfoText}" Text="{Binding Status}"/>

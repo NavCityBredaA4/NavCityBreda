@@ -246,4 +246,10 @@
   <data name="LandmarkReached" xml:space="preserve">
     <value>U heeft een bezienswaardigheid bereikt</value>
   </data>
+  <data name="RouteListDescription" xml:space="preserve">
+    <value>Tik op een route uit de onderstaande lijst om de details ervan te bekijken</value>
+  </data>
+  <data name="GPSInfo" xml:space="preserve">
+    <value>GPS Informatie</value>
+  </data>
 </root>

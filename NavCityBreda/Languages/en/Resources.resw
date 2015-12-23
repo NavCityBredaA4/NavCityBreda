@@ -246,4 +246,10 @@
   <data name="LandmarkReached" xml:space="preserve">
     <value>You have reached a landmark</value>
   </data>
+  <data name="RouteListDescription" xml:space="preserve">
+    <value>Tap on a route in de list below to view details</value>
+  </data>
+  <data name="GPSInfo" xml:space="preserve">
+    <value>GPS Information</value>
+  </data>
 </root>
