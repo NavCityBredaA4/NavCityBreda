@@ -79,8 +79,8 @@ namespace NavCityBreda.Model
                 case GeolocationAccessStatus.Allowed:
                     geo = new Geolocator {
                         DesiredAccuracy = PositionAccuracy.High,
-                        //MovementThreshold = 5
-                        ReportInterval = 1500
+                        MovementThreshold = 5
+                        //ReportInterval = 1500
                     };
 
                     ClearHistory();
@@ -124,7 +124,10 @@ namespace NavCityBreda.Model
             if (_history.Count > 0)
                 UpdatePosition(_history.Last(), args.Position);
             else
+            {
                 _position = args.Position;
+                UpdatePosition(args.Position, args.Position);
+            }
 
             _history.Add(args.Position);
         }
