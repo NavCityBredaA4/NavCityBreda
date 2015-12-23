@@ -146,7 +146,8 @@ namespace NavCityBreda.Views
             Map.MapElements.Clear();
             Map.MapElements.Add(CurrentPosition);
             Map.MapElements.Add(CurrentNavigationLine);
-            Map.MapElements.Add(Util.GetRouteLine(App.Geo.History.Select(p => p.Coordinate.Point.Position).ToList(), Color.FromArgb(255, 155, 155, 155), 250, 6));
+            if (App.Geo.History.Count > 1) 
+                Map.MapElements.Add(Util.GetRouteLine(App.Geo.History.Select(p => p.Coordinate.Point.Position).ToList(), Color.FromArgb(255, 155, 155, 155), 250, 6));
 
             foreach (Landmark l in r.Landmarks)
             {
@@ -200,13 +201,11 @@ namespace NavCityBreda.Views
         {
             Settings.Tracking = false;
             await Task.Delay(TimeSpan.FromMilliseconds(500));
-            await Map.TrySetViewBoundsAsync(App.RouteManager.CurrentRoute.Bounds, null, Windows.UI.Xaml.Controls.Maps.MapAnimationKind.Linear);
+            await Map.TrySetViewBoundsAsync(App.RouteManager.CurrentRoute.Bounds, null, Windows.UI.Xaml.Controls.Maps.MapAnimationKind.Default);
             await Task.Delay(TimeSpan.FromMilliseconds(500));
             await Map.TryRotateToAsync(0);
             await Task.Delay(TimeSpan.FromMilliseconds(1500));
             await Zoom();
-            await Task.Delay(TimeSpan.FromMilliseconds(500));
-            await Map.TryRotateToAsync((double)App.CompassTracker.Heading.HeadingTrueNorth);
             Settings.Tracking = true;
         }
 

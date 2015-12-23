@@ -1,6 +1,7 @@
 ﻿using NavCityBreda.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,7 @@ namespace NavCityBreda.Model
                 uint reportInterval = minReportInterval > 16 ? minReportInterval : 16;
                 comp.ReportInterval = reportInterval;
                 comp.ReadingChanged += Comp_ReadingChanged;
+                hdn = comp.GetCurrentReading();
             }
         }
 
