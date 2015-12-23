@@ -124,7 +124,7 @@
     <value>Beschrijving</value>
   </data>
   <data name="Disabled" xml:space="preserve">
-    <value>Uitgeschakelt</value>
+    <value>Uitgeschakeld</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>Klaar</value>
@@ -251,5 +251,23 @@
   </data>
   <data name="GPSInfo" xml:space="preserve">
     <value>GPS Informatie</value>
+  </data>
+  <data name="HelpItem1Header" xml:space="preserve">
+    <value>Posititie</value>
+  </data>
+  <data name="HelpItem1Text" xml:space="preserve">
+    <value>Uw positie op de map wordt weergegeven door het icoon hiernaast</value>
+  </data>
+  <data name="HelpItem2Header" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="HelpItem2Text" xml:space="preserve">
+    <value>U kunt het menu openen door op het icoontje links boven in de applicatie te tikken. U kunt ook swipen vanaf de linker rand van het scherm. U heeft binnen het menu 4 opties. Kaart, Route, Hulp, Instellingen. Hierover zal later dieper ingegaan worden. De text onderaan het menu wordt in het volgende onderdeel behandeld.</value>
+  </data>
+  <data name="HelpItem3Header" xml:space="preserve">
+    <value>GPS Informatie</value>
+  </data>
+  <data name="HelpItem3Text" xml:space="preserve">
+    <value>U kunt de GPS informatie onder in het menu vinden. Het bestaat uit drie onderdelen. Het eerste is de status van de GPS verbinding, zoals "uitgeschakeld" of "klaar". Ten tweede staat er de manier waarop de GPS verbonden is, GSM is het minst nauwkeurig, Satelliet het meest. Ten derde staat er de accuratie in meters.</value>
   </data>
 </root>

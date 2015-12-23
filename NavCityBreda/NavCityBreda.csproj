@@ -96,6 +96,8 @@
     <Content Include="Assets\CurrentLocationRound.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Help\HelpItem2Image.png" />
+    <Content Include="Assets\Help\HelpItem3Image.png" />
     <Content Include="Assets\LandmarkNotVisited.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

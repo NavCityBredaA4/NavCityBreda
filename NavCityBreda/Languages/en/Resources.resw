@@ -252,4 +252,22 @@
   <data name="GPSInfo" xml:space="preserve">
     <value>GPS Information</value>
   </data>
+  <data name="HelpItem1Header" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="HelpItem1Text" xml:space="preserve">
+    <value>Your position on the map is displayed with the icon on the left</value>
+  </data>
+  <data name="HelpItem2Header" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="HelpItem2Text" xml:space="preserve">
+    <value>You can open the menu by tapping on the icon in the upper left of the application. You can also swipe from the left edge of the screen. There are four options in the menu. Map, Route, Help and Settings. These will be discussed in depth later. The information at the bottom of the menu will be explained in the next section.</value>
+  </data>
+  <data name="HelpItem3Header" xml:space="preserve">
+    <value>GPS Information</value>
+  </data>
+  <data name="HelpItem3Text" xml:space="preserve">
+    <value>You can find GPS Information at the bottom of the menu. It exists out of three parts. The first is the status of the GPS connection, for examle "disabled" or "ready". Secondly is the way in which the GPS is connecte, Cellular is the least accurate, Satellite the most. The third part is the accuracy in meters.</value>
+  </data>
 </root>
