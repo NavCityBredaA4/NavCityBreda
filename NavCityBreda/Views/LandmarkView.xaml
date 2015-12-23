@@ -43,21 +43,23 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <!--<Image Source="{Binding Image}" Grid.Row="0"  />-->
-
             <Grid  Grid.Row="1" Margin="10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="40*" />
+                    <ColumnDefinition Width="25*" />
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
                     <SymbolIcon Symbol="Street" Style="{StaticResource InfoIcon}"/>
-                    <TextBlock Text="{Binding Address}" Style="{StaticResource InfoText}"/>
+                    <Viewbox StretchDirection="DownOnly" Stretch="UniformToFill">
+                        <TextBlock Text="{Binding Address}" Style="{StaticResource InfoText}"/>
+                    </Viewbox>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                     <SymbolIcon Symbol="{Binding IsVisited, Converter={StaticResource BoolConverter}}" Style="{StaticResource InfoIcon}"/>
-                    <TextBlock Text="{Binding Visited}" Style="{StaticResource InfoText}"/>
+                    <Viewbox StretchDirection="DownOnly" Stretch="UniformToFill">
+                        <TextBlock Text="{Binding Visited}" Style="{StaticResource InfoText}"/>
+                    </Viewbox>
                 </StackPanel>
             </Grid>
 
