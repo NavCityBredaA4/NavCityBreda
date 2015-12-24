@@ -207,7 +207,6 @@ namespace NavCityBreda.Model
         {
             if (Status == RouteStatus.STARTED)
             {
-                _currentroute.Reset();
                 _currentroute = null;
                 _currentlandmark = null;
                 _routetolandmark = null;
@@ -217,6 +216,15 @@ namespace NavCityBreda.Model
                 _currentmaneuver = null;
                 UpdateStatus(RouteStatus.STOPPED);
             }
+        }
+
+        public async Task<String> Reset()
+        {
+            foreach(Route r in _routes)
+            {
+                await r.Reset();
+            }
+            return "success";
         }
 
         // =============

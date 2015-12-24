@@ -92,7 +92,7 @@ namespace NavCityBreda.Views
             Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
             {
                 if (e.Status == LandmarkVisitedEventArgs.VisitedStatus.ENTERED)
-                    App.MainPage.Navigate(typeof(LandmarkView), e.Landmark);
+                    App.MainPage.Navigate(typeof(LandmarkDetailView), e.Landmark);
             }); 
         }
 
@@ -260,12 +260,12 @@ namespace NavCityBreda.Views
 
             Landmark l = w as Landmark;
 
-            App.MainPage.Navigate(typeof(LandmarkView), l);
+            App.MainPage.Navigate(typeof(LandmarkDetailView), l);
         }
 
         private void LandmarkName_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            App.MainPage.Navigate(typeof(LandmarkView), App.RouteManager.CurrentLandmark);
+            App.MainPage.Navigate(typeof(LandmarkDetailView), App.RouteManager.CurrentLandmark);
         }
 
         private void RecalculateRoute_Click(object sender, RoutedEventArgs e)

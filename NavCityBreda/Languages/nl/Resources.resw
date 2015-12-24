@@ -270,4 +270,28 @@
   <data name="HelpItem3Text" xml:space="preserve">
     <value>U kunt de GPS informatie onder in het menu vinden. Het bestaat uit drie onderdelen. Het eerste is de status van de GPS verbinding, zoals "uitgeschakeld" of "klaar". Ten tweede staat er de manier waarop de GPS verbonden is, GSM is het minst nauwkeurig, Satelliet het meest. Ten derde staat er de accuratie in meters.</value>
   </data>
+  <data name="Application" xml:space="preserve">
+    <value>Applicatie</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuleer</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nee</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="ResetConfirmation" xml:space="preserve">
+    <value>Weet u zeker dat u de applicatie wilt resetten?</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="BackTwiceText" xml:space="preserve">
+    <value>Druk nogmaals op vorige om te sluiten</value>
+  </data>
 </root>

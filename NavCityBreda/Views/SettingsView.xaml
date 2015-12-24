@@ -10,13 +10,26 @@
     <ScrollViewer>
         <StackPanel HorizontalAlignment="Stretch">
             <StackPanel Margin="10">
-                <TextBlock FontSize="20" Text="{Binding Language}" Margin="0,0,0,10"/>
+                <TextBlock Text="{Binding Language}" Style="{StaticResource Header}"/>
                 <ComboBox Name="Language" SelectionChanged="Language_SelectionChanged" HorizontalAlignment="Stretch">
                     <ComboBoxItem>English</ComboBoxItem>
                     <ComboBoxItem>Nederlands</ComboBoxItem>
                     <!-- <ComboBoxItem>Deutsch</ComboBoxItem> -->
                     <!-- <ComboBoxItem>日本語</ComboBoxItem> -->
                 </ComboBox>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+                <TextBlock Text="{Binding ResetHeader}" Style="{StaticResource Header}"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="ResetButton" Click="ResetButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE895;" Margin="0,0,10,0" />
+                            <TextBlock Text="{Binding Reset}" />
+                        </StackPanel>
+                    </Button>
+                    <ProgressRing Name="ResetProgress" IsActive="False" Margin="15,0,0,0"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

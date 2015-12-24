@@ -12,13 +12,13 @@ using Windows.UI.Xaml;
 
 namespace NavCityBreda.ViewModels
 {
-    public class LandmarkVM : TemplateVM
+    public class LandmarkDetailVM : TemplateVM
     {
         Landmark landmark;
 
         string address;
 
-        public LandmarkVM(Landmark l) : base(l.Name)
+        public LandmarkDetailVM(Landmark l) : base(l.Name)
         {
             this.landmark = l;
 

@@ -25,11 +25,11 @@ namespace NavCityBreda.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class LandmarkView : Page
+    public sealed partial class LandmarkDetailView : Page
     {
-        LandmarkVM landmarkvm;
+        LandmarkDetailVM landmarkvm;
 
-        public LandmarkView()
+        public LandmarkDetailView()
         {
             this.InitializeComponent();
         }
@@ -37,7 +37,7 @@ namespace NavCityBreda.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Landmark landmark = e.Parameter as Landmark;
-            landmarkvm = new LandmarkVM(landmark);
+            landmarkvm = new LandmarkDetailVM(landmark);
             this.DataContext = landmarkvm;
         }
     }

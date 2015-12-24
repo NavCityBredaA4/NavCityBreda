@@ -171,7 +171,7 @@
     <Compile Include="Model\Waypoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\HelpVM.cs" />
-    <Compile Include="ViewModels\LandmarkVM.cs" />
+    <Compile Include="ViewModels\LandmarkDetailVM.cs" />
     <Compile Include="ViewModels\MapVM.cs" />
     <Compile Include="ViewModels\MainPageVM.cs" />
     <Compile Include="ViewModels\RouteDetailVM.cs" />
@@ -193,8 +193,8 @@
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LandmarkView.xaml.cs">
-      <DependentUpon>LandmarkView.xaml</DependentUpon>
+    <Compile Include="Views\LandmarkDetailView.xaml.cs">
+      <DependentUpon>LandmarkDetailView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -278,7 +278,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LandmarkView.xaml">
+    <Page Include="Views\LandmarkDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

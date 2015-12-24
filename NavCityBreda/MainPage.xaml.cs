@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -27,24 +28,48 @@ namespace NavCityBreda
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        double bptime;
+        double lastbptime;
 
         public MainPage()
         {
             this.InitializeComponent();
             Frame.Navigated += Frame_Navigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
-            
+
+            bptime = Util.Now;
+
             this.DataContext = new MainPageVM();
             Frame.Navigate(typeof(MapView));
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
+            if (e.Handled) return;
+
             if (Frame.CanGoBack)
             {
                 e.Handled = true;
                 Frame.GoBack();
+                return;
             }
+
+            lastbptime = bptime;
+            bptime = Util.Now;
+
+            if(bptime - lastbptime > 2000)
+            {
+                ShowHideBackMessage();
+                e.Handled = true;
+            }
+        }
+
+        public async Task<String> ShowHideBackMessage()
+        {
+            BackMessage.Visibility = Visibility.Visible;
+            await Task.Delay(TimeSpan.FromSeconds(2));
+            BackMessage.Visibility = Visibility.Collapsed;
+            return "success";
         }
 
         public void Navigate(Type type)

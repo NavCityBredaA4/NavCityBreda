@@ -28,6 +28,15 @@ namespace NavCityBreda.ViewModels
             NotifyPropertyChanged(nameof(Source));
             NotifyPropertyChanged(nameof(Accuracy));
             NotifyPropertyChanged(nameof(GPSInfo));
+            NotifyPropertyChanged(nameof(BackText));
+        }
+
+        public string BackText
+        {
+            get
+            {
+                return Util.Loader.GetString("BackTwiceText");
+            }
         }
 
 

@@ -80,9 +80,14 @@ namespace NavCityBreda.Model
             return "success";
         }
 
-        public void Reset()
+        public async Task<String> Reset()
         {
-            Landmarks.ForEach(l => l.Visited = false);
+            foreach(Landmark l in Landmarks)
+            {
+                l.Visited = false;
+                await Task.Delay(TimeSpan.FromMilliseconds(2));
+            }
+            return "success";
         }
     }
 }

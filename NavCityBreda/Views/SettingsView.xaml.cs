@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -81,6 +82,27 @@ namespace NavCityBreda.Views
                     if (Settings.CurrentLanguage != "ja")
                         Settings.ChangeLanguage("ja");
                     break;
+            }
+        }
+
+        private async void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageDialog dlg = new MessageDialog(Util.Loader.GetString("ResetConfirmation"), Util.Loader.GetString("Reset"));
+            dlg.Commands.Add(new UICommand(Util.Loader.GetString("Yes")) { Id = 1 } );
+            dlg.Commands.Add(new UICommand(Util.Loader.GetString("No")) { Id = 0 });
+
+            dlg.DefaultCommandIndex = 0;
+            dlg.CancelCommandIndex = 1;
+
+            var result = await dlg.ShowAsync();
+
+            if((int)result.Id == 1)
+            {
+                ResetProgress.IsActive = true;
+                App.RouteManager.StopRoute();
+                Language.SelectedIndex = 0;
+                await App.RouteManager.Reset();
+                ResetProgress.IsActive = false;
             }
         }
     }

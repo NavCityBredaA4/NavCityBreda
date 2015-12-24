@@ -91,7 +91,7 @@ namespace NavCityBreda.Views
         private void LandmarkList_ItemClick(object sender, ItemClickEventArgs e)
         {
             MainPage mp = App.MainPage;
-            mp.Navigate(typeof(LandmarkView), e.ClickedItem as Landmark);
+            mp.Navigate(typeof(LandmarkDetailView), e.ClickedItem as Landmark);
         }
 
         private void StartRouteButton_Click(object sender, RoutedEventArgs e)

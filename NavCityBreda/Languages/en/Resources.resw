@@ -270,4 +270,28 @@
   <data name="HelpItem3Text" xml:space="preserve">
     <value>You can find GPS Information at the bottom of the menu. It exists out of three parts. The first is the status of the GPS connection, for examle "disabled" or "ready". Secondly is the way in which the GPS is connecte, Cellular is the least accurate, Satellite the most. The third part is the accuracy in meters.</value>
   </data>
+  <data name="Application" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="ResetConfirmation" xml:space="preserve">
+    <value>Are you sure you want to reset the application?</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="BackTwiceText" xml:space="preserve">
+    <value>Press back again to exit</value>
+  </data>
 </root>
