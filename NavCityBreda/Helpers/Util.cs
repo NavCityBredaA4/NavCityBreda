@@ -36,11 +36,12 @@ namespace NavCityBreda.Helpers
             return timestr;
         }
 
-        public static async Task<MapLocation> FindLocation(string location, Geopoint reference)
+        public static async Task<Geopoint> FindLocation(string location, Geopoint reference)
         {
             MapLocationFinderResult result = await MapLocationFinder.FindLocationsAsync(location, reference);
-            MapLocation from = result.Locations.First();
-            return from;
+            MapLocation from = result.Locations.FirstOrDefault();
+            Geopoint p = from.Point;
+            return p;
         }
 
         public static async Task<MapRoute> FindWalkingRoute(Geopoint from, Geopoint to)
@@ -59,9 +60,9 @@ namespace NavCityBreda.Helpers
 
         public static async Task<MapRoute> FindWalkingRoute(string from, string to, Geopoint reference)
         {
-            MapLocation f = await FindLocation(from, reference);
-            MapLocation t = await FindLocation(to, reference);
-            MapRoute m = await FindWalkingRoute(f.Point, t.Point);
+            Geopoint f = await FindLocation(from, reference);
+            Geopoint t = await FindLocation(to, reference);
+            MapRoute m = await FindWalkingRoute(f, t);
             return m;
         }
 
@@ -81,9 +82,9 @@ namespace NavCityBreda.Helpers
 
         public static async Task<MapRoute> FindDrivingRoute(string from, string to, Geopoint reference)
         {
-            MapLocation f = await FindLocation(from, reference);
-            MapLocation t = await FindLocation(to, reference);
-            MapRoute m = await FindDrivingRoute(f.Point, t.Point);
+            Geopoint f = await FindLocation(from, reference);
+            Geopoint t = await FindLocation(to, reference);
+            MapRoute m = await FindDrivingRoute(f, t);
             return m;
         }
 

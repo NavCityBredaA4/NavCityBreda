@@ -92,8 +92,6 @@ namespace NavCityBreda.Model
 
                     _position = await geo.GetGeopositionAsync();
 
-                    _status = PositionStatus.Initializing;
-
                     return "Connected";
 
                 case GeolocationAccessStatus.Denied:

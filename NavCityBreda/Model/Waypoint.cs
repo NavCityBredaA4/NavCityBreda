@@ -11,7 +11,7 @@ namespace NavCityBreda.Model
 {
     public class Waypoint
     {
-        public Geopoint Location { get; protected set; }
+        public Geopoint Position { get; protected set; }
 
         protected string _namekey;
         public string Name { get { return Util.Loader.GetString( _namekey ); } }
@@ -20,14 +20,14 @@ namespace NavCityBreda.Model
 
         public Waypoint(Geopoint p, string name, int num)
         {
-            Location = p;
+            Position = p;
             _namekey = name;
             Order = num;
         }
 
         public Waypoint(double la, double lo, string name, int num)
         {
-            Location = new Geopoint(new BasicGeoposition() { Altitude = 0, Latitude = la, Longitude = lo });
+            Position = new Geopoint(new BasicGeoposition() { Altitude = 0, Latitude = la, Longitude = lo });
             _namekey = name;
             Order = num;
         }
@@ -37,10 +37,10 @@ namespace NavCityBreda.Model
             Waypoint r = obj as Waypoint;
             MapIcon i = obj as MapIcon;
 
-            if (r != null && r.Name == this.Name && r.Location == this.Location)
+            if (r != null && r.Name == this.Name && r.Position == this.Position)
                 return true;
 
-            if (i != null && i.Title == this.Name && i.Location == this.Location)
+            if (i != null && i.Title == this.Name && i.Location == this.Position)
                 return true;
 
             return false;

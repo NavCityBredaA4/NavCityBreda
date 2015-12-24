@@ -183,7 +183,7 @@ namespace NavCityBreda.Model
             if (App.Geo.Position == null) return "error";
 
             _currentlandmark = _currentroute.Landmarks.FirstOrDefault(p => !p.Visited);
-            _routetolandmark = await Util.FindWalkingRoute(App.Geo.Position.Coordinate.Point, _currentlandmark.Location);
+            _routetolandmark = await Util.FindWalkingRoute(App.Geo.Position.Coordinate.Point, _currentlandmark.Position);
             _currentroutelegs = _routetolandmark.Legs.ToList() as List<MapRouteLeg>;
             _currentroutelegcount = 0;
             _currentmaneuvercount = 0;

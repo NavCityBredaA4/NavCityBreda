@@ -60,8 +60,6 @@ namespace NavCityBreda.Views
 
         private void Language_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LanguageLoading.IsActive = true;
-
             switch(Language.SelectedIndex)
             {
                 default:
@@ -84,8 +82,6 @@ namespace NavCityBreda.Views
                         Settings.ChangeLanguage("ja");
                     break;
             }
-
-            LanguageLoading.IsActive = false;
         }
     }
 }

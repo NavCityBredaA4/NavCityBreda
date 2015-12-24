@@ -7,24 +7,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
-        <ScrollViewer>
-            <StackPanel HorizontalAlignment="Stretch">
-
-                <StackPanel Margin="10">
-                    <TextBlock FontSize="20" Text="{Binding Language}" Margin="0,0,0,10"/>
-                    <ComboBox Name="Language" SelectionChanged="Language_SelectionChanged" HorizontalAlignment="Stretch">
-                        <ComboBoxItem>English</ComboBoxItem>
-                        <ComboBoxItem>Nederlands</ComboBoxItem>
-                        <!-- <ComboBoxItem>Deutsch</ComboBoxItem> -->
-                        <!-- <ComboBoxItem>日本語</ComboBoxItem> --> 
-                    </ComboBox>
-                    <ProgressRing IsActive="False" Name="LanguageLoading" />
-                </StackPanel>
-
-
-                <TextBlock Text="Settings - Add TileMapOption" Grid.Row="0" Margin="10"/>
+    <ScrollViewer>
+        <StackPanel HorizontalAlignment="Stretch">
+            <StackPanel Margin="10">
+                <TextBlock FontSize="20" Text="{Binding Language}" Margin="0,0,0,10"/>
+                <ComboBox Name="Language" SelectionChanged="Language_SelectionChanged" HorizontalAlignment="Stretch">
+                    <ComboBoxItem>English</ComboBoxItem>
+                    <ComboBoxItem>Nederlands</ComboBoxItem>
+                    <!-- <ComboBoxItem>Deutsch</ComboBoxItem> -->
+                    <!-- <ComboBoxItem>日本語</ComboBoxItem> -->
+                </ComboBox>
             </StackPanel>
-        </ScrollViewer>
-    </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

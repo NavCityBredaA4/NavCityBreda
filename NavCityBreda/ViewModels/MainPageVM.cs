@@ -95,8 +95,6 @@ namespace NavCityBreda.ViewModels
                 switch(App.Geo.Status)
                 {
                     case PositionStatus.Disabled:
-                        NotifyPropertyChanged(Source);
-                        NotifyPropertyChanged(Accuracy);
                         return Util.Loader.GetString("Disabled");
                     case PositionStatus.Initializing:
                         return Util.Loader.GetString("Initializing");

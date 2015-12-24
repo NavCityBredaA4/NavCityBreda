@@ -59,7 +59,8 @@
 
         <StackPanel Grid.Row="4" Name="LandmarkListPanel" Margin="10">
             <TextBlock Text="{Binding LandmarksTitle}" Style="{StaticResource Header}"/>
-            <ListView x:Name="LandmarkList" ItemsSource="{Binding Landmarks}" IsItemClickEnabled="True" ItemClick="LandmarkList_ItemClick">
+            <ListView x:Name="LandmarkList" ItemsSource="{Binding Landmarks}" IsItemClickEnabled="True" ItemClick="LandmarkList_ItemClick"
+                      ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled">
                 <ListView.ItemTemplate>
                     <DataTemplate x:Name="ListViewDataTemplate">
                         <StackPanel Orientation="Horizontal">

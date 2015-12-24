@@ -76,7 +76,7 @@ namespace NavCityBreda.Model
 
         public async Task<String> CalculateRoute()
         {
-            _route = await Util.FindWalkingRoute(_waypoints.Select(p => p.Location).ToList());
+            _route = await Util.FindWalkingRoute(_waypoints.Select(p => p.Position).ToList());
             return "success";
         }
 

@@ -86,7 +86,7 @@ namespace NavCityBreda.ViewModels
 
         private async void LoadStreet()
         {
-            address = await Util.FindAddress(landmark.Location);
+            address = await Util.FindAddress(landmark.Position);
             NotifyPropertyChanged(nameof(Address));
         }
     }

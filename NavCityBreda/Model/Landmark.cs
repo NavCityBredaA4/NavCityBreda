@@ -54,7 +54,7 @@ namespace NavCityBreda.Model
             Id = _namekey + "_" + Order;
 
             Icon = new MapIcon();
-            Icon.Location = Location;
+            Icon.Location = Position;
             Icon.NormalizedAnchorPoint = new Point(0.5, 1.0);
             Icon.Title = Name;
             Icon.ZIndex = 500;

@@ -160,7 +160,7 @@ namespace NavCityBreda.Views
             foreach (Landmark l in r.Landmarks)
             {
                 if (!l.Visited)
-                    GeofenceMonitor.Current.Geofences.Add(new Geofence(l.Id, new Geocircle(l.Location.Position, 35), MonitoredGeofenceStates.Entered, true));
+                    GeofenceMonitor.Current.Geofences.Add(new Geofence(l.Id, new Geocircle(l.Position.Position, 35), MonitoredGeofenceStates.Entered, true));
                 l.UpdateIcon();
                 await Task.Delay(TimeSpan.FromMilliseconds(3));
                 Map.MapElements.Add(l.Icon);
@@ -205,7 +205,7 @@ namespace NavCityBreda.Views
                         await Map.TryTiltToAsync(55);
                     }
 
-                    if (App.CompassTracker.Heading.HeadingTrueNorth.HasValue)
+                    if (App.CompassTracker.Heading != null && App.CompassTracker.Heading.HeadingTrueNorth.HasValue)
                     {
                         await Task.Delay(TimeSpan.FromMilliseconds(300));
                         await Map.TryRotateToAsync((double)App.CompassTracker.Heading.HeadingTrueNorth);

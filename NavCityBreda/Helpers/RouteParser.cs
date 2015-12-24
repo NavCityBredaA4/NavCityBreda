@@ -37,7 +37,7 @@ namespace NavCityBreda.Helpers
             foreach(JToken t in waypoints)
             {
                 if(!ValidateWaypointObject(t, out error))
-                    throw new FileLoadException("Invalid Waypoint information in " + datafile + ", " + error);
+                    throw new FileLoadException("Invalid Waypoint (#" + (count+1) + ") information in " + datafile + ", " + error);
 
                 Waypoint w;
 
