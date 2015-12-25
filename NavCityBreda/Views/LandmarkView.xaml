@@ -24,13 +24,25 @@
 
             <StackPanel Grid.Row="1" Margin="17,10,5,10">
                 <TextBlock Text="{Binding SortOrderTitle}" Style="{StaticResource Header}"/>
-                <RadioButton GroupName="SortMode" Name="AlphaSorted" Checked="Sort_Checked" IsChecked="True" Content="{Binding Ascending}" />
-                <RadioButton GroupName="SortMode" Name="AlphaReverseSorted" Checked="Sort_Checked" Content="{Binding Descending}" />
-                <RadioButton GroupName="SortMode" Name="VisitedSorted" Checked="Sort_Checked" Content="{Binding Visited}" />
-                <RadioButton GroupName="SortMode" Name="NotVisitedSorted" Checked="Sort_Checked" Content="{Binding NotVisited}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <RadioButton Grid.Column="0" Grid.Row="0" GroupName="SortMode" Name="AlphaSorted" Checked="Sort_Checked" IsChecked="True" Content="{Binding Ascending}" />
+                    <RadioButton Grid.Column="0" Grid.Row="1" GroupName="SortMode" Name="AlphaReverseSorted" Checked="Sort_Checked" Content="{Binding Descending}" />
+                    <RadioButton Grid.Column="1" Grid.Row="0" GroupName="SortMode" Name="VisitedSorted" Checked="Sort_Checked" Content="{Binding Visited}" />
+                    <RadioButton Grid.Column="1" Grid.Row="1" GroupName="SortMode" Name="NotVisitedSorted" Checked="Sort_Checked" Content="{Binding NotVisited}" />
+                </Grid>
             </StackPanel>
 
-            <StackPanel Grid.Row="2" Name="LandmarkListPanel" Margin="10">
+            <StackPanel Grid.Row="2" Name="LandmarkListPanel" Margin="17,10,5,10">
                 <TextBlock Text="{Binding LandmarksTitle}" Style="{StaticResource Header}"/>
                 <ListView x:Name="LandmarkList" ItemsSource="{Binding Landmarks}" Grid.Row="2" IsItemClickEnabled="True" ItemClick="LandmarkList_ItemClick"
                       ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled">
