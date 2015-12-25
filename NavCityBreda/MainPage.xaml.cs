@@ -2,21 +2,12 @@
 using NavCityBreda.ViewModels;
 using NavCityBreda.Views;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -102,21 +93,21 @@ namespace NavCityBreda
                     PageTitle.Text = "Nav City Breda";
                     break;
                 case "helpview":
-                    NavList.SelectedIndex = 2;
+                    NavList.SelectedIndex = 3;
                     break;
                 case "settingsview":
-                    NavList.SelectedIndex = 3;
+                    NavList.SelectedIndex = 4;
                     break;
                 case "mapview":
                     NavList.SelectedIndex = 0;
                     break;
+                case "routeview":
                 case "routedetailview":
                     NavList.SelectedIndex = 1;
                     break;
-                case "routeview":
-                    NavList.SelectedIndex = 1;
-                    break;
+                case "landmarkdetailview":
                 case "landmarkview":
+                    NavList.SelectedIndex = 2;
                     break;
             }
 
@@ -141,6 +132,8 @@ namespace NavCityBreda
             }
             else if (NavListHelp.IsSelected)
                 Frame.Navigate(typeof(HelpView));
+            else if (NavListLandmarks.IsSelected)
+                Frame.Navigate(typeof(LandmarkView));
             else if (NavListSettings.IsSelected)
                 Frame.Navigate(typeof(SettingsView));
             else if (NavListRoute.IsSelected)

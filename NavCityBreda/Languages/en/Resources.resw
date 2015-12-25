@@ -294,4 +294,16 @@
   <data name="BackTwiceText" xml:space="preserve">
     <value>Press back again to exit</value>
   </data>
+  <data name="LandmarkListDescription" xml:space="preserve">
+    <value>Tap on a landmark in de list below to view details. You can sort the list using the buttons.</value>
+  </data>
+  <data name="Ascending" xml:space="preserve">
+    <value>Ascending</value>
+  </data>
+  <data name="Descending" xml:space="preserve">
+    <value>Descending</value>
+  </data>
+  <data name="SortOrder" xml:space="preserve">
+    <value>Sort Order</value>
+  </data>
 </root>

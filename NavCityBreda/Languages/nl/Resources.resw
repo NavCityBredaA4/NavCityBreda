@@ -294,4 +294,16 @@
   <data name="BackTwiceText" xml:space="preserve">
     <value>Druk nogmaals op vorige om te sluiten</value>
   </data>
+  <data name="LandmarkListDescription" xml:space="preserve">
+    <value>Tik op een bezienswaardigheid uit de onderstaande lijst om de details ervan te bekijken. U kunt de lijst sorteren met de knoppen.</value>
+  </data>
+  <data name="Ascending" xml:space="preserve">
+    <value>Oplopend</value>
+  </data>
+  <data name="Descending" xml:space="preserve">
+    <value>Aflopend</value>
+  </data>
+  <data name="SortOrder" xml:space="preserve">
+    <value>Sorteer volgorde</value>
+  </data>
 </root>

@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Data.Xml.Dom;
 using Windows.Devices.Geolocation;
-using Windows.Foundation;
-using Windows.Graphics.Display;
 using Windows.Services.Maps;
 using Windows.UI;
 using Windows.UI.Notifications;
-using Windows.UI.ViewManagement;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
 
 namespace NavCityBreda.Helpers

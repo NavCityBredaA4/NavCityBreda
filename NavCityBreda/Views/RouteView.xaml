@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <ScrollViewer>
-    <Grid Grid.Row="2" Name="RouteListPanel">
+    <Grid Name="RouteListPanel">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

@@ -1,10 +1,5 @@
 ﻿using NavCityBreda.Helpers;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.UI.Core;
 
@@ -23,6 +18,7 @@ namespace NavCityBreda.ViewModels
             NotifyPropertyChanged(nameof(Map));
             NotifyPropertyChanged(nameof(Help));
             NotifyPropertyChanged(nameof(Route));
+            NotifyPropertyChanged(nameof(Landmarks));
             NotifyPropertyChanged(nameof(Settings));
             NotifyPropertyChanged(nameof(Status));
             NotifyPropertyChanged(nameof(Source));
@@ -61,6 +57,14 @@ namespace NavCityBreda.ViewModels
             get
             {
                 return Util.Loader.GetString("Route");
+            }
+        }
+
+        public string Landmarks
+        {
+            get
+            {
+                return Util.Loader.GetString("Landmarks");
             }
         }
 

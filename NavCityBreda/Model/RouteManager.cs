@@ -1,12 +1,9 @@
 ﻿using NavCityBreda.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Devices.Geolocation;
 using Windows.Devices.Geolocation.Geofencing;
 using Windows.Services.Maps;
 using Windows.UI.Core;
@@ -216,6 +213,18 @@ namespace NavCityBreda.Model
                 _currentmaneuver = null;
                 UpdateStatus(RouteStatus.STOPPED);
             }
+        }
+
+        public List<Landmark> GetAllLandmarks()
+        {
+            List<Landmark> l = new List<Landmark>();
+
+            foreach(Route r in _routes)
+            {
+                l.AddRange(r.Landmarks);
+            }
+
+            return l;
         }
 
         public async Task<String> Reset()

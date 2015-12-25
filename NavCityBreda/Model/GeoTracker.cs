@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using Windows.Devices.Geolocation.Geofencing;
-using Windows.Foundation;
 using Windows.System;
 
 namespace NavCityBreda.Model
