@@ -55,7 +55,6 @@
             <Viewbox RelativePanel.RightOf="NavButton" RelativePanel.AlignBottomWith="NavButton" StretchDirection="DownOnly" Stretch="UniformToFill" Margin="10,0,10,0">
                 <TextBlock FontSize="28" Name="PageTitle" Text="{Binding Map}" />
             </Viewbox>
-            
         </RelativePanel>
 
         <!-- http://stackoverflow.com/questions/32108362/uwp-swipe-to-open-splitview-pane-->
@@ -71,7 +70,7 @@
                                 <TextBlock Style="{StaticResource NavIcon}" Text="&#xE909;"/>
                                 <TextBlock Style="{StaticResource NavText}" Text="{Binding Map}"/>
                             </StackPanel>
-                        </ListBoxItem> 
+                        </ListBoxItem>
                         <ListBoxItem Name="NavListRoute">
                             <StackPanel Style="{StaticResource NavStackPanel}">
                                 <TextBlock Style="{StaticResource NavIcon}" Text="&#xE7AD;"/>
@@ -102,7 +101,7 @@
                         <StackPanel Style="{StaticResource GPSInfoPanel}">
                             <TextBlock Margin="5,0,0,0" FontSize="16" FontWeight="Bold" Text="{Binding GPSInfo}"/>
                         </StackPanel>
-                        
+
                         <StackPanel Style="{StaticResource GPSInfoPanel}" Tapped="GPSRefresh_Tapped">
                             <TextBlock Style="{StaticResource GPSInfoIcon}" Text="&#xE81D;"/>
                             <TextBlock Style="{StaticResource GPSInfoText}" Text="{Binding Status}"/>
@@ -122,10 +121,11 @@
                             <TextBlock Text="Nav City Breda @"/>
                             <TextBlock Text="{Binding Year}" Margin="5,0,0,0" />
                         </StackPanel>
-                        
+
                     </StackPanel>
                 </RelativePanel>
             </SplitView.Pane>
+            
             <SplitView.Content>
                 <Grid>
                     <Frame Name="Frame"/>

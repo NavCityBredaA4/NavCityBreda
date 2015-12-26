@@ -71,9 +71,10 @@ namespace NavCityBreda.Model
             var accessStatus = await Geolocator.RequestAccessAsync();
 
             switch (accessStatus)
-            { 
+            {
                 case GeolocationAccessStatus.Allowed:
-                    geo = new Geolocator {
+                    geo = new Geolocator
+                    {
                         DesiredAccuracy = PositionAccuracy.High,
                         MovementThreshold = 3
                         //ReportInterval = 1500

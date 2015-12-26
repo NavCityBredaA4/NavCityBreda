@@ -9,13 +9,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace NavCityBreda.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class RouteDetailView : Page
     {
         private Route route;
@@ -36,19 +31,20 @@ namespace NavCityBreda.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Route r = e.Parameter as Route;
-            
+
             if (r == route)
             {
                 routedetailvm.UpdateRoute();
                 LandmarkList.SelectedIndex = -1;
-                return;
+            }
+            else
+            {
+                route = r;
+                routedetailvm = new RouteDetailVM(route);
+                this.DataContext = routedetailvm;
             }
 
-            route = r;
-            routedetailvm = new RouteDetailVM(route);
-            this.DataContext = routedetailvm;
-
-            DrawRoute(); 
+            DrawRoute();
         }
 
         private async void DrawRoute()
@@ -57,7 +53,7 @@ namespace NavCityBreda.Views
 
             Zoom();
 
-            await Task.Delay(TimeSpan.FromMilliseconds(10));
+            await Task.Delay(TimeSpan.FromMilliseconds(25));
 
             MapPolyline m = Util.GetRouteLine(route.RouteObject, Color.FromArgb(255, 100, 100, 255), 25, 6);
             Map.MapElements.Add(m);

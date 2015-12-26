@@ -70,13 +70,13 @@ namespace NavCityBreda.ViewModels
             {
                 return landmark.Status;
             }
-        } 
+        }
 
         public string Visited
         {
             get
             {
-                switch(landmark.Status)
+                switch (landmark.Status)
                 {
                     default:
                     case Landmark.LandmarkStatus.NOTVISITED:

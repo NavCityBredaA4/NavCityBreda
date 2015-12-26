@@ -10,7 +10,7 @@ namespace NavCityBreda.Helpers.Converter
         {
             Model.Landmark.LandmarkStatus st = (Model.Landmark.LandmarkStatus)value;
 
-            switch(st)
+            switch (st)
             {
                 default:
                 case Model.Landmark.LandmarkStatus.NOTVISITED:

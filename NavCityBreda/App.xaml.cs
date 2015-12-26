@@ -12,9 +12,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace NavCityBreda
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
     sealed partial class App : Application
     {
 
@@ -58,7 +55,7 @@ namespace NavCityBreda
         {
             get
             {
-                 return Windows.UI.Core.CoreWindow.GetForCurrentThread().Dispatcher;
+                return Windows.UI.Core.CoreWindow.GetForCurrentThread().Dispatcher;
             }
         }
 

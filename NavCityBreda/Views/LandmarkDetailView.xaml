@@ -73,7 +73,7 @@
                 <TextBlock Text="{Binding DescriptionTitle}" Style="{StaticResource Header}"/>
                 <TextBlock TextWrapping="WrapWholeWords" Text="{Binding Description}"/>
             </StackPanel>
-           
+
         </Grid>
     </ScrollViewer>
 </Page>

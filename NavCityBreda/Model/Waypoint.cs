@@ -9,7 +9,7 @@ namespace NavCityBreda.Model
         public Geopoint Position { get; protected set; }
 
         protected string _namekey;
-        public string Name { get { return Util.Loader.GetString( _namekey ); } }
+        public string Name { get { return Util.Loader.GetString(_namekey); } }
 
         public int Order { get; protected set; }
 

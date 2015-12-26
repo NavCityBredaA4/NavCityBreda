@@ -10,9 +10,10 @@ namespace NavCityBreda.Helpers
         private static ApplicationDataContainer LOCAL_SETTINGS = ApplicationData.Current.LocalSettings;
 
         public delegate void OnLanguageUpdateHandler(EventArgs e);
-        public static event OnLanguageUpdateHandler OnLanguageUpdate; 
+        public static event OnLanguageUpdateHandler OnLanguageUpdate;
 
-        public static bool Tracking {
+        public static bool Tracking
+        {
             get
             {
                 return (bool)LOCAL_SETTINGS.Values["tracking"];
@@ -33,10 +34,10 @@ namespace NavCityBreda.Helpers
 
         public static async void ChangeLanguage(string lang)
         {
-                ApplicationLanguages.PrimaryLanguageOverride = lang;
-                await Task.Delay(TimeSpan.FromMilliseconds(100));
-                //App.rootFrame.Navigate(typeof(MainPage));
-                OnLanguageUpdate(new EventArgs());
+            ApplicationLanguages.PrimaryLanguageOverride = lang;
+            await Task.Delay(TimeSpan.FromMilliseconds(100));
+            //App.rootFrame.Navigate(typeof(MainPage));
+            OnLanguageUpdate(new EventArgs());
         }
 
         public static string CurrentLanguage { get { return ApplicationLanguages.PrimaryLanguageOverride; } }

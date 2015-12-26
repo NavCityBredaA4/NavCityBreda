@@ -17,13 +17,8 @@ using System.Threading.Tasks;
 using Windows.Devices.Geolocation.Geofencing;
 using Windows.UI.Core;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace NavCityBreda.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MapView : Page
     {
         MapIcon CurrentPosition;
@@ -75,7 +70,7 @@ namespace NavCityBreda.Views
             Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
             {
                 if (mapvm.Tracking && e.Heading.HeadingTrueNorth.HasValue)
-                   Map.TryRotateToAsync((double)e.Heading.HeadingTrueNorth);
+                    Map.TryRotateToAsync((double)e.Heading.HeadingTrueNorth);
             });
         }
 
@@ -85,7 +80,7 @@ namespace NavCityBreda.Views
             {
                 if (e.Status == LandmarkVisitedEventArgs.VisitedStatus.ENTERED)
                     App.MainPage.Navigate(typeof(LandmarkDetailView), e.Landmark);
-            }); 
+            });
         }
 
         private void RouteManager_OnLandmarkChanged(object sender, LandmarkChangedEventArgs e)
@@ -127,7 +122,7 @@ namespace NavCityBreda.Views
                 }
                 else
                     RemoveRoute();
-            });           
+            });
         }
 
         private async void DrawRoute()
@@ -146,7 +141,7 @@ namespace NavCityBreda.Views
 
             Map.MapElements.Add(Util.GetRouteLine(App.RouteManager.CurrentRoute.RouteObject, Color.FromArgb(200, 100, 100, 255), 50, 3));
 
-            if (App.Geo.History.Count > 1) 
+            if (App.Geo.History.Count > 1)
                 Map.MapElements.Add(Util.GetRouteLine(App.Geo.History.Select(p => p.Coordinate.Point.Position).ToList(), Color.FromArgb(255, 155, 155, 155), 250, 6));
 
             foreach (Landmark l in r.Landmarks)
@@ -215,7 +210,7 @@ namespace NavCityBreda.Views
                         await Task.Delay(TimeSpan.FromMilliseconds(300));
                         await Map.TryRotateToAsync(0);
                     }
-                    
+
                 }
                 Zooming = false;
                 return "success";
@@ -274,7 +269,7 @@ namespace NavCityBreda.Views
         {
             mapvm.Tracking = tracking;
 
-            if(tracking)
+            if (tracking)
             {
                 DisableControls(true);
 

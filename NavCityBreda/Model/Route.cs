@@ -14,13 +14,13 @@ namespace NavCityBreda.Model
         public GeoboundingBox Bounds { get { return _route.BoundingBox; } }
 
         private string _namekey;
-        public string Name { get { return Util.Loader.GetString( _namekey ); } }
+        public string Name { get { return Util.Loader.GetString(_namekey); } }
 
         private string _desckey;
-        public string Description { get { return Util.Loader.GetString( _desckey ); } }
+        public string Description { get { return Util.Loader.GetString(_desckey); } }
 
         private string _landdesckey;
-        public string LandmarksDescription { get { return Util.Loader.GetString( _landdesckey ); } }
+        public string LandmarksDescription { get { return Util.Loader.GetString(_landdesckey); } }
 
         private string foldername { get; set; }
 
@@ -80,7 +80,7 @@ namespace NavCityBreda.Model
 
         public async Task<String> Reset()
         {
-            foreach(Landmark l in Landmarks)
+            foreach (Landmark l in Landmarks)
             {
                 l.Status = Landmark.LandmarkStatus.NOTVISITED;
                 await Task.Delay(TimeSpan.FromMilliseconds(2));

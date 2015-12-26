@@ -32,7 +32,7 @@ namespace NavCityBreda.Model
         public MapIcon Icon { get; set; }
 
 
-        public Landmark(Geopoint p, string name, int num, string desc, List<Image> images) : base (p, name, num)
+        public Landmark(Geopoint p, string name, int num, string desc, List<Image> images) : base(p, name, num)
         {
             Create(name, desc, num, images);
         }
@@ -62,7 +62,7 @@ namespace NavCityBreda.Model
         {
             Icon.Title = Name;
 
-            switch(_status)
+            switch (_status)
             {
                 default:
                 case LandmarkStatus.NOTVISITED:

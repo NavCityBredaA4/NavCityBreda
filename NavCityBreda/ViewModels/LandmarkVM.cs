@@ -1,7 +1,6 @@
 ﻿using NavCityBreda.Helpers;
 using NavCityBreda.Helpers.Comparer;
 using NavCityBreda.Model;
-using System;
 using System.Collections.Generic;
 
 namespace NavCityBreda.ViewModels
@@ -97,7 +96,7 @@ namespace NavCityBreda.ViewModels
         {
             IComparer<Landmark> comparer;
 
-            switch(s)
+            switch (s)
             {
                 default:
                 case Sort.ALPHA:

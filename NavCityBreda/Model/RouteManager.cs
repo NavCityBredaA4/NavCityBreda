@@ -1,7 +1,6 @@
 ﻿using NavCityBreda.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,16 +19,16 @@ namespace NavCityBreda.Model
         public delegate void OnLandmarkVisitedHandler(object sender, LandmarkVisitedEventArgs e);
         public event OnLandmarkVisitedHandler OnLandmarkVisited;
 
-        public delegate void OnLandmarkChangedHandler (object sender, LandmarkChangedEventArgs e);
+        public delegate void OnLandmarkChangedHandler(object sender, LandmarkChangedEventArgs e);
         public event OnLandmarkChangedHandler OnLandmarkChanged;
 
-        public delegate void OnManeuverChangedHandler (object sender, ManeuverChangedEventArgs e);
+        public delegate void OnManeuverChangedHandler(object sender, ManeuverChangedEventArgs e);
         public event OnManeuverChangedHandler OnManeuverChanged;
 
 
 
         private List<Route> _routes;
-        public List<Route> Routes { get { return _routes;  } }
+        public List<Route> Routes { get { return _routes; } }
 
         private Route _currentroute;
         public Route CurrentRoute { get { return _currentroute; } }
@@ -41,7 +40,7 @@ namespace NavCityBreda.Model
         public MapRoute RouteToLandmark { get { return _routetolandmark; } }
 
         private int _currentroutelegcount;
-        private MapRouteLeg _currentrouteleg { get { return _currentroutelegs[_currentroutelegcount];  } }
+        private MapRouteLeg _currentrouteleg { get { return _currentroutelegs[_currentroutelegcount]; } }
         private List<MapRouteLeg> _currentroutelegs;
 
         private int _currentmaneuvercount;
@@ -68,12 +67,12 @@ namespace NavCityBreda.Model
             DistanceToManeuver = -1;
             GeofenceMonitor.Current.GeofenceStateChanged += Current_GeofenceStateChanged;
             App.Geo.OnPositionUpdate += Geo_OnPositionUpdate;
-            LoadRoutes();  
+            LoadRoutes();
         }
 
         private void Geo_OnPositionUpdate(object sender, PositionUpdatedEventArgs e)
         {
-            if(Status == RouteStatus.STARTED)
+            if (Status == RouteStatus.STARTED)
             {
                 bool found = false;
 
@@ -98,11 +97,11 @@ namespace NavCityBreda.Model
                     }
                 }
 
-                if(found)
+                if (found)
                 {
-                    if(_currentmaneuvercount >= _currentmaneuvers.Count)
+                    if (_currentmaneuvercount >= _currentmaneuvers.Count)
                     {
-                        if(_currentroutelegcount+1 < _currentroutelegs.Count)
+                        if (_currentroutelegcount + 1 < _currentroutelegs.Count)
                         {
                             _currentroutelegcount++;
                             _currentmaneuvercount = 0;
@@ -145,14 +144,14 @@ namespace NavCityBreda.Model
                     dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                     {
                         i.Status = Landmark.LandmarkStatus.VISITED;
-                    }); 
+                    });
                     _currentlandmark = i;
                     LandmarkVisited(i, LandmarkVisitedEventArgs.VisitedStatus.ENTERED);
                     Util.ShowToastNotification(i.Name, Util.Loader.GetString("LandmarkReached"));
                     UpdateRoute();
                 }
 
-                else if(state == GeofenceState.Exited)
+                else if (state == GeofenceState.Exited)
                 {
                     LandmarkVisited(i, LandmarkVisitedEventArgs.VisitedStatus.EXITED);
                 }
@@ -165,13 +164,13 @@ namespace NavCityBreda.Model
 
             _routes.Clear();
 
-            foreach(string folder in routefolders)
+            foreach (string folder in routefolders)
             {
                 string foldername = Path.GetFileName(folder);
                 if (foldername != "img")
                 {
                     Route r = RouteParser.LoadRoute(foldername);
-                    LoadingElement =  Util.Loader.GetString("Loading") + " " + r.Name.ToLower() + "...";
+                    LoadingElement = Util.Loader.GetString("Loading") + " " + r.Name.ToLower() + "...";
                     await r.CalculateRoute();
                     _routes.Add(r);
                 }
@@ -217,7 +216,7 @@ namespace NavCityBreda.Model
             _currentroutelegcount = 0;
             _currentmaneuvercount = 0;
             _currentmaneuver = _currentmaneuvers[_currentmaneuvercount];
-            
+
 
             //Send out events
             UpdateRoute(_routetolandmark, _currentlandmark);
@@ -265,7 +264,7 @@ namespace NavCityBreda.Model
         {
             List<Landmark> l = new List<Landmark>();
 
-            foreach(Route r in _routes)
+            foreach (Route r in _routes)
             {
                 l.AddRange(r.Landmarks);
             }
@@ -285,7 +284,7 @@ namespace NavCityBreda.Model
 
         public async Task<String> Reset()
         {
-            foreach(Route r in _routes)
+            foreach (Route r in _routes)
             {
                 await r.Reset();
             }

@@ -7,7 +7,7 @@ namespace NavCityBreda.ViewModels
 
         public SettingsVM() : base(Util.Loader.GetString("Settings"))
         {
-            
+
         }
 
         protected override void UpdatePropertiesToNewLanguage()

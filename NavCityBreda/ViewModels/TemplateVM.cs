@@ -14,7 +14,7 @@ namespace NavCityBreda.ViewModels
             dispatcher = App.Dispatcher;
             Settings.OnLanguageUpdate += Settings_OnLanguageUpdate;
 
-            if(App.MainPage != null)
+            if (App.MainPage != null)
                 App.MainPage.Title = title;
         }
 

@@ -105,7 +105,7 @@ namespace NavCityBreda.ViewModels
         {
             get
             {
-                switch(App.Geo.Status)
+                switch (App.Geo.Status)
                 {
                     case PositionStatus.Disabled:
                         return Util.Loader.GetString("Disabled");
@@ -129,7 +129,7 @@ namespace NavCityBreda.ViewModels
             get
             {
                 if (App.Geo.Connected == true && App.Geo.Position != null)
-                    switch(App.Geo.Position.Coordinate.PositionSource)
+                    switch (App.Geo.Position.Coordinate.PositionSource)
                     {
                         case PositionSource.Cellular:
                             return Util.Loader.GetString("Cellular");
@@ -153,7 +153,7 @@ namespace NavCityBreda.ViewModels
         {
             get
             {
-                
+
                 if (App.Geo.Connected == true && App.Geo.Position != null)
                     return App.Geo.Position.Coordinate.Accuracy.ToString() + "m";
                 else

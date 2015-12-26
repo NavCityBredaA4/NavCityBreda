@@ -11,7 +11,7 @@
     <Page.Resources>
         <convert:StatusToIconConverter x:Key="IconConverter" />
     </Page.Resources>
-    
+
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>

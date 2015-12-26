@@ -1,19 +1,12 @@
 ﻿using NavCityBreda.Helpers;
 using NavCityBreda.ViewModels;
-using System;
 using System.Diagnostics;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace NavCityBreda.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class SettingsView : Page
     {
         SettingsVM settingsvm;
@@ -23,7 +16,6 @@ namespace NavCityBreda.Views
             this.InitializeComponent();
             settingsvm = new SettingsVM();
             this.DataContext = settingsvm;
-            //throw new NotImplementedException("Tracking + tilemaps");
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -51,13 +43,13 @@ namespace NavCityBreda.Views
 
         private void Language_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch(Language.SelectedIndex)
+            switch (Language.SelectedIndex)
             {
                 default:
                     Language.SelectedIndex = 0;
                     break;
                 case 0:
-                    if(Settings.CurrentLanguage != "en")
+                    if (Settings.CurrentLanguage != "en")
                         Settings.ChangeLanguage("en");
                     break;
                 case 1:
@@ -79,7 +71,7 @@ namespace NavCityBreda.Views
         {
             bool confirm = await Util.ShowConfirmDialog(Util.Loader.GetString("Reset"), Util.Loader.GetString("ResetConfirmation"), Util.DialogType.YESNO);
 
-            if(confirm)
+            if (confirm)
             {
                 ResetProgress.IsActive = true;
                 App.RouteManager.StopRoute();

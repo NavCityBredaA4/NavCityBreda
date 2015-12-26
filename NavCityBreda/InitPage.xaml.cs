@@ -7,13 +7,8 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace NavCityBreda
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class InitPage : Page
     {
         internal Rect splashImageRect; // Rect to store splash screen image coordinates.
@@ -81,7 +76,7 @@ namespace NavCityBreda
                 Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     splashProgressText.Text = App.RouteManager.LoadingElement;
-                }); 
+                });
             }
 
             Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
@@ -92,7 +87,7 @@ namespace NavCityBreda
                 App.rootFrame = rootFrame;
                 rootFrame.Navigate(typeof(MainPage));
             });
-            
+
         }
     }
 }

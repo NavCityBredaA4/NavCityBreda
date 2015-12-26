@@ -5,11 +5,6 @@ namespace NavCityBreda.ViewModels
 {
     public class MapVM : TemplateVM
     {
-        //In een route de MapLegs gaan bijhouden. Dan de eerste als current instellen. 
-        //Dan kan je daarvan de informatie laten zien. Ook een event toevoegen als je dan aan het einde bent, dat weet je door lon-lon > 0.? te doen elke positie update.
-        //Allemaal in RouteManager afhandelen
-        //Nog een manier vinden om van een route afwijken op te vangen en dan opnieuw de route te berekenen.
-
         public MapVM() : base(Util.Loader.GetString("Map"))
         {
             App.RouteManager.OnManeuverChanged += RouteManager_OnManeuverChanged;
@@ -24,14 +19,16 @@ namespace NavCityBreda.ViewModels
 
         private void RouteManager_OnStatusUpdate(object sender, Model.RouteStatusChangedEventArgs e)
         {
-            dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => {
+            dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
                 NotifyPropertyChanged(nameof(Instructions));
             });
         }
 
         private void RouteManager_OnManeuverChanged(object sender, Model.ManeuverChangedEventArgs e)
         {
-            dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => {
+            dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
                 NotifyPropertyChanged(nameof(Landmark));
                 NotifyPropertyChanged(nameof(Maneuver));
             });
@@ -82,7 +79,7 @@ namespace NavCityBreda.ViewModels
 
         public void UpdateMap()
         {
-            if(App.MainPage != null)
+            if (App.MainPage != null)
                 App.MainPage.Title = Util.Loader.GetString("Map");
         }
     }

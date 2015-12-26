@@ -78,7 +78,7 @@
                     <Image Source="/Assets/CurrentLocationRound.png" Style="{StaticResource HelpImageSmall}" />
                 </RelativePanel>
             </StackPanel>
-            
+
             <!-- Page Navigation -->
             <StackPanel Grid.Row="1" Style="{StaticResource HelpPanel}">
                 <TextBlock Text="{Binding HelpItem2Header}" Style="{StaticResource Header}" />

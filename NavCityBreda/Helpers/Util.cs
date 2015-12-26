@@ -17,10 +17,11 @@ namespace NavCityBreda.Helpers
     {
         public enum DialogType { YESNO, OKCANCEL }
 
-        public static ResourceLoader Loader 
+        public static ResourceLoader Loader
         {
-            get {
-               return new Windows.ApplicationModel.Resources.ResourceLoader();
+            get
+            {
+                return new Windows.ApplicationModel.Resources.ResourceLoader();
             }
         }
 
@@ -171,7 +172,7 @@ namespace NavCityBreda.Helpers
                 dlg.Commands.Add(new UICommand(Util.Loader.GetString("Yes")) { Id = 0 });
                 dlg.Commands.Add(new UICommand(Util.Loader.GetString("No")) { Id = 1 });
             }
-            else if(type == DialogType.OKCANCEL)
+            else if (type == DialogType.OKCANCEL)
             {
                 dlg.Commands.Add(new UICommand(Util.Loader.GetString("Ok")) { Id = 0 });
                 dlg.Commands.Add(new UICommand(Util.Loader.GetString("Cancel")) { Id = 1 });
@@ -257,7 +258,7 @@ namespace NavCityBreda.Helpers
 
 
             if (onstreet)
-               response += " " + Util.Loader.GetString("RouteOn") + " " + maneuver.StreetName;
+                response += " " + Util.Loader.GetString("RouteOn") + " " + maneuver.StreetName;
 
             if (meters)
                 response = Util.Loader.GetString("RouteIn") + " " + distance + "m" + " " + response.ToLower();

@@ -30,10 +30,10 @@ namespace NavCityBreda.Helpers
 
             JToken[] waypoints = o["waypoints"].ToArray();
             int count = 0;
-            foreach(JToken t in waypoints)
+            foreach (JToken t in waypoints)
             {
-                if(!ValidateWaypointObject(t, out error))
-                    throw new FileLoadException("Invalid Waypoint (#" + (count+1) + ") information in " + datafile + ", " + error);
+                if (!ValidateWaypointObject(t, out error))
+                    throw new FileLoadException("Invalid Waypoint (#" + (count + 1) + ") information in " + datafile + ", " + error);
 
                 Waypoint w;
 
@@ -41,18 +41,18 @@ namespace NavCityBreda.Helpers
                 {
                     List<Image> images = new List<Image>();
 
-                    if(! t["image"].NullOrEmpty())
+                    if (!t["image"].NullOrEmpty())
                     {
                         JToken img = t["image"];
 
                         if (img.Type == JTokenType.String)
                         {
-                            if(ImageExists(foldername, (string)img))
+                            if (ImageExists(foldername, (string)img))
                                 images.Add(new Image(ImagePath(foldername, (string)img)));
                         }
-                        else if(img.Type == JTokenType.Array)
+                        else if (img.Type == JTokenType.Array)
                         {
-                            foreach(string s in img.ToArray())
+                            foreach (string s in img.ToArray())
                             {
                                 if (ImageExists(foldername, s))
                                     images.Add(new Image(ImagePath(foldername, s)));
@@ -143,7 +143,7 @@ namespace NavCityBreda.Helpers
                 error = "Longitude missing";
             }
 
-            if( valid && (bool)o["landmark"])
+            if (valid && (bool)o["landmark"])
             {
                 if (o["description"].NullOrEmpty())
                 {
