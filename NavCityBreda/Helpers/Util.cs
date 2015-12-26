@@ -8,12 +8,15 @@ using Windows.Devices.Geolocation;
 using Windows.Services.Maps;
 using Windows.UI;
 using Windows.UI.Notifications;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls.Maps;
 
 namespace NavCityBreda.Helpers
 {
     class Util
     {
+        public enum DialogType { YESNO, OKCANCEL }
+
         public static ResourceLoader Loader 
         {
             get {
@@ -57,28 +60,6 @@ namespace NavCityBreda.Helpers
             Geopoint f = await FindLocation(from, reference);
             Geopoint t = await FindLocation(to, reference);
             MapRoute m = await FindWalkingRoute(f, t);
-            return m;
-        }
-
-        public static async Task<MapRoute> FindDrivingRoute(Geopoint from, Geopoint to)
-        {
-            MapRouteFinderResult routeResult = await MapRouteFinder.GetDrivingRouteAsync(from, to);
-            MapRoute b = routeResult.Route;
-            return b;
-        }
-
-        public static async Task<MapRoute> FindDrivingRoute(List<Geopoint> points)
-        {
-            MapRouteFinderResult routeResult = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(points);
-            MapRoute b = routeResult.Route;
-            return b;
-        }
-
-        public static async Task<MapRoute> FindDrivingRoute(string from, string to, Geopoint reference)
-        {
-            Geopoint f = await FindLocation(from, reference);
-            Geopoint t = await FindLocation(to, reference);
-            MapRoute m = await FindDrivingRoute(f, t);
             return m;
         }
 
@@ -162,7 +143,7 @@ namespace NavCityBreda.Helpers
             return line;
         }
 
-        public static void SendToastNotification(string title, string text)
+        public static void ShowToastNotification(string title, string text)
         {
             ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
             XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
@@ -182,15 +163,44 @@ namespace NavCityBreda.Helpers
             ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
 
-        public static string TranslatedManeuver(MapRouteManeuver maneuver)
+        public static async Task<bool> ShowConfirmDialog(string title, string content, DialogType type)
+        {
+            MessageDialog dlg = new MessageDialog(content, title);
+            if (type == DialogType.YESNO)
+            {
+                dlg.Commands.Add(new UICommand(Util.Loader.GetString("Yes")) { Id = 0 });
+                dlg.Commands.Add(new UICommand(Util.Loader.GetString("No")) { Id = 1 });
+            }
+            else if(type == DialogType.OKCANCEL)
+            {
+                dlg.Commands.Add(new UICommand(Util.Loader.GetString("Ok")) { Id = 0 });
+                dlg.Commands.Add(new UICommand(Util.Loader.GetString("Cancel")) { Id = 1 });
+            }
+
+            dlg.DefaultCommandIndex = 0;
+            dlg.CancelCommandIndex = 1;
+
+            var result = await dlg.ShowAsync();
+
+            if ((int)result.Id == 0)
+                return true;
+            else
+                return false;
+        }
+
+        public static string TranslatedManeuver(MapRouteManeuver maneuver, int distance)
         {
             string response = "";
             bool onstreet = false;
+            bool meters = true;
 
-            switch(maneuver.Kind)
+            distance = (int)Math.Round(distance / 5.0) * 5;
+
+            switch (maneuver.Kind)
             {
                 default:
                     response = Util.Loader.GetString("RouteSeeMap");
+                    meters = false;
                     break;
                 case MapRouteManeuverKind.End:
                     response = Util.Loader.GetString("RouteEnd");
@@ -201,9 +211,11 @@ namespace NavCityBreda.Helpers
                     break;
                 case MapRouteManeuverKind.None:
                     response = Util.Loader.GetString("RouteNone");
+                    meters = false;
                     break;
                 case MapRouteManeuverKind.Start:
                     response = Util.Loader.GetString("RouteStart");
+                    meters = false;
                     break;
                 case MapRouteManeuverKind.TurnHardLeft:
                 case MapRouteManeuverKind.TurnLeft:
@@ -240,8 +252,15 @@ namespace NavCityBreda.Helpers
             if (maneuver.StreetName == "")
                 onstreet = false;
 
+            if (distance < 10)
+                meters = false;
+
+
             if (onstreet)
                response += " " + Util.Loader.GetString("RouteOn") + " " + maneuver.StreetName;
+
+            if (meters)
+                response = Util.Loader.GetString("RouteIn") + " " + distance + "m" + " " + response.ToLower();
 
             return response;
         }
