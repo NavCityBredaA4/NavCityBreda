@@ -36,7 +36,7 @@ namespace NavCityBreda.ViewModels
         {
             get
             {
-                return landmark == App.RouteManager.CurrentLandmark;
+                return landmark == App.RouteManager.CurrentLandmark && landmark.Status == Landmark.LandmarkStatus.NOTVISITED;
             }
         }
 

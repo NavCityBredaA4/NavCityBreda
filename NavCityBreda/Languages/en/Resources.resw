@@ -241,7 +241,7 @@
     <value>WiFi</value>
   </data>
   <data name="RouteIn" xml:space="preserve">
-    <value>in</value>
+    <value>In</value>
   </data>
   <data name="LandmarkReached" xml:space="preserve">
     <value>You have reached a landmark</value>

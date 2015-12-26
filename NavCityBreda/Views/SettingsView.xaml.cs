@@ -77,16 +77,9 @@ namespace NavCityBreda.Views
 
         private async void ResetButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageDialog dlg = new MessageDialog(Util.Loader.GetString("ResetConfirmation"), Util.Loader.GetString("Reset"));
-            dlg.Commands.Add(new UICommand(Util.Loader.GetString("Yes")) { Id = 1 } );
-            dlg.Commands.Add(new UICommand(Util.Loader.GetString("No")) { Id = 0 });
+            bool confirm = await Util.ShowConfirmDialog(Util.Loader.GetString("Reset"), Util.Loader.GetString("ResetConfirmation"), Util.DialogType.YESNO);
 
-            dlg.DefaultCommandIndex = 0;
-            dlg.CancelCommandIndex = 1;
-
-            var result = await dlg.ShowAsync();
-
-            if((int)result.Id == 1)
+            if(confirm)
             {
                 ResetProgress.IsActive = true;
                 App.RouteManager.StopRoute();

@@ -75,7 +75,7 @@ namespace NavCityBreda.Model
                 case GeolocationAccessStatus.Allowed:
                     geo = new Geolocator {
                         DesiredAccuracy = PositionAccuracy.High,
-                        MovementThreshold = 5
+                        MovementThreshold = 3
                         //ReportInterval = 1500
                     };
 

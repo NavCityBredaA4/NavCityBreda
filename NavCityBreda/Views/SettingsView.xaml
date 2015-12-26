@@ -24,7 +24,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Button Name="ResetButton" Click="ResetButton_Click">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE895;" Margin="0,0,10,0" />
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE895;" Margin="0,3,10,0" />
                             <TextBlock Text="{Binding Reset}" />
                         </StackPanel>
                     </Button>

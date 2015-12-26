@@ -50,7 +50,7 @@ namespace NavCityBreda.ViewModels
             get
             {
                 if (App.RouteManager.CurrentManeuver != null)
-                    return Util.TranslatedManeuver(App.RouteManager.CurrentManeuver);
+                    return Util.TranslatedManeuver(App.RouteManager.CurrentManeuver, App.RouteManager.DistanceToManeuver);
                 else
                     return Util.Loader.GetString("Unknown");
             }

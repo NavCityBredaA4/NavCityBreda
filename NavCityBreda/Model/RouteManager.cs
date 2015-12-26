@@ -48,6 +48,8 @@ namespace NavCityBreda.Model
         private MapRouteManeuver _currentmaneuver;
         private List<MapRouteManeuver> _currentmaneuvers { get { return _currentrouteleg.Maneuvers.ToList(); } }
         public MapRouteManeuver CurrentManeuver { get { return _currentmaneuver; } }
+        public int DistanceToManeuver { get; private set; }
+
 
         public string LoadingElement;
 
@@ -63,6 +65,7 @@ namespace NavCityBreda.Model
 
             LoadingElement = Util.Loader.GetString("Initializing") + "...";
             Status = RouteStatus.LOADING;
+            DistanceToManeuver = -1;
             GeofenceMonitor.Current.GeofenceStateChanged += Current_GeofenceStateChanged;
             App.Geo.OnPositionUpdate += Geo_OnPositionUpdate;
             LoadRoutes();  
@@ -85,7 +88,7 @@ namespace NavCityBreda.Model
                         double dif_lat = Math.Abs(_currentroutelegs[q].Maneuvers[i].StartingPoint.Position.Latitude - e.New.Coordinate.Point.Position.Latitude);
                         double dif_lon = Math.Abs(_currentroutelegs[q].Maneuvers[i].StartingPoint.Position.Longitude - e.New.Coordinate.Point.Position.Longitude);
 
-                        if (dif_lat < 0.00003 || dif_lon < 0.00003)
+                        if (dif_lat < 0.000025 || dif_lon < 0.000025)
                         {
                             _currentroutelegcount = q;
                             _currentmaneuvercount = i + 1;
@@ -113,9 +116,10 @@ namespace NavCityBreda.Model
                     if (_currentmaneuver != _currentmaneuvers[_currentmaneuvercount])
                     {
                         _currentmaneuver = _currentmaneuvers[_currentmaneuvercount];
-                        UpdateManeuver(_currentmaneuver);
                     }
                 }
+
+                UpdateManeuver(_currentmaneuver);
             }
         }
 
@@ -144,7 +148,7 @@ namespace NavCityBreda.Model
                     }); 
                     _currentlandmark = i;
                     LandmarkVisited(i, LandmarkVisitedEventArgs.VisitedStatus.ENTERED);
-                    Util.SendToastNotification(i.Name, Util.Loader.GetString("LandmarkReached"));
+                    Util.ShowToastNotification(i.Name, Util.Loader.GetString("LandmarkReached"));
                     UpdateRoute();
                 }
 
@@ -214,6 +218,7 @@ namespace NavCityBreda.Model
             _currentmaneuvercount = 0;
             _currentmaneuver = _currentmaneuvers[_currentmaneuvercount];
             
+
             //Send out events
             UpdateRoute(_routetolandmark, _currentlandmark);
             UpdateManeuver(_currentmaneuver);
@@ -268,6 +273,16 @@ namespace NavCityBreda.Model
             return l;
         }
 
+        private async Task<int> DistanceToCurrentManeuver()
+        {
+            if (_currentmaneuver == null) return -1;
+            if (App.Geo.Position == null) return -1;
+
+            MapRoute route = await Util.FindWalkingRoute(App.Geo.Position.Coordinate.Point, _currentmaneuver.StartingPoint);
+
+            return (int)route.LengthInMeters;
+        }
+
         public async Task<String> Reset()
         {
             foreach(Route r in _routes)
@@ -305,8 +320,10 @@ namespace NavCityBreda.Model
             OnLandmarkChanged(this, new LandmarkChangedEventArgs(route, l));
         }
 
-        private void UpdateManeuver(MapRouteManeuver curman)
+        private async void UpdateManeuver(MapRouteManeuver curman)
         {
+            DistanceToManeuver = await DistanceToCurrentManeuver();
+
             // Make sure someone is listening to event
             if (OnManeuverChanged == null) return;
 
