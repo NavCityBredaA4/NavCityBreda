@@ -306,4 +306,10 @@
   <data name="SortOrder" xml:space="preserve">
     <value>Sorteer volgorde</value>
   </data>
+  <data name="SkipLandmark" xml:space="preserve">
+    <value>Bezienswaardigheid overslaan</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Overgeslagen</value>
+  </data>
 </root>

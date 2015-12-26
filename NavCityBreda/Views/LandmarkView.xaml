@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <convert:BoolToIconConverter x:Key="BoolConverter" />
+        <convert:StatusToIconConverter x:Key="IconConverter" />
     </Page.Resources>
     
     <ScrollViewer>
@@ -49,7 +49,7 @@
                     <ListView.ItemTemplate>
                         <DataTemplate x:Name="ListViewDataTemplate">
                             <StackPanel Orientation="Horizontal">
-                                <SymbolIcon Symbol="{Binding Visited, Converter={StaticResource BoolConverter}}" Margin="0,0,10,0"/>
+                                <SymbolIcon Symbol="{Binding Status, Converter={StaticResource IconConverter}}" Margin="0,0,10,0"/>
                                 <TextBlock Text="{Binding Name}" FontSize="18"/>
                             </StackPanel>
                         </DataTemplate>

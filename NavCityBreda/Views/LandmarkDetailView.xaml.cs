@@ -25,5 +25,16 @@ namespace NavCityBreda.Views
             landmarkvm = new LandmarkDetailVM(landmark);
             this.DataContext = landmarkvm;
         }
+
+        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Skip();
+        }
+
+        private async void Skip()
+        {
+            await App.RouteManager.SkipLandmark();
+            landmarkvm.Skip();
+        }
     }
 }

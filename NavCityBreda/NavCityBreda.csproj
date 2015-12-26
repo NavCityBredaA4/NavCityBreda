@@ -101,6 +101,7 @@
     <Content Include="Assets\LandmarkNotVisited.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\LandmarkSkipped.png" />
     <Content Include="Assets\LandmarkVisited.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -153,7 +154,7 @@
     <Compile Include="Helpers\Comparer\LandmarkAlphaReversedComparer.cs" />
     <Compile Include="Helpers\Comparer\LandmarkNotVisitedComparer.cs" />
     <Compile Include="Helpers\Comparer\LandmarkVisitedComparer.cs" />
-    <Compile Include="Helpers\Converter\BoolToIconConverter.cs" />
+    <Compile Include="Helpers\Converter\StatusToIconConverter.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\RouteParser.cs" />
     <Compile Include="Helpers\Settings.cs" />

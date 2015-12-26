@@ -89,6 +89,9 @@ namespace NavCityBreda.ViewModels
         {
             get
             {
+                if (route.Landmarks.TrueForAll(lm => lm.Status != Landmark.LandmarkStatus.NOTVISITED))
+                    return false;
+
                 return App.RouteManager.CurrentRoute != route;
             }
         }
@@ -105,7 +108,10 @@ namespace NavCityBreda.ViewModels
         {
             get
             {
-                return !StartEnabled;
+                if (route.Landmarks.TrueForAll(lm => lm.Status != Landmark.LandmarkStatus.NOTVISITED))
+                    return false;
+
+                return App.RouteManager.CurrentRoute == route;
             }
         }
 

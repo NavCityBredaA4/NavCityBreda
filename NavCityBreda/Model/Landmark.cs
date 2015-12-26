@@ -15,13 +15,15 @@ namespace NavCityBreda.Model
 
         public List<Image> Images { get; private set; }
 
-        private bool _visited;
-        public bool Visited
+        public enum LandmarkStatus { NOTVISITED, VISITED, SKIPPED }
+
+        private LandmarkStatus _status;
+        public LandmarkStatus Status
         {
-            get { return _visited; }
+            get { return _status; }
             set
             {
-                _visited = value;
+                _status = value;
                 UpdateIcon();
             }
         }
@@ -42,7 +44,7 @@ namespace NavCityBreda.Model
 
         private void Create(string name, string desc, int num, List<Image> images)
         {
-            _visited = false;
+            _status = LandmarkStatus.NOTVISITED;
             _desckey = desc;
 
             Images = images;
@@ -60,10 +62,19 @@ namespace NavCityBreda.Model
         {
             Icon.Title = Name;
 
-            if(_visited)
-                Icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/LandmarkVisited.png"));
-            else
-                Icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/LandmarkNotVisited.png"));
+            switch(_status)
+            {
+                default:
+                case LandmarkStatus.NOTVISITED:
+                    Icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/LandmarkNotVisited.png"));
+                    break;
+                case LandmarkStatus.VISITED:
+                    Icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/LandmarkVisited.png"));
+                    break;
+                case LandmarkStatus.SKIPPED:
+                    Icon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/LandmarkSkipped.png"));
+                    break;
+            }
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using NavCityBreda.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 using Windows.Devices.Geolocation.Geofencing;
 using Windows.Services.Maps;
 using Windows.UI.Core;
@@ -138,7 +140,7 @@ namespace NavCityBreda.Model
                 {
                     dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                     {
-                        i.Visited = true;
+                        i.Status = Landmark.LandmarkStatus.VISITED;
                     }); 
                     _currentlandmark = i;
                     LandmarkVisited(i, LandmarkVisitedEventArgs.VisitedStatus.ENTERED);
@@ -177,19 +179,58 @@ namespace NavCityBreda.Model
 
         public async Task<String> UpdateRoute()
         {
+            //Can't navigate without current position
             if (App.Geo.Position == null) return "error";
 
-            _currentlandmark = _currentroute.Landmarks.FirstOrDefault(p => !p.Visited);
-            _routetolandmark = await Util.FindWalkingRoute(App.Geo.Position.Coordinate.Point, _currentlandmark.Position);
+            //Stop route if end is reached
+            _currentlandmark = _currentroute.Landmarks.FirstOrDefault(p => p.Status == Landmark.LandmarkStatus.NOTVISITED);
+            if (_currentlandmark == null)
+            {
+                StopRoute();
+                return "stopped";
+            }
+
+            //Create route from last landmark trough all the waypoints
+            List<Geopoint> _waypoints = new List<Geopoint>();
+            _waypoints.Add(App.Geo.Position.Coordinate.Point);
+
+            Landmark lastlandmark = _currentroute.Landmarks.ElementAtOrDefault(_currentroute.Landmarks.IndexOf(_currentlandmark) - 1);
+
+            if (lastlandmark != null)
+            {
+                int start = _currentroute.Waypoints.IndexOf(lastlandmark) + 1;
+                int offset = _currentroute.Waypoints.IndexOf(_currentlandmark) - start;
+                List<Geopoint> temp = _currentroute.Waypoints.GetRange(start, offset).Select(e => e.Position).ToList();
+                _waypoints.AddRange(temp);
+            }
+            _waypoints.Add(_currentlandmark.Position);
+
+
+            //Update all other vars to match
+            //_routetolandmark = await Util.FindWalkingRoute(App.Geo.Position.Coordinate.Point, _currentlandmark.Position);
+            _routetolandmark = await Util.FindWalkingRoute(_waypoints);
             _currentroutelegs = _routetolandmark.Legs.ToList() as List<MapRouteLeg>;
             _currentroutelegcount = 0;
             _currentmaneuvercount = 0;
             _currentmaneuver = _currentmaneuvers[_currentmaneuvercount];
             
+            //Send out events
             UpdateRoute(_routetolandmark, _currentlandmark);
             UpdateManeuver(_currentmaneuver);
 
             return "success";
+        }
+
+        public async Task<String> SkipLandmark()
+        {
+            if (Status != RouteStatus.STARTED) return "error";
+
+            await dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                _currentlandmark.Status = Landmark.LandmarkStatus.SKIPPED;
+            });
+            string s = await UpdateRoute();
+            return s;
         }
 
         public async void StartRoute(Route r)

@@ -11,7 +11,7 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <convert:BoolToIconConverter x:Key="BoolConverter"/>
+        <convert:StatusToIconConverter x:Key="IconConverter"/>
         <convert:BoolToVisibilityConverter x:Key="VisConverter"/>
     </Page.Resources>
 
@@ -46,7 +46,7 @@
             </StackPanel>
         </Grid>
 
-        <StackPanel Grid.Row="2" Margin="10" Visibility="Visible">
+        <StackPanel Grid.Row="2" Margin="10">
             <Button Click="StartRouteButton_Click" Content="{Binding StartRouteText}" Background="DarkGreen" Foreground="White" HorizontalAlignment="Stretch" Visibility="{Binding StartEnabled, Converter={StaticResource VisConverter}}"/>
             <Button Click="StopRouteButton_Click" Content="{Binding StopRouteText}" Background="DarkRed" Foreground="White" HorizontalAlignment="Stretch" Visibility="{Binding StopEnabled, Converter={StaticResource VisConverter}}"/>
         </StackPanel>
@@ -64,7 +64,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate x:Name="ListViewDataTemplate">
                         <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="{Binding Visited, Converter={StaticResource BoolConverter}}" Margin="0,0,10,0"/>
+                            <SymbolIcon Symbol="{Binding Status, Converter={StaticResource IconConverter}}" Margin="0,0,10,0"/>
                             <TextBlock Text="{Binding Name}" FontSize="18"/>
                         </StackPanel>
                     </DataTemplate>

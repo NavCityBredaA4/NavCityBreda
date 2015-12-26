@@ -25,6 +25,29 @@ namespace NavCityBreda.ViewModels
             NotifyPropertyChanged(nameof(Description));
         }
 
+        public void Skip()
+        {
+            NotifyPropertyChanged(nameof(CurrentLandmark));
+            NotifyPropertyChanged(nameof(IsVisited));
+            NotifyPropertyChanged(nameof(Visited));
+        }
+
+        public bool CurrentLandmark
+        {
+            get
+            {
+                return landmark == App.RouteManager.CurrentLandmark;
+            }
+        }
+
+        public string SkipLandmarkText
+        {
+            get
+            {
+                return Util.Loader.GetString("SkipLandmark");
+            }
+        }
+
         public string Address
         {
             get
@@ -41,11 +64,11 @@ namespace NavCityBreda.ViewModels
             }
         }
 
-        public bool IsVisited
+        public Landmark.LandmarkStatus IsVisited
         {
             get
             {
-                return landmark.Visited;
+                return landmark.Status;
             }
         } 
 
@@ -53,10 +76,16 @@ namespace NavCityBreda.ViewModels
         {
             get
             {
-                if (landmark.Visited)
-                    return Util.Loader.GetString("Visited");
-                else
-                    return Util.Loader.GetString("NotVisited");
+                switch(landmark.Status)
+                {
+                    default:
+                    case Landmark.LandmarkStatus.NOTVISITED:
+                        return Util.Loader.GetString("NotVisited");
+                    case Landmark.LandmarkStatus.VISITED:
+                        return Util.Loader.GetString("Visited");
+                    case Landmark.LandmarkStatus.SKIPPED:
+                        return Util.Loader.GetString("Skipped");
+                }
             }
         }
 

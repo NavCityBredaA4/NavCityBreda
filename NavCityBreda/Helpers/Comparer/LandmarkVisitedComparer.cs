@@ -7,14 +7,18 @@ namespace NavCityBreda.Helpers.Comparer
     {
         public int Compare(Landmark x, Landmark y)
         {
-            if (x.Visited == y.Visited)
-            {
+            if (x.Status == y.Status)
                 return x.Name.CompareTo(y.Name);
-            }
-            else if (x.Visited)
+            else if (x.Status == Landmark.LandmarkStatus.VISITED)
                 return -1;
-            else
+            else if (y.Status == Landmark.LandmarkStatus.VISITED)
                 return 1;
+            else if (x.Status == Landmark.LandmarkStatus.SKIPPED)
+                return -1;
+            else if (y.Status == Landmark.LandmarkStatus.SKIPPED)
+                return 1;
+            else
+                return -1;
         }
     }
 }

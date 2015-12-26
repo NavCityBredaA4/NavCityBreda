@@ -9,12 +9,14 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <convert:BoolToIconConverter x:Key="BoolConverter"/>
+        <convert:StatusToIconConverter x:Key="IconConverter"/>
+        <convert:BoolToVisibilityConverter x:Key="VisConverter" />
     </Page.Resources>
 
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -56,14 +58,18 @@
                     </Viewbox>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <SymbolIcon Symbol="{Binding IsVisited, Converter={StaticResource BoolConverter}}" Style="{StaticResource InfoIcon}"/>
+                    <SymbolIcon Symbol="{Binding IsVisited, Converter={StaticResource IconConverter}}" Style="{StaticResource InfoIcon}"/>
                     <Viewbox StretchDirection="DownOnly" Stretch="UniformToFill">
                         <TextBlock Text="{Binding Visited}" Style="{StaticResource InfoText}"/>
                     </Viewbox>
                 </StackPanel>
             </Grid>
 
-            <StackPanel  Grid.Row="2" Margin="10">
+            <StackPanel Grid.Row="2" Margin="10">
+                <Button Name="Button" Click="Button_Click" Content="{Binding SkipLandmarkText}" Background="DarkRed" Foreground="White" HorizontalAlignment="Stretch" Visibility="{Binding CurrentLandmark, Converter={StaticResource VisConverter}}"/>
+            </StackPanel>
+
+            <StackPanel  Grid.Row="3" Margin="10">
                 <TextBlock Text="{Binding DescriptionTitle}" Style="{StaticResource Header}"/>
                 <TextBlock TextWrapping="WrapWholeWords" Text="{Binding Description}"/>
             </StackPanel>

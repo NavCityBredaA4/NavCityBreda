@@ -82,7 +82,7 @@ namespace NavCityBreda.Model
         {
             foreach(Landmark l in Landmarks)
             {
-                l.Visited = false;
+                l.Status = Landmark.LandmarkStatus.NOTVISITED;
                 await Task.Delay(TimeSpan.FromMilliseconds(2));
             }
             return "success";
