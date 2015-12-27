@@ -1,5 +1,5 @@
 ﻿using NavCityBreda.Helpers;
-using NavCityBreda.Model;
+using NavCityBreda.Model.Object;
 using NavCityBreda.ViewModels;
 using System;
 using System.Threading.Tasks;

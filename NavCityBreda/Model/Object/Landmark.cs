@@ -6,7 +6,7 @@ using Windows.Foundation;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls.Maps;
 
-namespace NavCityBreda.Model
+namespace NavCityBreda.Model.Object
 {
     public class Landmark : Waypoint
     {

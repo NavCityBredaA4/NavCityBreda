@@ -1,6 +1,6 @@
 ﻿using Windows.UI.ViewManagement;
 
-namespace NavCityBreda.Model
+namespace NavCityBreda.Model.Object
 {
     public class Image
     {

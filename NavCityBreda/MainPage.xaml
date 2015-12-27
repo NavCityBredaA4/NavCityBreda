@@ -21,7 +21,7 @@
 
         <Style x:Key="NavText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="28" />
-            <Setter Property="Margin" Value="20,0,0,0" />
+            <Setter Property="Margin" Value="18,0,0,0" />
         </Style>
 
 
@@ -57,39 +57,44 @@
             </Viewbox>
         </RelativePanel>
 
-        <!-- http://stackoverflow.com/questions/32108362/uwp-swipe-to-open-splitview-pane-->
         <SplitView Grid.Row="1" Name="NavView" DisplayMode="Overlay" OpenPaneLength="275">
             <SplitView.Pane>
-                <RelativePanel Name="MySplitviewPane" VerticalAlignment="Stretch"
+                <RelativePanel VerticalAlignment="Stretch"
                       ManipulationMode="TranslateX"
-                      ManipulationCompleted="MySplitviewPane_ManipulationCompleted" Style="{ThemeResource DarkModeFix}">
+                      ManipulationCompleted="Pane_ManipulationCompleted" Style="{ThemeResource DarkModeFix}">
 
                     <ListBox RelativePanel.AlignTopWithPanel="True" SelectionMode="Single" Name="NavList" SelectionChanged="NavList_SelectionChanged" Tapped="NavList_Tapped">
-                        <ListBoxItem Name="NavListMap">
+                        <ListBoxItem Name="NavListMap" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
                             <StackPanel Style="{StaticResource NavStackPanel}">
                                 <TextBlock Style="{StaticResource NavIcon}" Text="&#xE909;"/>
                                 <TextBlock Style="{StaticResource NavText}" Text="{Binding Map}"/>
                             </StackPanel>
                         </ListBoxItem>
-                        <ListBoxItem Name="NavListRoute">
+                        <ListBoxItem Name="NavListRoute" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
                             <StackPanel Style="{StaticResource NavStackPanel}">
                                 <TextBlock Style="{StaticResource NavIcon}" Text="&#xE7AD;"/>
                                 <TextBlock Style="{StaticResource NavText}" Text="{Binding Route}"/>
                             </StackPanel>
                         </ListBoxItem>
-                        <ListBoxItem Name="NavListLandmarks">
+                        <ListBoxItem Name="NavListLandmarks" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
                             <StackPanel Style="{StaticResource NavStackPanel}">
                                 <TextBlock Style="{StaticResource NavIcon}" Text="&#xE913;"/>
                                 <TextBlock Style="{StaticResource NavText}" Text="{Binding Landmarks}" />
                             </StackPanel>
                         </ListBoxItem>
-                        <ListBoxItem Name="NavListHelp">
+                        <ListBoxItem Name="NavListHelp" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
                             <StackPanel Style="{StaticResource NavStackPanel}">
                                 <TextBlock Style="{StaticResource NavIcon}" Text="&#xE897;"/>
                                 <TextBlock Style="{StaticResource NavText}" Text="{Binding Help}"/>
                             </StackPanel>
                         </ListBoxItem>
-                        <ListBoxItem Name="NavListSettings">
+                        <ListBoxItem Name="NavListSearch" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
+                            <StackPanel Style="{StaticResource NavStackPanel}">
+                                <TextBlock Style="{StaticResource NavIcon}" Text="&#xE71E;"/>
+                                <TextBlock Style="{StaticResource NavText}" Text="{Binding Search}"/>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="NavListSettings" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
                             <StackPanel Style="{StaticResource NavStackPanel}">
                                 <TextBlock Style="{StaticResource NavIcon}" Text="&#xE713;"/>
                                 <TextBlock Style="{StaticResource NavText}" Text="{Binding Settings}"/>
@@ -131,7 +136,7 @@
                     <Frame Name="Frame"/>
 
                     <StackPanel ManipulationMode="TranslateX"
-                          ManipulationCompleted="Grid_ManipulationCompleted"
+                          ManipulationCompleted="Content_ManipulationCompleted"
                           Width="10"
                           Background="Transparent"
                           HorizontalAlignment="Left"

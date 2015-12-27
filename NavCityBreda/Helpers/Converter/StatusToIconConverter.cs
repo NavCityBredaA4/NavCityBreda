@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NavCityBreda.Model.Object;
+using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 
@@ -8,16 +9,16 @@ namespace NavCityBreda.Helpers.Converter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            Model.Landmark.LandmarkStatus st = (Model.Landmark.LandmarkStatus)value;
+            Landmark.LandmarkStatus st = (Landmark.LandmarkStatus)value;
 
             switch (st)
             {
                 default:
-                case Model.Landmark.LandmarkStatus.NOTVISITED:
+                case Landmark.LandmarkStatus.NOTVISITED:
                     return Symbol.Cancel;
-                case Model.Landmark.LandmarkStatus.VISITED:
+                case Landmark.LandmarkStatus.VISITED:
                     return Symbol.Accept;
-                case Model.Landmark.LandmarkStatus.SKIPPED:
+                case Landmark.LandmarkStatus.SKIPPED:
                     return Symbol.Forward;
             }
         }

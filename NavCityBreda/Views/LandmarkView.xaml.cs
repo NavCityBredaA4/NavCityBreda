@@ -1,4 +1,4 @@
-﻿using NavCityBreda.Model;
+﻿using NavCityBreda.Model.Object;
 using NavCityBreda.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

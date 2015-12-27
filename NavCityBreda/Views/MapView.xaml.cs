@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
 using NavCityBreda.Model;
+using NavCityBreda.Model.Object;
 using Windows.Storage.Streams;
 using NavCityBreda.Helpers;
 using Windows.UI;

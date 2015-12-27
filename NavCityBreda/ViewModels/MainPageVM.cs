@@ -19,6 +19,7 @@ namespace NavCityBreda.ViewModels
             NotifyPropertyChanged(nameof(Help));
             NotifyPropertyChanged(nameof(Route));
             NotifyPropertyChanged(nameof(Landmarks));
+            NotifyPropertyChanged(nameof(Search));
             NotifyPropertyChanged(nameof(Settings));
             NotifyPropertyChanged(nameof(Status));
             NotifyPropertyChanged(nameof(Source));
@@ -65,6 +66,14 @@ namespace NavCityBreda.ViewModels
             get
             {
                 return Util.Loader.GetString("Landmarks");
+            }
+        }
+
+        public string Search
+        {
+            get
+            {
+                return Util.Loader.GetString("Search");
             }
         }
 

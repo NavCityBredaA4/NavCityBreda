@@ -7,7 +7,7 @@ using Windows.Devices.Geolocation;
 using Windows.Services.Maps;
 using Windows.UI.Xaml.Controls.Maps;
 
-namespace NavCityBreda.Model
+namespace NavCityBreda.Model.Object
 {
     public class Route
     {

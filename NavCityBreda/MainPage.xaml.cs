@@ -91,7 +91,7 @@ namespace NavCityBreda
                     NavList.SelectedIndex = 3;
                     break;
                 case "settingsview":
-                    NavList.SelectedIndex = 4;
+                    NavList.SelectedIndex = 5;
                     break;
                 case "mapview":
                     NavList.SelectedIndex = 0;
@@ -103,6 +103,9 @@ namespace NavCityBreda
                 case "landmarkdetailview":
                 case "landmarkview":
                     NavList.SelectedIndex = 2;
+                    break;
+                case "searchview":
+                    NavList.SelectedIndex = 4;
                     break;
             }
 
@@ -131,6 +134,8 @@ namespace NavCityBreda
                 Frame.Navigate(typeof(LandmarkView));
             else if (NavListSettings.IsSelected)
                 Frame.Navigate(typeof(SettingsView));
+            else if (NavListSearch.IsSelected)
+                Frame.Navigate(typeof(SearchView));
             else if (NavListRoute.IsSelected)
             {
                 if (App.RouteManager.CurrentRoute == null)
@@ -145,7 +150,7 @@ namespace NavCityBreda
             NavView.IsPaneOpen = false;
         }
 
-        private void Grid_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        private void Content_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
             if (e.Cumulative.Translation.X > 20)
             {
@@ -153,7 +158,7 @@ namespace NavCityBreda
             }
         }
 
-        private void MySplitviewPane_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        private void Pane_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
             if (e.Cumulative.Translation.X < -20)
             {

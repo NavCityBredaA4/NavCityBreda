@@ -1,6 +1,6 @@
 ﻿using NavCityBreda.Helpers;
 using NavCityBreda.Helpers.Comparer;
-using NavCityBreda.Model;
+using NavCityBreda.Model.Object;
 using System.Collections.Generic;
 
 namespace NavCityBreda.ViewModels

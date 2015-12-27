@@ -312,4 +312,22 @@
   <data name="Skipped" xml:space="preserve">
     <value>Overgeslagen</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Zoeken</value>
+  </data>
+  <data name="SearchResults" xml:space="preserve">
+    <value>Zoek resultaten</value>
+  </data>
+  <data name="SearchTerm" xml:space="preserve">
+    <value>Zoek term</value>
+  </data>
+  <data name="SearchResultCount" xml:space="preserve">
+    <value>resultaten</value>
+  </data>
+  <data name="SearchDescription" xml:space="preserve">
+    <value>Doorzoek beschrijving</value>
+  </data>
+  <data name="SearchResultDescription" xml:space="preserve">
+    <value>In beschrijving</value>
+  </data>
 </root>
