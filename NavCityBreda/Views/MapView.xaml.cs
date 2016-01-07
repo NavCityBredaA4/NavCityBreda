@@ -134,9 +134,12 @@ namespace NavCityBreda.Views
 
             if (App.RouteManager.CurrentRoute == null) return;
 
-            GeofenceMonitor.Current.Geofences.Clear();
-            Map.MapElements.Clear();
-            await Task.Delay(TimeSpan.FromMilliseconds(100));
+            while (Map.MapElements.Any() || GeofenceMonitor.Current.Geofences.Any())
+            {
+                Map.MapElements.Clear();
+                await Task.Delay(TimeSpan.FromMilliseconds(100));
+                GeofenceMonitor.Current.Geofences.Clear();
+            }
             Map.MapElements.Add(CurrentPosition);
             Map.MapElements.Add(CurrentNavigationLine);
 
@@ -158,10 +161,12 @@ namespace NavCityBreda.Views
         private async void RemoveRoute()
         {
             Track(false);
-            await Task.Delay(TimeSpan.FromMilliseconds(100));
-            Map.MapElements.Clear();
-            await Task.Delay(TimeSpan.FromMilliseconds(100));
-            GeofenceMonitor.Current.Geofences.Clear();
+            while (Map.MapElements.Any() || GeofenceMonitor.Current.Geofences.Any())
+            {
+                Map.MapElements.Clear();
+                await Task.Delay(TimeSpan.FromMilliseconds(100));
+                GeofenceMonitor.Current.Geofences.Clear();
+            }
             await Task.Delay(TimeSpan.FromMilliseconds(100));
             DrawCurrenPosition(App.Geo.Position.Coordinate.Point);
         }

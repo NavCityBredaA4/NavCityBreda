@@ -2,6 +2,7 @@
 using NavCityBreda.Model.Object;
 using NavCityBreda.ViewModels;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -49,7 +50,11 @@ namespace NavCityBreda.Views
 
         private async void DrawRoute()
         {
-            Map.MapElements.Clear();
+            while (Map.MapElements.Any())
+            {
+                Map.MapElements.Clear();
+                await Task.Delay(TimeSpan.FromMilliseconds(100));
+            }
 
             Zoom();
 
