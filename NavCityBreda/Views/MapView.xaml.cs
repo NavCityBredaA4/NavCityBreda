@@ -122,7 +122,9 @@ namespace NavCityBreda.Views
                     ZoomRoute();
                 }
                 else
+                {
                     RemoveRoute();
+                }
             });
         }
 
@@ -155,11 +157,14 @@ namespace NavCityBreda.Views
             }
         }
 
-        private void RemoveRoute()
+        private async void RemoveRoute()
         {
             Track(false);
+            await Task.Delay(TimeSpan.FromMilliseconds(100));
             Map.MapElements.Clear();
+            await Task.Delay(TimeSpan.FromMilliseconds(100));
             GeofenceMonitor.Current.Geofences.Clear();
+            await Task.Delay(TimeSpan.FromMilliseconds(100));
             DrawCurrenPosition(App.Geo.Position.Coordinate.Point);
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using Windows.Devices.Geolocation.Geofencing;
 using Windows.System;
 
 namespace NavCityBreda.Model
@@ -86,6 +87,8 @@ namespace NavCityBreda.Model
 
                     geo.PositionChanged += Geo_PositionChanged;
                     geo.StatusChanged += Geo_StatusChanged;
+
+                    GeofenceMonitor.Current.Geofences.Clear();
 
                     _position = await geo.GetGeopositionAsync();
 
