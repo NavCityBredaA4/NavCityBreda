@@ -150,7 +150,7 @@ namespace NavCityBreda.Views
             foreach (Landmark l in r.Landmarks)
             {
                 if (l.Status != Landmark.LandmarkStatus.VISITED)
-                    GeofenceMonitor.Current.Geofences.Add(new Geofence(l.Id, new Geocircle(l.Position.Position, 25), MonitoredGeofenceStates.Entered, true));
+                    GeofenceMonitor.Current.Geofences.Add(new Geofence(l.Id, new Geocircle(l.Position.Position, 25), MonitoredGeofenceStates.Entered, true, TimeSpan.FromSeconds(3)));
                 l.UpdateIcon();
                 await Task.Delay(TimeSpan.FromMilliseconds(3));
                 Map.MapElements.Add(l.Icon);
