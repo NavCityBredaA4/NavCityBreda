@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{b34bc5be-844f-4c3c-8f7b-74de5af8cf7f}</ProjectGuid>
+    <ProjectGuid>{B34BC5BE-844F-4C3C-8F7B-74DE5AF8CF7F}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NavCityBreda</RootNamespace>
     <AssemblyName>NavCityBreda</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
@@ -17,15 +17,13 @@
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    
     <PackageCertificateKeyFile>NavCityBreda_TemporaryKey.pfx</PackageCertificateKeyFile>
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\ARM\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
-    <NoWarn>;2008</NoWarn>
+    <NoWarn>2008;CS4014</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>ARM</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -71,7 +69,7 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
-    <NoWarn>;2008</NoWarn>
+    <NoWarn>2008;CS4014;</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -92,50 +90,232 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\CurrentLocationArrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\CurrentLocationRound.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Help\HelpItem2Image.png" />
+    <Content Include="Assets\Help\HelpItem3Image.png" />
+    <Content Include="Assets\LandmarkNotVisited.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\LandmarkSkipped.png" />
+    <Content Include="Assets\LandmarkVisited.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SplashScreen.scale-100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SplashScreen.scale-150.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Routes\historische_kilometer\data.json" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_1.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_10.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_11.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_12.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_13.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_14.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_15.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_16.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_17.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_18.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_19.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_2.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_20.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_21.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_22.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_23.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_24.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_25.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_26.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_3.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_4.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_5.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_6.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_7.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_8.jpg" />
+    <Content Include="Routes\historische_kilometer\media\historische_kilometer_9.jpg" />
+    <PRIResource Include="Routes\historische_kilometer\lang\en\Resources.resw" />
+    <PRIResource Include="Routes\historische_kilometer\lang\nl\Resources.resw" />
+    <PRIResource Include="Routes\historische_kilometer\lang\de\Resources.resw" />
+    <PRIResource Include="Languages\ja\Resources.resw" />
+    <PRIResource Include="Languages\nl\Resources.resw" />
     <None Include="project.json" />
+    <PRIResource Include="Languages\en\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Comparer\LandmarkAlphaComparer.cs" />
+    <Compile Include="Helpers\Comparer\LandmarkAlphaReversedComparer.cs" />
+    <Compile Include="Helpers\Comparer\LandmarkNotVisitedComparer.cs" />
+    <Compile Include="Helpers\Comparer\LandmarkVisitedComparer.cs" />
+    <Compile Include="Helpers\Comparer\SearchLandmarkComparer.cs" />
+    <Compile Include="Helpers\Comparer\SearchRouteComparer.cs" />
+    <Compile Include="Helpers\Converter\StatusToIconConverter.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\RouteParser.cs" />
+    <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Helpers\Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Helpers\Util.cs" />
+    <Compile Include="InitPage.xaml.cs">
+      <DependentUpon>InitPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\CompassTracker.cs" />
+    <Compile Include="Model\GeoTracker.cs" />
+    <Compile Include="Model\Object\Image.cs" />
+    <Compile Include="Model\Object\Landmark.cs" />
+    <Compile Include="Model\Object\Route.cs" />
+    <Compile Include="Model\RouteManager.cs" />
+    <Compile Include="Model\SearchHandler.cs" />
+    <Compile Include="Model\Search\LandmarkResult.cs" />
+    <Compile Include="Model\Search\RouteResult.cs" />
+    <Compile Include="Model\Search\SearchResult.cs" />
+    <Compile Include="Model\Object\Waypoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\HelpVM.cs" />
+    <Compile Include="ViewModels\LandmarkDetailVM.cs" />
+    <Compile Include="ViewModels\LandmarkVM.cs" />
+    <Compile Include="ViewModels\MapVM.cs" />
+    <Compile Include="ViewModels\MainPageVM.cs" />
+    <Compile Include="ViewModels\RouteDetailVM.cs" />
+    <Compile Include="ViewModels\RouteVM.cs" />
+    <Compile Include="ViewModels\SearchVM.cs" />
+    <Compile Include="ViewModels\SettingsVM.cs" />
+    <Compile Include="ViewModels\TemplateVM.cs" />
+    <Compile Include="Views\HelpView.xaml.cs">
+      <DependentUpon>HelpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LandmarkView.xaml.cs">
+      <DependentUpon>LandmarkView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MapView.xaml.cs">
+      <DependentUpon>MapView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RouteDetailView.xaml.cs">
+      <DependentUpon>RouteDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RouteView.xaml.cs">
+      <DependentUpon>RouteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchView.xaml.cs">
+      <DependentUpon>SearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LandmarkDetailView.xaml.cs">
+      <DependentUpon>LandmarkDetailView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    
     <None Include="NavCityBreda_TemporaryKey.pfx" />
-    
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Square150x150Logo.scale-100.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\SplashScreen.scale-200.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Square150x150Logo.scale-200.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Square44x44Logo.scale-200.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\StoreLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Wide310x150Logo.scale-200.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="InitPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\DarkTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\DefaultStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\LightTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\HelpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LandmarkView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RouteDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RouteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LandmarkDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
-  
+  <ItemGroup>
+    <Folder Include="Languages\de\" />
+    <Folder Include="Routes\historische_kilometer\lang\ja\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
-
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

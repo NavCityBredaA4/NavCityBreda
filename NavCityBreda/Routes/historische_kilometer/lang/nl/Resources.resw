@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AVPDescription" xml:space="preserve">
+    <value>Antonius van Paduakerk</value>
+  </data>
+  <data name="AVPName" xml:space="preserve">
+    <value>Antonius van Paduakerk</value>
+  </data>
+  <data name="BGHDescription" xml:space="preserve">
+    <value>Begijnenhof</value>
+  </data>
+  <data name="BGHName" xml:space="preserve">
+    <value>Begijnenhof</value>
+  </data>
+  <data name="BHDescription" xml:space="preserve">
+    <value>De haven markt die hier gevestigt is bestaat sinds 1934.</value>
+  </data>
+  <data name="BHName" xml:space="preserve">
+    <value>Havenmarkt</value>
+  </data>
+  <data name="BTDescription" xml:space="preserve">
+    <value>In de Molenstraat ziet u recht de Bibliotheek, ontworpen door architect Herman Hertzberger. Omdat de Molenstraat vrij smal is, heeft de architect ruimte gecreëerd door de bibliotheek schuin oplopende wanden te geven. Op de plaats van de bibliotheek (op de hoek met de Oude Vest) bevond zich vroeger een poort. Boven deze poort bevond zich 's Heeren Gevangenhuys, waar de zwaarst gestraften werden ondergebracht. De plaats is nog met keitjes in het asfalt aangegeven; de asfaltweg is de plaats van de oude stadsgracht.</value>
+  </data>
+  <data name="BTName" xml:space="preserve">
+    <value>Bibliotheek</value>
+  </data>
+  <data name="BVDescription" xml:space="preserve">
+    <value>Wie hier een pilsje pakt, ontdekt (overigens ook zonder dat pilsje) al heel gauw, dat dit plein het mooiste uitzicht biedt op de grote toren van de Grote Kerk. Vanaf deze plek kunt u ook de mooie brede onderbouw van die toren bewonderen. Er is veel te zien op dit pleintje. Links op de hoek van de Havermarkt en Reigerstraat ziet u het huis 'De Arent', gebouwd rond ca. 1490. Het heeft nu een zeventiende eeuwse trapgevel en is in 1966 geheel gerestaureerd en verbouwd tot restaurant. Tegenover u op de Havermarkt bevinden zich nog twee panden die uw aandacht verdienen. Havermarkt nummer 5 dateert uit de zestiende en zeventiend eeuw. 'De Vogelstruys' op Havermarkt 21 is een opmerkelijk zeventiende eeuws monument met een hoge, niet symmetrische trapgevel. Ook dit huis heeft in de loop de eeuwen allerlei functies en bestemmingen gehad. Het was onder meer refugiehuis voor de zusters van Catharinadal in de zeventiende eeuw. Voor het beeldje 'De Troubadour', dat aan het eind van de Havermarkt prijkt, zijn vier exemplaren vervaardigd. De andere drie werden onthuld in Diest, Orange en Dillenburg, de zustersteden van Breda in de in 1963 tot stand gekomen Unie van Oranjesteden. Een stukje verder in de Visserstraat (nr. 31), aan de rechterkant, staat een fraai bakstenen huis uit de 17e eeuw met overblijfselen van een zestiende eeuwse gothische woning, de Drie Moren geheten.</value>
+  </data>
+  <data name="BVIDescription" xml:space="preserve">
+    <value>Binding van Isaac</value>
+  </data>
+  <data name="BVIName" xml:space="preserve">
+    <value>Binding van Isaac</value>
+  </data>
+  <data name="BVMDescription" xml:space="preserve">
+    <value>Dit monument is geplaats naar de bevrijding in 1951 om dit te herdenken.</value>
+  </data>
+  <data name="BVMName" xml:space="preserve">
+    <value>Bevrijdingsmonument</value>
+  </data>
+  <data name="BVName" xml:space="preserve">
+    <value>Vismarkt</value>
+  </data>
+  <data name="BYDescription" xml:space="preserve">
+    <value>Café Beyerd</value>
+  </data>
+  <data name="BYName" xml:space="preserve">
+    <value>Beyerd</value>
+  </data>
+  <data name="CTDescription" xml:space="preserve">
+    <value>Chasse theater</value>
+  </data>
+  <data name="CTName" xml:space="preserve">
+    <value>Chasse theater</value>
+  </data>
+  <data name="ESDescription" xml:space="preserve">
+    <value>Einde stadswandeling</value>
+  </data>
+  <data name="ESName" xml:space="preserve">
+    <value>Einde stadswandeling</value>
+  </data>
+  <data name="GHPDescription" xml:space="preserve">
+    <value>Gasthuispoort</value>
+  </data>
+  <data name="GHPName" xml:space="preserve">
+    <value>Gasthuispoort</value>
+  </data>
+  <data name="GKDescription" xml:space="preserve">
+    <value>De bisschop van Breda keerde na een afwezigheid van 32 jaar aan het begin van 2001 terug naar de Antoniuskerk die daarmee de status van kathedraal opnieuw verwierf. Aan de voorgevel zijn duidelijk de drie soorten antieke zuilen te zien. Van onder naar boven: Dorische, Ionische en Corinthische zuilen. Het beeld boven de ingang stelt 'de Godsdienst' voor. Binnen valt direct de schitterende houten preekstoel op. Hierin is in verschillende panelen het leven van H. Antonius uitgebeeld. Even verder bevinden zich restanten of alleen maar herinneringen aan twee zeer voorname hofhuizen, het Huis Ocrum, waarin tot 1994 de Kunstacademie St. Joost was gevestigd en het Huis Hersbeeck, thans pastorie. In 1667 verbleven in beide huizen de Engelse gezanten, die deelnamen aan de Vredesonderhandelingen van Breda. De afgevaardigden van de Raad van State gebruikten het pand (nr. 16) wanneer zij in de stad op dienstreis waren, maar ook koning Lodewijk Napoleon heeft er gelogeerd. De erker van dit pand had een controlerende functie: de pastoor kon goed in de gaten houden wie er naar de kerk ging. Het Huis Ocrum (nr. 18) was van 1848 tot 1952 rooms burgerweeshuis. Dat kunt u nog zien aan de kinderkopjes die aan de 19e eeuwse voorgevel van het academiegebouw zijn aangebracht. De rode kleur van dit huis (na de restauratie aangebracht) zal door de loop der jaren een mooie grijs rode kleur krijgen.</value>
+  </data>
+  <data name="GKName" xml:space="preserve">
+    <value>Grote Kerk</value>
+  </data>
+  <data name="GMDescription" xml:space="preserve">
+    <value>De Grote Markt</value>
+  </data>
+  <data name="GMName" xml:space="preserve">
+    <value>Grote Markt</value>
+  </data>
+  <data name="HBDescription" xml:space="preserve">
+    <value>Het Huis van Brecht is een van de meer historische gebouwen in Breda.</value>
+  </data>
+  <data name="HBName" xml:space="preserve">
+    <value>Huis van Brecht</value>
+  </data>
+  <data name="HPDescription" xml:space="preserve">
+    <value>Het Poortje</value>
+  </data>
+  <data name="HPName" xml:space="preserve">
+    <value>Het Poortje</value>
+  </data>
+  <data name="KBDescription" xml:space="preserve">
+    <value>Dit plein bevindt zich aan de zuiderzijde van het kasteel. U heeft zo een mooi uitzicht op de monumentale poort, de zgn. Stadhouderspoort met het wapen van stadhouder Willem de Vijfde, dat overigens pas later is aangebracht. Achter u ziet u het ruiterstandbeeld van stadhouder koning Willem III geplaatst. Voor dit standbeeld werd onder de burgerij van Breda een inzameling gehouden die f 47.000,-- opbracht. Voor de oude Nassaustad Breda is de stadhouderkoning van grote betekenis geweest. Hij voltooide na anderhalve eeuw de verbouwing van het Kasteel. Hendrik de Derde van Nassau en zijn (drede) vrouw Mencia de Mendoza hebben veel in Breda ver- toefd, maar verbleven dan toch bij voorkeur in de vertrekken boven de overigens al lang geleden gesloopte watermolen op het terrein van het Kasteel. Rechts van de poort bevindt zich het zgn. Blokhuis, de ambts- woning van de gouveneur van de KMA. Willem van Oranje woonde daar in een aangrenzende ruimte, maar Prins Maurits prefereerde de watermolen als dagelijks verblijf. Prins Philips Willem (1554-1618), de oudste en roomskatholieke zoon van Willem van Oranje, die vele jaren in Spaanse balling- schap verbleef en in Diest werd begraven, is de eerste Oranje geweest, die met zijn vrouw ook in het Kasteel ging wonen. Hij liet het park Valkenberg verfraaien en het Kasteel echt als een paleis inrichten. Bij zijn dood in 1618 werden in Breda tweeënveertig dagen achtereen de kerkklokken geluid. Op de plaats van de vensters, links en rechts van de poort, bevonden zich in de zestiende en zeventiende eeuw sierlijke open galerijen. Het muisgrijze gebouw links van de kasteelpoort werd gebouwd in 1867. Het maakt thans ook deel uit van het KMA gebouwen complex. Meer geschiedenis schuilt et achter de witte pui van het gebouw.</value>
+  </data>
+  <data name="KBName" xml:space="preserve">
+    <value>Kasteel van Breda</value>
+  </data>
+  <data name="KTKDescription" xml:space="preserve">
+    <value>In 1969 werden in Breda de Torenfeesten gehouden uit vreugde over de afsluiting van de restauratieperiode van de Grote Toren, die 25 jaar in beslag nam. Al die tijd hebben de Bredanaars, maar zij niet alleen, tegen een toren aangekeken die zijn schoonheid achter een netwerk van steigers verborgen hield. Ook tussen 1995 en 1997 werd de schoonheid van de Grote of Onze Lieve Vrouwe Kerk tijdelijk verborgen gehouden achter steigers. In bijna drie jaar tijd werd de kerk wederom van binnen gerestaureerd. De restauratie was onderverdeeld in drie fasen. In de eerste fase stonden onder andere werkzaamheden als het schoonspuiten van de buitenzijde, het repareren van het voegwerk en de glas-in-loodramen en het schilderen van de binnenzijde centraal. In de tweede fase werd de vloerverwarming aangelegd; In de derde fase is de rest van de kerk gerestaureerd. Uit onderzoek is vast komen te staan dat in 1410 de bouw van de kerk is begonnen. In de zestiende eeuw is de kerk aan de zuidzijde en aan de noordzijde uitgebreid met enkele kapellen, de huidige consistoriekamer en de kootomgang. De toren kwam in 1509 gereed; In 1468 was daarvoor de eerste steen gelegd,zodat de bouwperiode alles bij elkaar toch wel veertig jaar heeft geduurd. De torenspits brandde in 1694 af. In de jaren daarna werd hij herbouwd, onder andere met hout dat door stadhouderkoning Willem de derde uit zijn bossen was geschonken. In 1702 kon de haan er weer op worden geplaatst. Het is duidelijk dat de Heren van Breda, met name de Nassaufs, een belangrijke bijdrage hebben geleverd aan de wordingsgeschiedenis van de Grote Kerk. Die Heren van Breda liggen er ook begraven; Hun graftomben zijn ware kunsthistorische pronkstukken. Prins Willem van Oranje, die in 1584 in Delft werd vermoord, had in de Grote Kerk onder het prachtige grafmonument van Graaf Engelbert de Tweede een laatste rustplaats gereserveerd, maar zijn stoffelijk overschot en die van de na hem komende Oranjevorsten werden voortaan in Delft te aarde besteld.</value>
+  </data>
+  <data name="KTKName" xml:space="preserve">
+    <value>Kruising Torenstraat/Kerkplein</value>
+  </data>
+  <data name="KZDescription" xml:space="preserve">
+    <value>Op deze hoek ziet u aan de overkant een voornaam monument uit de geschiedenis van Breda: de kloosterkazerne. Het is een deel van het vroegere zusterklooster St. Catharinadal, dat hier sinds 1295 gevestigd was. Het huidige gebouw dateert uit 1504. In 1645 werden de zusters Norbertinessen vanuit Breda naar Oosterhout verdreven.</value>
+  </data>
+  <data name="KZName" xml:space="preserve">
+    <value>Kloosterkazerne</value>
+  </data>
+  <data name="LHDescription" xml:space="preserve">
+    <value>Tot 1812 deed dit park dienst als kasteeltuin voor de Heren van Breda. Het park dankt zijn naam aan een val- kenhuis, dat aan de rand ervan stond en van waaruit de kasteelbewoners en hun gasten de valkenjacht bedreven. Het park was van orgine een echt bos met hoge bomen. In de zeventiende eeuw verdween dat karakter door de aanleg van een tuin naar Franse stijl. Eén replica van de 17 beelden staat verderop in het park, in een speciaal aangelegd perkje. Dit perkje is een herinnering aan de Franse stijltuin. Het originele beeld is te bezichtigen in het Breda's Museum. In 1995 is het Valkenberg in een nieuw jasje gestoken. In het hele park zijn paden verlegd, struiken en bosschages weggehaald en nieuwe verlichting aangebracht. Daarnaast zijn er nieuwe banken in het park geplaatst en speelvoorzieningen voor de kinderen gemaakt. Bij opgravingen in het park zijn de fundamenten van een middeleeuwse muurtoren en van de stenen muur gevonden, die tot 1537 klein Breda omringde. Van twee muurtorens is een klein stukje opgebouwd.</value>
+  </data>
+  <data name="LHName" xml:space="preserve">
+    <value>The Light House</value>
+  </data>
+  <data name="LZDescription" xml:space="preserve">
+    <value>De liefdeszuster is een standbeeld in het centrum van Breda</value>
+  </data>
+  <data name="LZName" xml:space="preserve">
+    <value>Liefdeszuster</value>
+  </data>
+  <data name="NBMDescription" xml:space="preserve">
+    <value>Bij de ingang van het stadspark, het Valkenberg, staat een monument dat u iets vertelt over de wordings-geschiedenis van de stad Breda, maar vooral over de Heren van de stad uit het Huis van Nassau en de 500-jarige band tussen Breda en het Huis van Nassau. Op 3 juli 1905 werd het Nassau-Baronie-monument, zoals het officieel heet, met veel feestelijk vertoon door Koningin Wilhelmina onthuld. Het beeld herinnert aan het feit, dat in 1404 Graaf Engelbert, de eerste Bredase Nassau en zijn gemalin, Johanna van Polanen, werden ingehuldigd als Heer en Vrouwe van Breda. De ontwerper is de welbekende dr. P.J.H. Cuypers, die o.m. het Rijksmuseum en het Centraal Station in Amsterdam ontwierp. Op dit monument zijn niet alleen de wapenschilden van twintig gemeenten in en rond de Baronie aangebracht maar ook de Leeuw van Nassau die boven alles uittorent met koningskroon, zwaard en wapenschild. In de drie reliëfs is de 'blijde incomste' van Graaf Engelbert en zijn gemalin afgebeeld. De poorters bieden de sleutel van de stad aan.</value>
+  </data>
+  <data name="NBMName" xml:space="preserve">
+    <value>Nassau Baronie Monument</value>
+  </data>
+  <data name="RDSDescription" xml:space="preserve">
+    <value>Ridderstraat</value>
+  </data>
+  <data name="RDSName" xml:space="preserve">
+    <value>Ridderstraat</value>
+  </data>
+  <data name="RouteDescription" xml:space="preserve">
+    <value>De historische kilometer door Breda</value>
+  </data>
+  <data name="RouteLandmarks" xml:space="preserve">
+    <value>Kasteel van Breda, Grote Kerk, Stadhuis</value>
+  </data>
+  <data name="RouteName" xml:space="preserve">
+    <value>Historische kilometer</value>
+  </data>
+  <data name="SGDescription" xml:space="preserve">
+    <value>Het Spanjaardsgat is een monument</value>
+  </data>
+  <data name="SGName" xml:space="preserve">
+    <value>Spanjaardsgat</value>
+  </data>
+  <data name="SHDescription" xml:space="preserve">
+    <value>De hoofdingang van het standhuis bevindt zich boven het bordes, dat bewaakt wordt door twee zandstenen leeuwen. Het stadhuis, zoals dat er nu uitziet, kwam pas in 1767 tot stand. Het zijn eigenlijk vier huizen, die toen door de bouwmeester van Oranje, Philips Willem Schonck, achter één gevel werden verborgen. Het oudste deel is de grote hal. Al in de vijftiende eeuw werd daarnaast ook een zgn. 'Cleyn raedthuys' in gebruik genomen. In 1898 kwam het meest rechtse huis, het 'Liggend Hert' erbij, dat nog steeds een aparte gevel. heeft. Ondanks het feit dat het stadhuis slechts beperkt geopend is voor het publiek, willen we u de volgende informatie over de binnen zijde ervan toch niet onthouden. Vrouwe Justitia boven de hoofdingang en het houten beeld achter in de hal geven aan dat in het stadhuis vroeger ook recht gesproken werd. De balie van de vroegere rechtbank, eens staande tegen de achtermuur van de hal, wordt nu in het Breda's Museum bewaard. Links hangt een grote kopie van het beroemde schilderij van Velasques 'Las Lanzas', dat de overgave van Breda aan de Spaanse bevelhebber Spinola (1625) in beeld brengt. Het oorspronkelijke schilderij hangt in het Prado te Madrid. Het stadhuis wordt nog gebruikt voor openbare raadsvergaderingen en voor het sluiten van huwelijken. De burgemeester, wethouders en gemeete-ambtenaren huizen sinds februari 1992 in het nieuwe Stadskantoor aan de Claudius Prinsenlaan in Breda. Door het poortgebouw rechts van het stadhuis lopen we het Stadserf op. Midden op dit pleintje herinnert het beeldje De Turfschipper van Gerarda Rueb, aan de legendarische overval in 1590 van Adriaan van Bergen met zijn Turfschip. (De VVV Breda verkoopt hiervan een replica).</value>
+  </data>
+  <data name="SHName" xml:space="preserve">
+    <value>Stadhuis</value>
+  </data>
+  <data name="SHPDescription" xml:space="preserve">
+    <value>De Stathouderspoort is een poort in Breda</value>
+  </data>
+  <data name="SHPName" xml:space="preserve">
+    <value>Stadhouderspoort</value>
+  </data>
+  <data name="VVVDescription" xml:space="preserve">
+    <value>VVV van Breda. Dit is het startpunt van de route</value>
+  </data>
+  <data name="VVVName" xml:space="preserve">
+    <value>VVV</value>
+  </data>
+  <data name="WMDescription" xml:space="preserve">
+    <value>Willem Merkxtuin</value>
+  </data>
+  <data name="WMName" xml:space="preserve">
+    <value>Willem Merkxtuin</value>
+  </data>
+  <data name="WP1" xml:space="preserve">
+    <value>Pad ten westen van monument</value>
+  </data>
+  <data name="WP10" xml:space="preserve">
+    <value>Kruising Kloosterplein/Vlaszak</value>
+  </data>
+  <data name="WP11" xml:space="preserve">
+    <value>Kruising Vlaszak/Boschstraat</value>
+  </data>
+  <data name="WP12" xml:space="preserve">
+    <value>Kruising Vlaszak/Boschstraat</value>
+  </data>
+  <data name="WP13" xml:space="preserve">
+    <value>Ingang Veemarktstraat</value>
+  </data>
+  <data name="WP14" xml:space="preserve">
+    <value>Eerste bocht Veemarktstraat</value>
+  </data>
+  <data name="WP15" xml:space="preserve">
+    <value>Kruising Veemarktstraat/St.Annastraat</value>
+  </data>
+  <data name="WP16" xml:space="preserve">
+    <value>Kruising St.Annastraat/Catharinastraat</value>
+  </data>
+  <data name="WP17" xml:space="preserve">
+    <value>Kruising St.Annastraat/Catharinastraat</value>
+  </data>
+  <data name="WP18" xml:space="preserve">
+    <value>Kruising Molenstraat/Kloosterplein</value>
+  </data>
+  <data name="WP2" xml:space="preserve">
+    <value>Navigatiepunt</value>
+  </data>
+  <data name="WP3" xml:space="preserve">
+    <value>Einde park</value>
+  </data>
+  <data name="WP4" xml:space="preserve">
+    <value>Kruising Kasteelplein/Cingelstaart</value>
+  </data>
+  <data name="WP5" xml:space="preserve">
+    <value>Bocht Cingelstraat</value>
+  </data>
+  <data name="WP6" xml:space="preserve">
+    <value>Kruising Torenstraat/Kerkplein</value>
+  </data>
+  <data name="WP7" xml:space="preserve">
+    <value>Terug naar de grote markt</value>
+  </data>
+  <data name="WP8" xml:space="preserve">
+    <value>Zuidpunt Grote Markt</value>
+  </data>
+  <data name="WP9" xml:space="preserve">
+    <value>Kruising St.Janstraat/Molenstraat</value>
+  </data>
+</root>

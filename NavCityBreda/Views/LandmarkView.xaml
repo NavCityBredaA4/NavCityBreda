@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="NavCityBreda.Views.LandmarkView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NavCityBreda.Views"
+    xmlns:convert="using:NavCityBreda.Helpers.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <convert:StatusToIconConverter x:Key="IconConverter" />
+    </Page.Resources>
+
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Margin="17,10,5,10" Text="{Binding Description}" TextWrapping="WrapWholeWords" Grid.Row="0"/>
+
+            <StackPanel Grid.Row="1" Margin="17,10,5,10">
+                <TextBlock Text="{Binding SortOrderTitle}" Style="{StaticResource Header}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <RadioButton Grid.Column="0" Grid.Row="0" GroupName="SortMode" Name="AlphaSorted" Checked="Sort_Checked" IsChecked="True" Content="{Binding Ascending}" />
+                    <RadioButton Grid.Column="0" Grid.Row="1" GroupName="SortMode" Name="AlphaReverseSorted" Checked="Sort_Checked" Content="{Binding Descending}" />
+                    <RadioButton Grid.Column="1" Grid.Row="0" GroupName="SortMode" Name="VisitedSorted" Checked="Sort_Checked" Content="{Binding Visited}" />
+                    <RadioButton Grid.Column="1" Grid.Row="1" GroupName="SortMode" Name="NotVisitedSorted" Checked="Sort_Checked" Content="{Binding NotVisited}" />
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Name="LandmarkListPanel" Margin="17,10,5,10">
+                <TextBlock Text="{Binding LandmarksTitle}" Style="{StaticResource Header}"/>
+                <ListView x:Name="LandmarkList" ItemsSource="{Binding Landmarks}" Grid.Row="2" IsItemClickEnabled="True" ItemClick="LandmarkList_ItemClick"
+                      ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:Name="ListViewDataTemplate">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="{Binding Status, Converter={StaticResource IconConverter}}" Margin="0,0,10,0"/>
+                                <TextBlock Text="{Binding Name}" FontSize="18"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

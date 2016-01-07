@@ -1,0 +1,315 @@
+{
+	"name": "RouteName",
+	"description": "RouteDescription",
+	"landmarks": "RouteLandmarks",
+	"waypoints": [{
+		"name": "VVVName",
+		"landmark": true,
+		"description": "VVVDescription",
+		"image": [ "historische_kilometer_1.jpg", "historische_kilometer_2.jpg"],
+		"latitude": 51.594112,
+		"longitude": 4.779417
+	},
+	{
+		"name": "LZName",
+		"landmark": true,
+		"description": "LZDescription",
+		"image": "historische_kilometer_3.jpg",
+		"latitude": 51.593278,
+		"longitude": 4.779388
+	},
+	{
+		"name": "NBMName",
+		"landmark": true,
+		"description": "NBMDescription",
+		"image": "historische_kilometer_4.jpg",
+		"latitude": 51.5925,
+		"longitude": 4.779695
+	},
+	{
+		"name": "WP1",
+		"landmark": false,
+		"latitude": 51.5925,
+		"longitude": 4.779388
+	},
+	{
+		"name": "LHName",
+		"landmark": true,
+		"description": "LHDescription",
+		"image": "historische_kilometer_5.jpg",
+		"latitude": 51.592833,
+		"longitude": 4.778472
+	},
+	{
+		"name": "WP2",
+		"landmark": false,
+		"latitude": 51.592667,
+		"longitude": 4.777917
+	},
+	{
+		"name": "WP3",
+		"landmark": false,
+		"latitude": 51.590612,
+		"longitude": 4.777
+	},
+	{
+		"name": "KBName",
+		"landmark": true,
+		"description": "KBDescription",
+		"image": "historische_kilometer_9.jpg",
+		"latitude": 51.590612,
+		"longitude": 4.776167
+	},
+	{
+		"name": "SHPName",
+		"landmark": true,
+		"description": "SHPDescription",
+		"image": "historische_kilometer_11.jpg",
+		"latitude": 51.589695,
+		"longitude": 4.776138
+	},
+	{
+		"name": "WY4",
+		"landmark": false,
+		"latitude": 51.590333,
+		"longitude": 4.776
+	},
+	{
+		"name": "WP5",
+		"landmark": false,
+		"latitude": 51.590388,
+		"longitude": 4.775
+	},
+	{
+		"name": "HBName",
+		"landmark": true,
+		"description": "HBDescription",
+		"image": "historische_kilometer_7.jpg",
+		"latitude": 51.590028,
+		"longitude": 4.774362
+	},
+	{
+		"name": "SGName",
+		"landmark": true,
+		"description": "SGDescription",
+		"image": ["historische_kilometer_6.jpg", "historische_kilometer_14.jpg", "historische_kilometer_21.jpg", "historische_kilometer_22.jpg"],
+		"latitude": 51.590195,
+		"longitude": 4.773445
+	},
+	{
+		"name": "BVName",
+		"landmark": true,
+		"description": "BVDescription",
+		"image": "historische_kilometer_20.jpg",
+		"latitude": 51.589833,
+		"longitude": 4.773333
+	},
+	{
+		"name": "BHName",
+		"landmark": true,
+		"description": "BHDescription",
+		"image": "historische_kilometer_19.jpg",
+		"latitude": 51.589362,
+		"longitude": 4.774445
+	},
+	{
+		"name": "KTKName",
+		"landmark": true,
+		"description": "KTKDescription",
+		"latitude": 51.588778,
+		"longitude": 4.774888
+	},
+	{
+		"name": "GKName",
+		"landmark": true,
+		"description": "GKDescription",
+		"image": "historische_kilometer_10.jpg",
+		"latitude": 51.588833,
+		"longitude": 4.775278
+	},
+	{
+		"name": "WP6",
+		"landmark": false,
+		"latitude": 51.588778,
+		"longitude": 4.774888
+	},
+	{
+		"name": "HPName",
+		"landmark": true,
+		"description": "HPDescription",
+		"latitude": 51.588195,
+		"longitude": 4.775138
+	},
+	{
+		"name": "RDSName",
+		"landmark": true,
+		"description": "RDSDescription",
+		"latitude": 51.587083,
+		"longitude": 4.77575
+	},
+	{
+		"name": "GMName",
+		"landmark": true,
+		"description": "GMDescription",
+		"image": "historische_kilometer_17.jpg",
+		"latitude": 51.587417,
+		"longitude": 4.776555
+	},
+	{
+		"name": "BVMName",
+		"landmark": true,
+		"description": "BVMDescription",
+    "image": [ "historische_kilometer_24.jpg", "historische_kilometer_25.jpg"],
+		"latitude": 51.588028,
+		"longitude": 4.776333
+	},
+	{
+		"name": "SHName",
+		"landmark": true,
+		"description": "SHDescription",
+		"latitude": 51.58875,
+		"longitude": 4.776112
+	},
+	{
+		"name": "WP7",
+		"landmark": false,
+		"latitude": 51.587972,
+		"longitude": 4.776362
+	},
+	{
+		"name": "WP8",
+		"landmark": false,
+		"latitude": 51.5875,
+		"longitude": 4.776555
+	},
+	{
+		"name": "AVPName",
+		"landmark": true,
+		"description": "AVPDescription",
+		"latitude": 51.587638,
+		"longitude": 4.77725
+	},
+	{
+		"name": "WP9",
+		"landmark": false,
+		"latitude": 51.588278,
+		"longitude": 4.7785
+	},
+	{
+		"name": "BTName",
+		"landmark": true,
+		"description": "BTDescription",
+		"latitude": 51.588,
+		"longitude": 4.778945
+	},
+	{
+		"name": "WP18",
+		"landmark": false,
+		"latitude": 51.587362,
+		"longitude": 4.780222
+	},
+	{
+		"name": "KZName",
+		"landmark": true,
+		"description": "KZDescription",
+		"latitude": 51.587722,
+		"longitude": 4.781028
+	},
+	{
+		"name": "CTName",
+		"landmark": true,
+		"description": "CTDescription",
+		"latitude": 51.58775,
+		"longitude": 4.782
+	},
+	{
+		"name": "WP10",
+		"landmark": false,
+		"latitude": 51.58775,
+		"longitude": 4.78125
+	},
+	{
+		"name": "BVIName",
+		"landmark": true,
+		"description": "BVIDescription",
+		"latitude": 51.588612,
+		"longitude": 4.780888
+	},
+	{
+		"name": "WP11",
+		"landmark": false,
+		"latitude": 51.5895,
+		"longitude": 4.780445
+	},
+	{
+		"name": "BYName",
+		"landmark": true,
+		"description": "BYDescription",
+		"latitude": 51.589667,
+		"longitude": 4.781
+	},
+	{
+		"name": "WP12",
+		"landmark": false,
+		"latitude": 51.5895,
+		"longitude": 4.780445
+	},
+	{
+		"name": "GHPName",
+		"landmark": true,
+		"description": "GHPDescription",
+		"latitude": 51.589555,
+		"longitude": 4.78
+	},
+	{
+		"name": "WP13",
+		"landmark": false,
+		"latitude": 51.589417,
+		"longitude": 4.779862
+	},
+	{
+		"name": "WP14",
+		"landmark": false,
+		"latitude": 51.589028,
+		"longitude": 4.779695
+	},
+	{
+		"name": "WP15",
+		"landmark": false,
+		"latitude": 51.588555,
+		"longitude": 4.778333
+	},
+	{
+		"name": "WMName",
+		"landmark": true,
+		"description": "WMDescription",
+		"latitude": 51.589112,
+		"longitude": 4.777945
+	},
+	{
+		"name": "WP16",
+		"landmark": false,
+		"latitude": 51.589667,
+		"longitude": 4.777805
+	},
+	{
+		"name": "BGHName",
+		"landmark": true,
+		"description": "BGHDescription",
+		"latitude": 51.589695,
+		"longitude": 4.778362
+	},
+	{
+		"name": "WP17",
+		"landmark": false,
+		"latitude": 51.589667,
+		"longitude": 4.777805
+	},
+	{
+		"name": "ESName",
+		"landmark": true,
+		"description": "ESDescription",
+		"latitude": 51.5895,
+		"longitude": 4.77625
+	}]
+}

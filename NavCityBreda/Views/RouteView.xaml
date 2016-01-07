@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="NavCityBreda.Views.RouteView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NavCityBreda.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <Grid Name="RouteListPanel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Margin="17,10,5,10" Text="{Binding Description}" TextWrapping="WrapWholeWords" Grid.Row="0"/>
+
+            <ListView x:Name="RouteList" Grid.Row="1" ItemsSource="{Binding Routes}" Margin="0,10,0,0" IsItemClickEnabled="True" ItemClick="RouteList_ItemClick"
+                  ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:Name="ListViewDataTemplate">
+                        <StackPanel Margin="5,0,0,0">
+                            <TextBlock Text="{Binding Name}" FontSize="20" TextWrapping="NoWrap"/>
+                            <TextBlock Text="{Binding LandmarksDescription}" FontSize="14" TextWrapping="WrapWholeWords" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </Grid>
+    </ScrollViewer>
+</Page>

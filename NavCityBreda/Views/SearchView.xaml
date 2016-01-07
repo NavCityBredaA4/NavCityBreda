@@ -1,0 +1,88 @@
+﻿<Page
+    x:Class="NavCityBreda.Views.SearchView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NavCityBreda.Views"
+    xmlns:convert="using:NavCityBreda.Helpers.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <RelativePanel Grid.Row="0" Margin="10">
+                <TextBox RelativePanel.AlignLeftWithPanel="True" RelativePanel.LeftOf="SearchButton" Name="SearchTerm" PlaceholderText="{Binding SearchTerm}" KeyDown="SearchTerm_KeyDown" />
+                <Button Name="SearchButton" Click="SearchButton_Click" RelativePanel.AlignRightWithPanel="True" Margin="5,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Zoom" Margin="0,0,5,0" Name="Icon" />
+                        <ProgressRing Margin="0,0,5,0" Width="20" Height="20" IsActive="False" Visibility="Collapsed" Name="SearchLoading"/>
+                        <TextBlock Text="{Binding Search}" />
+                    </StackPanel>
+                </Button>
+            </RelativePanel>
+
+            <StackPanel Grid.Row="1" Margin="10">
+                <TextBlock Text="{Binding Settings}" Style="{StaticResource Header}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <CheckBox Grid.Row="0" Name="Description" IsChecked="False" Content="{Binding SeachDescription}" />
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Name="ResultsPanel">
+                <RelativePanel Margin="10">
+                    <TextBlock Text="{Binding SearchResults}" Style="{StaticResource Header}" RelativePanel.AlignLeftWithPanel="True" Name="ResultHeader"/>
+                    <TextBlock Text="{Binding ResultCount}" FontSize="14" Foreground="Gray" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignBottomWith="ResultHeader"/>
+                </RelativePanel>
+
+                <ListView Name="RouteList" ItemsSource="{Binding Routes}" IsItemClickEnabled="True" ItemClick="RouteList_ItemClick" Margin="0,5,0,0"
+                      ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                            <Setter Property="VerticalContentAlignment" Value="Top" />
+                            <Setter Property="Margin" Value="0" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,2,0,2">
+                                <TextBlock Text="{Binding Name}" FontSize="20" TextWrapping="NoWrap"/>
+                                <TextBlock Text="{Binding Details}" FontSize="14" TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <ListView Name="LandmarkList" ItemsSource="{Binding Landmarks}" IsItemClickEnabled="True" ItemClick="LandmarkList_ItemClick" Margin="0,5,0,0"
+                      ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                            <Setter Property="VerticalContentAlignment" Value="Top" />
+                            <Setter Property="Margin" Value="0" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,2,0,2">
+                                <TextBlock Text="{Binding Name}" FontSize="20" TextWrapping="NoWrap"/>
+                                <TextBlock Text="{Binding Details}" FontSize="14" TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>
