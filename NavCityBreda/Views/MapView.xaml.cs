@@ -132,13 +132,11 @@ namespace NavCityBreda.Views
         {
             if (App.RouteManager.Status != RouteManager.RouteStatus.STARTED) return;
 
-            Route r = App.RouteManager.CurrentRoute;
-
-            if (r == null) return;
+            if (App.RouteManager.CurrentRoute == null) return;
 
             GeofenceMonitor.Current.Geofences.Clear();
             Map.MapElements.Clear();
-            await Task.Delay(TimeSpan.FromMilliseconds(10));
+            await Task.Delay(TimeSpan.FromMilliseconds(100));
             Map.MapElements.Add(CurrentPosition);
             Map.MapElements.Add(CurrentNavigationLine);
 
@@ -147,7 +145,7 @@ namespace NavCityBreda.Views
             if (App.Geo.History.Count > 1)
                 Map.MapElements.Add(Util.GetRouteLine(App.Geo.History.Select(p => p.Coordinate.Point.Position).ToList(), Color.FromArgb(255, 155, 155, 155), 250, 6));
 
-            foreach (Landmark l in r.Landmarks)
+            foreach (Landmark l in App.RouteManager.CurrentRoute.Landmarks)
             {
                 if (l.Status != Landmark.LandmarkStatus.VISITED)
                     GeofenceMonitor.Current.Geofences.Add(new Geofence(l.Id, new Geocircle(l.Position.Position, 25), MonitoredGeofenceStates.Entered, true, TimeSpan.FromSeconds(3)));
