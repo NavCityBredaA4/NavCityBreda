@@ -19,7 +19,7 @@
             <Setter Property="RelativePanel.AlignTopWithPanel" Value="True" />
             <Setter Property="RelativePanel.AlignLeftWithPanel" Value="True" />
             <Setter Property="TextWrapping" Value="WrapWholeWords" />
-            <Setter Property="TextAlignment" Value="Justify" />
+            <Setter Property="TextAlignment" Value="Left" />
         </Style>
 
         <Style TargetType="TextBlock" x:Key="HelpTextImage">
@@ -27,7 +27,7 @@
             <Setter Property="RelativePanel.AlignLeftWithPanel" Value="True" />
             <Setter Property="TextWrapping" Value="WrapWholeWords" />
             <Setter Property="Margin" Value="0,0,60,0" />
-            <Setter Property="TextAlignment" Value="Justify" />
+            <Setter Property="TextAlignment" Value="Left" />
         </Style>
 
         <Style TargetType="Image" x:Key="HelpImageSmall">
