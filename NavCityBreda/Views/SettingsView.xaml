@@ -14,7 +14,7 @@
                 <ComboBox Name="Language" SelectionChanged="Language_SelectionChanged" HorizontalAlignment="Stretch">
                     <ComboBoxItem>English</ComboBoxItem>
                     <ComboBoxItem>Nederlands</ComboBoxItem>
-                    <!-- <ComboBoxItem>Deutsch</ComboBoxItem> -->
+                    <ComboBoxItem>Deutsch</ComboBoxItem>
                     <!-- <ComboBoxItem>日本語</ComboBoxItem> -->
                 </ComboBox>
             </StackPanel>

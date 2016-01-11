@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AVPDescription" xml:space="preserve">
-    <value>Antonius van Paduakerk</value>
+    <value>Beschrijving van Antonius van Paduakerk</value>
   </data>
   <data name="AVPName" xml:space="preserve">
     <value>Antonius van Paduakerk</value>
   </data>
   <data name="BGHDescription" xml:space="preserve">
-    <value>Begijnenhof</value>
+    <value>Beschrijving van Begijnenhof</value>
   </data>
   <data name="BGHName" xml:space="preserve">
     <value>Begijnenhof</value>
@@ -136,7 +136,7 @@
     <value>Havenmarkt</value>
   </data>
   <data name="BTDescription" xml:space="preserve">
-    <value>In de Molenstraat ziet u recht de Bibliotheek, ontworpen door architect Herman Hertzberger. Omdat de Molenstraat vrij smal is, heeft de architect ruimte gecreëerd door de bibliotheek schuin oplopende wanden te geven. Op de plaats van de bibliotheek (op de hoek met de Oude Vest) bevond zich vroeger een poort. Boven deze poort bevond zich 's Heeren Gevangenhuys, waar de zwaarst gestraften werden ondergebracht. De plaats is nog met keitjes in het asfalt aangegeven; de asfaltweg is de plaats van de oude stadsgracht.</value>
+    <value>In de Molenstraat ziet u rechts de Bibliotheek, ontworpen door architect Herman Hertzberger. Omdat de Molenstraat vrij smal is, heeft de architect ruimte gecreëerd door de bibliotheek schuin oplopende wanden te geven. Op de plaats van de bibliotheek (op de hoek met de Oude Vest) bevond zich vroeger een poort. Boven deze poort bevond zich 's Heeren Gevangenhuys, waar de zwaarst gestraften werden ondergebracht. De plaats is nog met keitjes in het asfalt aangegeven; de asfaltweg is de plaats van de oude stadsgracht.</value>
   </data>
   <data name="BTName" xml:space="preserve">
     <value>Bibliotheek</value>
@@ -145,7 +145,7 @@
     <value>Wie hier een pilsje pakt, ontdekt (overigens ook zonder dat pilsje) al heel gauw, dat dit plein het mooiste uitzicht biedt op de grote toren van de Grote Kerk. Vanaf deze plek kunt u ook de mooie brede onderbouw van die toren bewonderen. Er is veel te zien op dit pleintje. Links op de hoek van de Havermarkt en Reigerstraat ziet u het huis 'De Arent', gebouwd rond ca. 1490. Het heeft nu een zeventiende eeuwse trapgevel en is in 1966 geheel gerestaureerd en verbouwd tot restaurant. Tegenover u op de Havermarkt bevinden zich nog twee panden die uw aandacht verdienen. Havermarkt nummer 5 dateert uit de zestiende en zeventiend eeuw. 'De Vogelstruys' op Havermarkt 21 is een opmerkelijk zeventiende eeuws monument met een hoge, niet symmetrische trapgevel. Ook dit huis heeft in de loop de eeuwen allerlei functies en bestemmingen gehad. Het was onder meer refugiehuis voor de zusters van Catharinadal in de zeventiende eeuw. Voor het beeldje 'De Troubadour', dat aan het eind van de Havermarkt prijkt, zijn vier exemplaren vervaardigd. De andere drie werden onthuld in Diest, Orange en Dillenburg, de zustersteden van Breda in de in 1963 tot stand gekomen Unie van Oranjesteden. Een stukje verder in de Visserstraat (nr. 31), aan de rechterkant, staat een fraai bakstenen huis uit de 17e eeuw met overblijfselen van een zestiende eeuwse gothische woning, de Drie Moren geheten.</value>
   </data>
   <data name="BVIDescription" xml:space="preserve">
-    <value>Binding van Isaac</value>
+    <value>Beschrijving van Binding van Isaac</value>
   </data>
   <data name="BVIName" xml:space="preserve">
     <value>Binding van Isaac</value>
@@ -160,25 +160,25 @@
     <value>Vismarkt</value>
   </data>
   <data name="BYDescription" xml:space="preserve">
-    <value>Café Beyerd</value>
+    <value>Beschrijving van Café Beyerd</value>
   </data>
   <data name="BYName" xml:space="preserve">
     <value>Beyerd</value>
   </data>
   <data name="CTDescription" xml:space="preserve">
-    <value>Chasse theater</value>
+    <value>Beschrijbing van Chasse theater</value>
   </data>
   <data name="CTName" xml:space="preserve">
     <value>Chasse theater</value>
   </data>
   <data name="ESDescription" xml:space="preserve">
-    <value>Einde stadswandeling</value>
+    <value>Beschrijving van Einde stadswandeling</value>
   </data>
   <data name="ESName" xml:space="preserve">
     <value>Einde stadswandeling</value>
   </data>
   <data name="GHPDescription" xml:space="preserve">
-    <value>Gasthuispoort</value>
+    <value>Beschrijving van Gasthuispoort</value>
   </data>
   <data name="GHPName" xml:space="preserve">
     <value>Gasthuispoort</value>
@@ -190,7 +190,7 @@
     <value>Grote Kerk</value>
   </data>
   <data name="GMDescription" xml:space="preserve">
-    <value>De Grote Markt</value>
+    <value>Beschrijving van De Grote Markt</value>
   </data>
   <data name="GMName" xml:space="preserve">
     <value>Grote Markt</value>
@@ -202,7 +202,7 @@
     <value>Huis van Brecht</value>
   </data>
   <data name="HPDescription" xml:space="preserve">
-    <value>Het Poortje</value>
+    <value>Beschrijving van  Het Poortje</value>
   </data>
   <data name="HPName" xml:space="preserve">
     <value>Het Poortje</value>
@@ -244,7 +244,7 @@
     <value>Nassau Baronie Monument</value>
   </data>
   <data name="RDSDescription" xml:space="preserve">
-    <value>Ridderstraat</value>
+    <value>Beschrijving van Ridderstraat</value>
   </data>
   <data name="RDSName" xml:space="preserve">
     <value>Ridderstraat</value>
@@ -265,7 +265,7 @@
     <value>Spanjaardsgat</value>
   </data>
   <data name="SHDescription" xml:space="preserve">
-    <value>De hoofdingang van het standhuis bevindt zich boven het bordes, dat bewaakt wordt door twee zandstenen leeuwen. Het stadhuis, zoals dat er nu uitziet, kwam pas in 1767 tot stand. Het zijn eigenlijk vier huizen, die toen door de bouwmeester van Oranje, Philips Willem Schonck, achter één gevel werden verborgen. Het oudste deel is de grote hal. Al in de vijftiende eeuw werd daarnaast ook een zgn. 'Cleyn raedthuys' in gebruik genomen. In 1898 kwam het meest rechtse huis, het 'Liggend Hert' erbij, dat nog steeds een aparte gevel. heeft. Ondanks het feit dat het stadhuis slechts beperkt geopend is voor het publiek, willen we u de volgende informatie over de binnen zijde ervan toch niet onthouden. Vrouwe Justitia boven de hoofdingang en het houten beeld achter in de hal geven aan dat in het stadhuis vroeger ook recht gesproken werd. De balie van de vroegere rechtbank, eens staande tegen de achtermuur van de hal, wordt nu in het Breda's Museum bewaard. Links hangt een grote kopie van het beroemde schilderij van Velasques 'Las Lanzas', dat de overgave van Breda aan de Spaanse bevelhebber Spinola (1625) in beeld brengt. Het oorspronkelijke schilderij hangt in het Prado te Madrid. Het stadhuis wordt nog gebruikt voor openbare raadsvergaderingen en voor het sluiten van huwelijken. De burgemeester, wethouders en gemeete-ambtenaren huizen sinds februari 1992 in het nieuwe Stadskantoor aan de Claudius Prinsenlaan in Breda. Door het poortgebouw rechts van het stadhuis lopen we het Stadserf op. Midden op dit pleintje herinnert het beeldje De Turfschipper van Gerarda Rueb, aan de legendarische overval in 1590 van Adriaan van Bergen met zijn Turfschip. (De VVV Breda verkoopt hiervan een replica).</value>
+    <value>De hoofdingang van het stadhuis bevindt zich boven het bordes, dat bewaakt wordt door twee zandstenen leeuwen. Het stadhuis, zoals dat er nu uitziet, kwam pas in 1767 tot stand. Het zijn eigenlijk vier huizen, die toen door de bouwmeester van Oranje, Philips Willem Schonck, achter één gevel werden verborgen. Het oudste deel is de grote hal. Al in de vijftiende eeuw werd daarnaast ook een zgn. 'Cleyn raedthuys' in gebruik genomen. In 1898 kwam het meest rechtse huis, het 'Liggend Hert' erbij, dat nog steeds een aparte gevel. heeft. Ondanks het feit dat het stadhuis slechts beperkt geopend is voor het publiek, willen we u de volgende informatie over de binnen zijde ervan toch niet onthouden. Vrouwe Justitia boven de hoofdingang en het houten beeld achter in de hal geven aan dat in het stadhuis vroeger ook recht gesproken werd. De balie van de vroegere rechtbank, eens staande tegen de achtermuur van de hal, wordt nu in het Breda's Museum bewaard. Links hangt een grote kopie van het beroemde schilderij van Velasques 'Las Lanzas', dat de overgave van Breda aan de Spaanse bevelhebber Spinola (1625) in beeld brengt. Het oorspronkelijke schilderij hangt in het Prado te Madrid. Het stadhuis wordt nog gebruikt voor openbare raadsvergaderingen en voor het sluiten van huwelijken. De burgemeester, wethouders en gemeete-ambtenaren huizen sinds februari 1992 in het nieuwe Stadskantoor aan de Claudius Prinsenlaan in Breda. Door het poortgebouw rechts van het stadhuis lopen we het Stadserf op. Midden op dit pleintje herinnert het beeldje De Turfschipper van Gerarda Rueb, aan de legendarische overval in 1590 van Adriaan van Bergen met zijn Turfschip. (De VVV Breda verkoopt hiervan een replica).</value>
   </data>
   <data name="SHName" xml:space="preserve">
     <value>Stadhuis</value>
@@ -283,7 +283,7 @@
     <value>VVV</value>
   </data>
   <data name="WMDescription" xml:space="preserve">
-    <value>Willem Merkxtuin</value>
+    <value>Beschrijving van Willem Merkxtuin</value>
   </data>
   <data name="WMName" xml:space="preserve">
     <value>Willem Merkxtuin</value>
