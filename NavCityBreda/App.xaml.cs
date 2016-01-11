@@ -3,6 +3,7 @@ using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
+using Windows.Globalization;
 using Windows.Graphics.Display;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
@@ -117,6 +118,8 @@ namespace NavCityBreda
                 this.DebugSettings.EnableFrameRateCounter = false;
             }
 #endif
+
+            ApplicationLanguages.PrimaryLanguageOverride = "en";
 
             rootFrame = Window.Current.Content as Frame;
 
