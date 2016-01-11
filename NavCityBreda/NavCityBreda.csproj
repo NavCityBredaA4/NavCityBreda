@@ -138,11 +138,11 @@
     <Content Include="Routes\historische_kilometer\media\historische_kilometer_7.jpg" />
     <Content Include="Routes\historische_kilometer\media\historische_kilometer_8.jpg" />
     <Content Include="Routes\historische_kilometer\media\historische_kilometer_9.jpg" />
+    <PRIResource Include="Routes\historische_kilometer\lang\de\Resources.resw" />
     <PRIResource Include="Routes\historische_kilometer\lang\en\Resources.resw" />
     <PRIResource Include="Routes\historische_kilometer\lang\nl\Resources.resw" />
-    <PRIResource Include="Routes\historische_kilometer\lang\de\Resources.resw" />
-    <PRIResource Include="Languages\ja\Resources.resw" />
     <PRIResource Include="Languages\nl\Resources.resw" />
+    <PRIResource Include="Languages\de\Resources.resw" />
     <None Include="project.json" />
     <PRIResource Include="Languages\en\Resources.resw" />
   </ItemGroup>
@@ -309,10 +309,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Languages\de\" />
-    <Folder Include="Routes\historische_kilometer\lang\ja\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

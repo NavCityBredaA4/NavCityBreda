@@ -133,7 +133,7 @@
     <value>Hulp</value>
   </data>
   <data name="Initializing" xml:space="preserve">
-    <value>Initaliseren</value>
+    <value>Initialiseren</value>
   </data>
   <data name="IPAddress" xml:space="preserve">
     <value>IP Adres</value>
@@ -304,7 +304,7 @@
     <value>Aflopend</value>
   </data>
   <data name="SortOrder" xml:space="preserve">
-    <value>Sorteer volgorde</value>
+    <value>Sorteervolgorde</value>
   </data>
   <data name="SkipLandmark" xml:space="preserve">
     <value>Bezienswaardigheid overslaan</value>
@@ -316,10 +316,10 @@
     <value>Zoeken</value>
   </data>
   <data name="SearchResults" xml:space="preserve">
-    <value>Zoek resultaten</value>
+    <value>Zoekresultaten</value>
   </data>
   <data name="SearchTerm" xml:space="preserve">
-    <value>Zoek term</value>
+    <value>Zoekterm</value>
   </data>
   <data name="SearchResultCount" xml:space="preserve">
     <value>resultaten</value>

@@ -11,6 +11,7 @@
         <Style x:Key="NavStackPanel" TargetType="StackPanel">
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="MinWidth" Value="275" />
         </Style>
 
         <Style x:Key="NavIcon" TargetType="TextBlock">
@@ -63,45 +64,47 @@
                       ManipulationMode="TranslateX"
                       ManipulationCompleted="Pane_ManipulationCompleted" Style="{ThemeResource DarkModeFix}">
 
-                    <ListBox RelativePanel.AlignTopWithPanel="True" SelectionMode="Single" Name="NavList" SelectionChanged="NavList_SelectionChanged" Tapped="NavList_Tapped">
-                        <ListBoxItem Name="NavListMap" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
-                            <StackPanel Style="{StaticResource NavStackPanel}">
-                                <TextBlock Style="{StaticResource NavIcon}" Text="&#xE909;"/>
-                                <TextBlock Style="{StaticResource NavText}" Text="{Binding Map}"/>
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem Name="NavListRoute" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
-                            <StackPanel Style="{StaticResource NavStackPanel}">
-                                <TextBlock Style="{StaticResource NavIcon}" Text="&#xE7AD;"/>
-                                <TextBlock Style="{StaticResource NavText}" Text="{Binding Route}"/>
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem Name="NavListLandmarks" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
-                            <StackPanel Style="{StaticResource NavStackPanel}">
-                                <TextBlock Style="{StaticResource NavIcon}" Text="&#xE913;"/>
-                                <TextBlock Style="{StaticResource NavText}" Text="{Binding Landmarks}" />
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem Name="NavListHelp" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
-                            <StackPanel Style="{StaticResource NavStackPanel}">
-                                <TextBlock Style="{StaticResource NavIcon}" Text="&#xE897;"/>
-                                <TextBlock Style="{StaticResource NavText}" Text="{Binding Help}"/>
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem Name="NavListSearch" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
-                            <StackPanel Style="{StaticResource NavStackPanel}">
-                                <TextBlock Style="{StaticResource NavIcon}" Text="&#xE71E;"/>
-                                <TextBlock Style="{StaticResource NavText}" Text="{Binding Search}"/>
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem Name="NavListSettings" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
-                            <StackPanel Style="{StaticResource NavStackPanel}">
-                                <TextBlock Style="{StaticResource NavIcon}" Text="&#xE713;"/>
-                                <TextBlock Style="{StaticResource NavText}" Text="{Binding Settings}"/>
-                            </StackPanel>
-                        </ListBoxItem>
-                    </ListBox>
-
+                    <Viewbox Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Stretch" RelativePanel.AlignTopWithPanel="True">
+                        <ListBox SelectionMode="Single" Name="NavList" SelectionChanged="NavList_SelectionChanged" Tapped="NavList_Tapped">
+                            <ListBoxItem Name="NavListMap" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
+                                <StackPanel Style="{StaticResource NavStackPanel}">
+                                    <TextBlock Style="{StaticResource NavIcon}" Text="&#xE909;"/>
+                                    <TextBlock Style="{StaticResource NavText}" Text="{Binding Map}"/>
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem Name="NavListRoute" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
+                                <StackPanel Style="{StaticResource NavStackPanel}">
+                                    <TextBlock Style="{StaticResource NavIcon}" Text="&#xE7AD;"/>
+                                    <TextBlock Style="{StaticResource NavText}" Text="{Binding Route}"/>
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem Name="NavListLandmarks" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
+                                <StackPanel Style="{StaticResource NavStackPanel}">
+                                    <TextBlock Style="{StaticResource NavIcon}" Text="&#xE913;"/>
+                                    <TextBlock Style="{StaticResource NavText}" Text="{Binding Landmarks}" />
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem Name="NavListHelp" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
+                                <StackPanel Style="{StaticResource NavStackPanel}">
+                                    <TextBlock Style="{StaticResource NavIcon}" Text="&#xE897;"/>
+                                    <TextBlock Style="{StaticResource NavText}" Text="{Binding Help}"/>
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem Name="NavListSearch" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
+                                <StackPanel Style="{StaticResource NavStackPanel}">
+                                    <TextBlock Style="{StaticResource NavIcon}" Text="&#xE71E;"/>
+                                    <TextBlock Style="{StaticResource NavText}" Text="{Binding Search}"/>
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem Name="NavListSettings" ManipulationMode="TranslateX" ManipulationCompleted="Pane_ManipulationCompleted">
+                                <StackPanel Style="{StaticResource NavStackPanel}">
+                                    <TextBlock Style="{StaticResource NavIcon}" Text="&#xE713;"/>
+                                    <TextBlock Style="{StaticResource NavText}" Text="{Binding Settings}"/>
+                                </StackPanel>
+                            </ListBoxItem>
+                        </ListBox>
+                    </Viewbox>
+                    
                     <StackPanel RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Background="Transparent" Tapped="GPSRefresh_Tapped">
                         <StackPanel Style="{StaticResource GPSInfoPanel}">
                             <TextBlock Margin="5,0,0,0" FontSize="16" FontWeight="Bold" Text="{Binding GPSInfo}"/>
